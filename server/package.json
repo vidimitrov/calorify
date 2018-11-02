@@ -1,0 +1,15 @@
+{
+  "name": "calorify-server",
+  "version": "0.0.1",
+  "description": "An application that helps you tracking your daily calories",
+  "main": "src/server.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.toptal.com/screening/veselin-dimitrov"
+  },
+  "author": "Veselin Dimitrov",
+  "license": "ISC"
+}
