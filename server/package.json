@@ -9,7 +9,8 @@
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "tslint -t stylish --project \"tsconfig.json\"",
   },
   "repository": {
     "type": "git",
