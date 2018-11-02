@@ -11,6 +11,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
+    "clean": "rimraf coverage build tmp"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "jest": "^23.6.0",
     "nodemon": "^1.18.5",
     "pm2": "^3.2.2",
+    "rimraf": "^2.6.2",
     "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
