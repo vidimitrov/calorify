@@ -8,7 +8,8 @@
     "build": "rm -rf dist && npm run build-ts && npm run lint",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
-    "test": "jest"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,13 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.0.1",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.5",
-    "pm2": "^3.2.2"
-  },
-  "dependencies": {
+    "pm2": "^3.2.2",
+    "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
-  }
+  },
+  "dependencies": {}
 }
