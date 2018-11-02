@@ -20,6 +20,8 @@
   "author": "Veselin Dimitrov",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.2",
     "concurrently": "^4.0.1",
     "jest": "^23.6.0",
     "nodemon": "^1.18.5",
