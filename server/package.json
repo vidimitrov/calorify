@@ -4,6 +4,10 @@
   "description": "An application that helps you tracking your daily calories",
   "main": "src/server.ts",
   "scripts": {
+    "start": "ts-node src/server.ts",
+    "build": "rm -rf dist && npm run build-ts && npm run lint",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
     "test": "jest"
   },
   "repository": {
@@ -16,5 +20,10 @@
     "concurrently": "^4.0.1",
     "nodemon": "^1.18.5",
     "pm2": "^3.2.2"
+  },
+  "dependencies": {
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
   }
 }
