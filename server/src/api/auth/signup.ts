@@ -19,13 +19,13 @@ const signup = async (ctx: Koa.Context) => {
 
   if (user) {
     return respondWith.forbidden(ctx, 'User already exist');
-  } else {
-    try {
-      user = await User.create(attrs);
-    } catch (err) {
-      return respondWith.error(ctx, err);
-    }
+  }
+
+  try {
+    user = await User.create(attrs);
     return respondWith.success(ctx, { user: omit(user, ['password', 'provider']) });
+  } catch (err) {
+    return respondWith.error(ctx, err);
   }
 };
 

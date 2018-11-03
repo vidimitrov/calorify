@@ -2,14 +2,14 @@ import Knex from 'knex';
 import { PG_URI, PG_POOL_MIN, PG_POOL_MAX } from '../../config';
 
 interface FindAllOptions {
-  columns?: Array<string>;
+  columns?: string[];
   offset?: number;
   limit?: number;
-};
+}
 
 const DEFAULT_FIND_ALL_OPTS: FindAllOptions = {
   offset: 0,
-  limit: 100
+  limit: 100,
 };
 
 const client: Knex = Knex({
@@ -17,9 +17,9 @@ const client: Knex = Knex({
   connection: PG_URI,
   pool: {
     min: PG_POOL_MIN,
-    max: PG_POOL_MAX
+    max: PG_POOL_MAX,
   },
-  searchPath: ['knex', 'public']
+  searchPath: ['knex', 'public'],
 });
 
 function find(table: string, criteria: any = {}): Promise<any> {
@@ -27,8 +27,8 @@ function find(table: string, criteria: any = {}): Promise<any> {
     .select()
     .from(table)
     .where(criteria)
-    .first()
-};
+    .first();
+}
 
 function findAll(
   table: string,
@@ -40,27 +40,27 @@ function findAll(
     .where(criteria)
     .offset(opts.offset)
     .limit(opts.limit);
-};
+}
 
 function create(table: string, resource: any, opts: any): Promise<any> {
   const returning = opts.returning || ['id'];
   return client
     .returning(returning)
     .insert(resource)
-    .into(table)
-};
+    .into(table);
+}
 
 function update(table: string, criteria: any = {}, attributes: any = {}): Promise<any> {
   return client(table)
     .where(criteria)
     .update(attributes);
-};
+}
 
 function remove(table: string, criteria: any = {}): Promise<any> {
   return client(table)
     .where(criteria)
     .del();
-};
+}
 
 export { find, findAll, create, update, remove };
 

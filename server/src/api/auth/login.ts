@@ -10,14 +10,15 @@ const login = (ctx: Koa.Context, next): void => {
     if (err) {
       return respondWith.error(ctx, err);
     }
-    else if (!user) {
-      return respondWith.badRequest(ctx, 'Wrong credentials');
-    } else {
-      await ctx.login(user, { session: false });
-      const token = jwt.sign(omit(user, 'password'), API_SECRET);
 
-      return respondWith.success(ctx, { token });
+    if (!user) {
+      return respondWith.badRequest(ctx, 'Wrong credentials');
     }
+
+    await ctx.login(user, { session: false });
+    const token = jwt.sign(omit(user, 'password'), API_SECRET);
+
+    return respondWith.success(ctx, { token });
   };
 
   return passport.authenticate('local', { session: false }, done)(ctx, null);

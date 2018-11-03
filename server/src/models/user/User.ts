@@ -13,7 +13,7 @@ const PROPS = [
   'deleted',
   'daily_calories_limit',
   'created_at',
-  'updated_at'
+  'updated_at',
 ];
 
 export interface UserType extends BaseType {
@@ -26,17 +26,16 @@ export interface UserType extends BaseType {
   role: string;
   avatar: string;
   deleted: boolean;
-};
+}
 
 export interface UserModel {
   find: (criteria: any, opts?: any) => Promise<UserType>;
   findById: (id: string) => Promise<UserType>;
-  findAll: (criteria: any, opts?: any) => Promise<Array<UserType>>;
+  findAll: (criteria: any, opts?: any) => Promise<UserType[]>;
   create: (user: UserType) => Promise<UserType>;
   update: (criteria: any, attrs: any) => Promise<UserType>;
   remove: (criteria: any) => Promise<UserType>;
-};
-
+}
 
 export const verifyPassword = async (user: UserType, password: string): Promise<boolean> => {
   let result;
@@ -68,13 +67,14 @@ export default (function User(): UserModel {
       const user = await <Promise<UserType>>Base.findById(USERS_TABLE, id);
       return user ? omit(user, OMIT_PROPS) : null;
     },
-    findAll: async (criteria: any, opts?: any): Promise<Array<UserType>> => {
-      const users = await <Promise<Array<UserType>>>Base.findAll(USERS_TABLE, criteria, opts);
-      return map(users, (user) => omit(user, OMIT_PROPS));
+    findAll: async (criteria: any, opts?: any): Promise<UserType[]> => {
+      const users = await <Promise<UserType[]>>Base.findAll(USERS_TABLE, criteria, opts);
+      return map(users, user => omit(user, OMIT_PROPS));
     },
     create: async (user: UserType): Promise<UserType> => {
       user.password = await generatePassword(user.password);
-      const [response] = await <Promise<Array<UserType>>>Base.create(USERS_TABLE, user, { returning: PROPS });
+      const [response] =
+        await <Promise<UserType[]>>Base.create(USERS_TABLE, user, { returning: PROPS });
       return response;
     },
     update: async (criteria: any, attrs: any): Promise<UserType> => {

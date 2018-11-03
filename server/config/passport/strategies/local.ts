@@ -2,7 +2,8 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import User, { verifyPassword } from '../../../src/models/user/User';
 
 const opts = { usernameField: 'email' };
-const strategy = new LocalStrategy(opts,
+const strategy = new LocalStrategy(
+  opts,
   async (email: string, password: string, done: any) => {
     const query = { email, provider: 'local' };
     const queryOpts = { omit: false };

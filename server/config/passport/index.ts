@@ -5,7 +5,7 @@ import User from '../../src/models/user/User';
 
 interface UserType {
   id: string;
-};
+}
 
 passport.serializeUser((user: UserType, done) => {
   done(null, user.id);

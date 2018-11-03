@@ -5,5 +5,5 @@ import logout from './logout';
 export default {
   login,
   signup,
-  logout
+  logout,
 };

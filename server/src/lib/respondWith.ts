@@ -6,28 +6,28 @@ const respondWith = (() => {
       ctx.status = 200;
       ctx.body = {
         success: true,
-        ...body
+        ...body,
       };
     },
     badRequest: async (ctx: Koa.Context, message?: string) => {
       ctx.status = 400;
       ctx.body = {
         success: false,
-        message: message || 'Bad request data'
+        message: message || 'Bad request data',
       };
     },
     notAuthorized: async (ctx: Koa.Context, message?: string) => {
       ctx.status = 401;
       ctx.body = {
         success: false,
-        message: message || 'Protected resource! Authenticate to access it'
+        message: message || 'Protected resource! Authenticate to access it',
       };
     },
     forbidden: (ctx: Koa.Context, message?: string) => {
       ctx.status = 403;
       ctx.body = {
         success: false,
-        message: message || 'Permission required'
+        message: message || 'Permission required',
       };
     },
 
@@ -37,15 +37,15 @@ const respondWith = (() => {
       ctx.body = {
         success: false,
         message: 'Internal server error',
-        ...body
+        ...body,
       };
     },
     custom: async (ctx: Koa.Context, status: number, body: any) => {
       ctx.status = status;
       ctx.body = {
-        ...body
+        ...body,
       };
-    }
+    },
   };
 })();
 

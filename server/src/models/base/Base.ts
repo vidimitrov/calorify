@@ -4,7 +4,7 @@ export interface BaseType {
   id: string;
   created_at: Date;
   updated_at: Date;
-};
+}
 
 export default class Base {
   constructor() { }
@@ -17,11 +17,11 @@ export default class Base {
     return (async () => find(table, { id }))();
   }
 
-  public static findAll(table: string, criteria: any, opts?: any): Promise<Array<BaseType>> {
+  public static findAll(table: string, criteria: any, opts?: any): Promise<BaseType[]> {
     return (async () => findAll(table, criteria, opts))();
   }
 
-  public static create(table: string, resource: any, opts?: any): Promise<Array<BaseType>> {
+  public static create(table: string, resource: any, opts?: any): Promise<BaseType[]> {
     return (async () => create(table, resource, opts))();
   }
 

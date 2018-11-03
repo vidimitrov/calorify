@@ -18,7 +18,7 @@ describe('db module', () => {
     });
 
     it('should return a Knex Builder object', () => {
-      var result = find(FAKE_TABLE);
+      const result = find(FAKE_TABLE);
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
     });
@@ -30,7 +30,7 @@ describe('db module', () => {
     });
 
     it('should return a Knex Builder object', () => {
-      var result = findAll(FAKE_TABLE);
+      const result = findAll(FAKE_TABLE);
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
     });
@@ -42,7 +42,7 @@ describe('db module', () => {
     });
 
     it('should return a Knex Builder object', () => {
-      var result = create(FAKE_TABLE, {}, {});
+      const result = create(FAKE_TABLE, {}, {});
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
     });
@@ -54,7 +54,7 @@ describe('db module', () => {
     });
 
     it('should return a Knex Builder object', () => {
-      var result = update(FAKE_TABLE);
+      const result = update(FAKE_TABLE);
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
     });
@@ -66,7 +66,7 @@ describe('db module', () => {
     });
 
     it('should return a promise', () => {
-      var result = remove(FAKE_TABLE);
+      const result = remove(FAKE_TABLE);
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
     });
