@@ -7,7 +7,7 @@
     "start": "ts-node src/server.ts",
     "build": "rm -rf dist && npm run build-ts && npm run lint",
     "build-ts": "tsc",
-    "watch-ts": "tsc -w",
+    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
