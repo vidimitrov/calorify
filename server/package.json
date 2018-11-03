@@ -11,7 +11,11 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
-    "clean": "rimraf coverage build tmp"
+    "clean": "rimraf coverage build tmp",
+    "_knex": "node_modules/.bin/knex --cwd db",
+    "migrate": "npm run _knex -- migrate:latest",
+    "rollback": "npm run _knex -- migrate:rollback",
+    "migrate:make": "npm run _knex -- migrate:make"
   },
   "repository": {
     "type": "git",
@@ -39,11 +43,13 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
+    "knex": "^0.15.2",
     "koa": "^2.6.1",
     "koa-bodyparser": "^4.2.1",
     "koa-cors": "^0.0.16",
     "koa-helmet": "^4.0.0",
     "koa-router": "^7.4.0",
-    "koa-session": "^5.10.0"
+    "koa-session": "^5.10.0",
+    "pg": "^7.6.0"
   }
 }
