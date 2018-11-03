@@ -1,5 +1,6 @@
 import passport from 'koa-passport';
 import local from './strategies/local';
+import jwt from './strategies/jwt';
 import User from '../../src/models/user/User';
 
 passport.serializeUser((user, done) => {
@@ -16,3 +17,4 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(local);
+passport.use(jwt);
