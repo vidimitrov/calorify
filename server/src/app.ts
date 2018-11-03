@@ -3,6 +3,7 @@ import helmet from 'koa-helmet';
 import cors from 'koa-cors';
 import session from 'koa-session';
 import bodyparser from 'koa-bodyparser';
+import passport from 'koa-passport';
 import router from './router';
 
 import {
@@ -35,8 +36,14 @@ app
   .use(session(SESSION_CONFIG, app))
   .use(bodyparser())
   .use(cors({ credentials: true, methods: 'GET,HEAD,PUT,POST,DELETE,PATCH' }))
+  .use(passport.initialize())
+  .use(passport.session())
   .use(router.routes())
   .use(router.allowedMethods())
   .use(helmet());
+
+// Configure Passport
+console.log('Configuring Passport authentication strategies...');
+import '../config/passport';
 
 export default app;
