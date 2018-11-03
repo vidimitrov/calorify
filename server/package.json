@@ -8,7 +8,7 @@
     "build": "rm -rf dist && npm run build-ts && npm run lint",
     "build-ts": "tsc",
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
-    "test": "jest --coverage",
+    "test": "jest --verbose --coverage",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
     "clean": "rimraf coverage build tmp",
@@ -50,6 +50,7 @@
     "koa-helmet": "^4.0.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.0",
-    "pg": "^7.6.0"
+    "pg": "^7.6.0",
+    "pg-native": "^3.0.0"
   }
 }
