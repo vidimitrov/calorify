@@ -10,6 +10,7 @@ export const up = (knex) => {
       name varchar(200) NOT NULL,
       email varchar(100) NOT NULL,
       provider varchar(50) DEFAULT 'local',
+      daily_calories_limit integer DEFAULT 0,
       deleted boolean DEFAULT false,
       created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
