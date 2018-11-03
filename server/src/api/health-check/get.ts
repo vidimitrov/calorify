@@ -6,6 +6,4 @@ const get = (ctx: Koa.Context): void => {
   ctx.status = 200;
 };
 
-export {
-  get
-};
+export default get;
