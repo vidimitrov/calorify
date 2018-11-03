@@ -3,11 +3,15 @@ import local from './strategies/local';
 import jwt from './strategies/jwt';
 import User from '../../src/models/user/User';
 
-passport.serializeUser((user, done) => {
+interface UserType {
+  id: string;
+};
+
+passport.serializeUser((user: UserType, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id: string, done) => {
   try {
     const user = await User.findById(id);
     done(null, user);
