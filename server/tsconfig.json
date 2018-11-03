@@ -10,14 +10,15 @@
     "baseUrl": ".",
     "types": [
       "node"
-    ]
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
   },
   "include": [
     "src/**/*.ts",
-    "config/**/*.ts"
+    "config/**/*.ts",
+    "node_modules/@types/jest"
   ],
-  "exclude": [
-    "src/**/*.spec.ts",
-    "node_modules"
-  ]
+  "exclude": []
 }
