@@ -12,6 +12,10 @@ const remove = async (ctx: Koa.Context) => {
 
   const mealId: string = ctx.params.id;
 
+  if (!mealId) {
+    return respondWith.badRequest(ctx);
+  }
+
   try {
     const criteria = { id: mealId };
     await Meal.update(criteria, { deleted: true });

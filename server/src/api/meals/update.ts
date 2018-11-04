@@ -13,6 +13,10 @@ const update = async (ctx: Koa.Context) => {
   const mealId: string = ctx.params.id;
   const attrs: MealType = (ctx.request.body as any).attrs;
 
+  if (!mealId) {
+    return respondWith.badRequest(ctx);
+  }
+
   try {
     const criteria = { id: mealId };
     await Meal.update(criteria, attrs);

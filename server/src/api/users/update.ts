@@ -13,6 +13,10 @@ const update = async (ctx: Koa.Context) => {
   const userId: string = ctx.params.id;
   const attrs: UserType = (ctx.request.body as any).attrs;
 
+  if (!userId) {
+    return respondWith.badRequest(ctx);
+  }
+
   try {
     const criteria = { id: userId };
     await User.update(criteria, attrs);

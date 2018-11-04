@@ -10,8 +10,12 @@ const findById = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const mealId: string = ctx.params.mealId;
+  const mealId: string = ctx.params.id;
   let meal: MealType;
+
+  if (!mealId) {
+    return respondWith.badRequest(ctx);
+  }
 
   try {
     meal = await Meal.findById(mealId);

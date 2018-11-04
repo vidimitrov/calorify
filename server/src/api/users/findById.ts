@@ -13,6 +13,10 @@ const findById = async (ctx: Koa.Context) => {
   const userId: string = ctx.params.id;
   let user: UserType;
 
+  if (!userId) {
+    return respondWith.badRequest(ctx);
+  }
+
   try {
     user = await User.findById(userId);
   } catch (err) {
