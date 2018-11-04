@@ -8,6 +8,7 @@ const init = async () => {
   const permissions = [
     // "User" can CRUD only his own resources
     { role: 'user', resource: 'user', action: 'read:own', attributes: '*' },
+    { role: 'user', resource: 'user', action: 'update:own', attributes: '*' },
     { role: 'user', resource: 'meal', action: 'create:own', attributes: '*' },
     { role: 'user', resource: 'meal', action: 'read:own', attributes: '*' },
     { role: 'user', resource: 'meal', action: 'update:own', attributes: '*' },
