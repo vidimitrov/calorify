@@ -15,9 +15,9 @@ router.get('/api/auth/logout', api.auth.logout);
 // Users
 router.post('/api/users', protect, api.users.create);
 router.get('/api/users', protect, api.users.list);
-router.get('/api/users/:userId', protect, api.users.findById);
-router.patch('/api/users/:userId', protect, api.users.update);
-router.delete('/api/users/:userId', protect, api.users.remove);
+router.get('/api/users/:id', protect, api.users.findById);
+router.patch('/api/users/:id', protect, api.users.update);
+router.delete('/api/users/:id', protect, api.users.remove);
 
 // Meals
 router.post('/api/meals', protect, api.meals.create);

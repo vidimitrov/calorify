@@ -10,7 +10,7 @@ const update = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const userId: string = ctx.params.userId;
+  const userId: string = ctx.params.id;
   const attrs: UserType = (ctx.request.body as any).attrs;
 
   try {

@@ -10,7 +10,7 @@ const findById = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const userId: string = ctx.params.userId;
+  const userId: string = ctx.params.id;
   let user: UserType;
 
   try {
