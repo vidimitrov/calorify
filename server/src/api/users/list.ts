@@ -10,12 +10,10 @@ const list = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const organizationId: string = ctx.params.organizationId;
   let users: UserType[];
 
   try {
     users = await User.findAll({
-      organization_id: organizationId,
       deleted: false,
     });
   } catch (err) {

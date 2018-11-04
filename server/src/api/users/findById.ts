@@ -10,7 +10,6 @@ const findById = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const organizationId: string = ctx.params.organizationId;
   const userId: string = ctx.params.userId;
   let user: UserType;
 
@@ -20,8 +19,7 @@ const findById = async (ctx: Koa.Context) => {
     return respondWith.error(ctx, err);
   }
 
-  const body = user.organization_id === organizationId ? { user } : { user: null };
-  return respondWith.success(ctx, body);
+  return respondWith.success(ctx, { user });
 };
 
 export default findById;

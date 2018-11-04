@@ -10,12 +10,11 @@ const update = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const organizationId: string = ctx.params.organizationId;
   const userId: string = ctx.params.userId;
   const attrs: UserType = (ctx.request.body as any).attrs;
 
   try {
-    const criteria = { id: userId, organization_id: organizationId };
+    const criteria = { id: userId };
     await User.update(criteria, attrs);
   } catch (err) {
     return respondWith.error(ctx, err);

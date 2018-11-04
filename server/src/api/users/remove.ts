@@ -10,11 +10,10 @@ const remove = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const organizationId: string = ctx.params.organizationId;
   const userId: string = ctx.params.userId;
 
   try {
-    const criteria = { id: userId, organization_id: organizationId };
+    const criteria = { id: userId };
     await User.update(criteria, { deleted: true });
   } catch (err) {
     return respondWith.error(ctx, err);

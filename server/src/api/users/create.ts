@@ -11,11 +11,8 @@ const create = async (ctx: Koa.Context) => {
 
   if (!allowed) return respondWith.forbidden(ctx);
 
-  const organizationId: string = ctx.params.organizationId;
   const attrs: UserType = (ctx.request.body as any).attrs;
   let user: UserType;
-
-  attrs.organization_id = organizationId;
 
   try {
     user = await User.find(omit(attrs, ['password']));
