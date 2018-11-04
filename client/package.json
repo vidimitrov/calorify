@@ -8,6 +8,7 @@
   "author": "Veselin Dimitrov",
   "dependencies": {
     "react": "^16.6.0",
+    "react-app-polyfill": "^0.1.3",
     "react-dom": "^16.6.0",
     "react-scripts": "2.1.1"
   },
