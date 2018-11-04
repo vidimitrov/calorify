@@ -1,0 +1,15 @@
+{
+  "name": "calorify-app",
+  "version": "0.0.1",
+  "description": "Calorify - an app that helps you track your daily calories",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.toptal.com/screening/veselin-dimitrov"
+  },
+  "author": "Veselin Dimitrov",
+  "license": "ISC"
+}
