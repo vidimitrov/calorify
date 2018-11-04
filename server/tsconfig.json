@@ -12,7 +12,6 @@
       "node"
     ],
     "typeRoots": [
-      "node_modules/koa-bodyparser",
       "node_modules/@types"
     ],
   },
@@ -21,8 +20,6 @@
     "config/**/*.ts",
     "node_modules/@types/jest",
     "node_modules/@types/node",
-    "node_modules/@types/koa",
-    "node_modules/@types/koa-bodyparser",
   ],
   "exclude": []
 }
