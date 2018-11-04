@@ -5,7 +5,7 @@ export const up = (knex) => {
     CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
     CREATE TABLE ${USERS_TABLE} (
       id uuid PRIMARY KEY DEFAULT uuid_generate_v4() UNIQUE,
-      role varchar(50),
+      role varchar(50) DEFAULT 'user',
       password text NOT NULL,
       name varchar(200) NOT NULL,
       email varchar(100) NOT NULL,
