@@ -1,4 +1,6 @@
-import { API_URL } from '../../config';
+import cfg from '../../config';
+
+const { API_URL } = cfg;
 
 export const login = (email, password) => {
   const attrs = {
@@ -33,4 +35,4 @@ export const signup = (name, email, password) => {
   });
 };
 
-export const logout = (email, password) => fetch(`${API_URL}/api/auth/logout`);
+export const logout = () => fetch(`${API_URL}/api/auth/logout`);

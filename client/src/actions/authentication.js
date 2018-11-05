@@ -50,13 +50,15 @@ export const logoutFailure = error => ({
 
 const handleSuccessfulLogin = dispatch => (response) => {
   if (response.body && response.body.token) {
-    const token = response.body.token;
+    const { body } = response;
+    const { token } = body;
     const user = jwt.decode(token);
 
     window.localStorage.setItem('token', token);
     dispatch(loginSuccess(token, user));
     return Promise.resolve(token);
   }
+  return Promise.resolve();
 };
 const handleFailedLogin = dispatch => (error) => {
   dispatch(loginFailure(error));
