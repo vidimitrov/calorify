@@ -3,9 +3,8 @@ module.exports = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
   ],
-  resolver: 'jest-pnp-resolver',
   setupFiles: [
-    'react-app-polyfill/jsdom',
+    './src/setupTests.js',
   ],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
