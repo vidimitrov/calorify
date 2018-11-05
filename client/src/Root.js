@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import { Router, Link, Redirect } from "@reach/router";
+import { Router, Link } from "@reach/router";
+import { Provider } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import logo from './assets/img/logo.png';
 
@@ -72,20 +74,26 @@ const Main = () => (
   </Wrapper >
 );
 
-function Root() {
+function Root({ store }) {
   return (
-    <Router>
-      <Dashboard path="/">
-        <Main path="/" />
-        <UserSettings path="/settings" />
-      </Dashboard>
-      <Authentication path="/auth">
-        <Login path="/login" />
-        <Signup path="/signup" />
-        <ForgotPassword path="/forgot-password" />
-      </Authentication>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Dashboard path="/">
+          <Main path="/" />
+          <UserSettings path="/settings" />
+        </Dashboard>
+        <Authentication path="/auth">
+          <Login path="/login" />
+          <Signup path="/signup" />
+          <ForgotPassword path="/forgot-password" />
+        </Authentication>
+      </Router>
+    </Provider>
   );
 }
+
+Root.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 
 export default Root;
