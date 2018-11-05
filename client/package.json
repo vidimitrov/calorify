@@ -11,7 +11,7 @@
     "build": "parcel build src/index.html",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "test": "jest --watch-all",
+    "test": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
