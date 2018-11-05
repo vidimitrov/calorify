@@ -7,11 +7,11 @@ export const login = (email, password) => {
   };
 
   return fetch(`${API_URL}/api/auth/login`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(attrs)
+    body: JSON.stringify(attrs),
   });
 };
 
@@ -25,14 +25,12 @@ export const signup = (name, email, password) => {
   if (role) attrs.role = role;
 
   return fetch(`${API_URL}/api/auth/signup`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ attrs })
+    body: JSON.stringify({ attrs }),
   });
 };
 
-export const logout = (email, password) => {
-  return fetch(`${API_URL}/api/auth/logout`);
-};
+export const logout = (email, password) => fetch(`${API_URL}/api/auth/logout`);

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import {
+  createStore, combineReducers, applyMiddleware, compose,
+} from 'redux';
 import { createLogger } from 'redux-logger';
 
 import Root from './Root';
@@ -19,15 +21,18 @@ export const store = createStore(
   }),
   compose(
     applyMiddleware(...middlewares),
-    window.devToolsExtension &&
-      process.env.NODE_ENV === 'development' ?
-      window.devToolsExtension() : (f) => f
-  )
+    window.devToolsExtension
+      && process.env.NODE_ENV === 'development'
+      ? window.devToolsExtension() : f => f,
+  ),
 );
+
 
 ReactDOM.render(
   <Root store={store} />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 serviceWorker.register();
+
+export default {};

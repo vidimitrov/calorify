@@ -1,3 +1,3 @@
 export default {
-  API_URL: null
+  API_URL: null,
 };

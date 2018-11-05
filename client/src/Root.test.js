@@ -7,7 +7,7 @@ it('renders without crashing', () => {
   const mockStore = {
     subscribe: () => { },
     dispatch: () => { },
-    getState: () => { }
+    getState: () => { },
   };
   ReactDOM.render(<Root store={mockStore} />, div);
   ReactDOM.unmountComponentAtNode(div);
