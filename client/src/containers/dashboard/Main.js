@@ -57,8 +57,12 @@ Main.propTypes = {
     email: PropTypes.string.isRequired,
     provider: PropTypes.string.isRequired,
     daily_calories_limit: PropTypes.number.isRequired,
-  }).isRequired,
+  }),
   logout: PropTypes.func.isRequired,
+};
+
+Main.defaultProps = {
+  user: null,
 };
 
 const mapStateToProps = state => ({
