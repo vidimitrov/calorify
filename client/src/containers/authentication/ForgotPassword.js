@@ -19,7 +19,7 @@ export const ForgotPassword = () => (
       </FormHeader>
 
       <form>
-        <Input type="text" name="signup" placeholder="What's your email?" valid={false} />
+        <Input type="text" name="signup" placeholder="What's your email?" invalid />
         <ValidationLabel valid={false}>Emails is incorrect</ValidationLabel>
         <SubmitButton type="submit" value="Reset password" />
         <SecondaryAction>
