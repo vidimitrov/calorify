@@ -13,6 +13,7 @@ const respondWith = (() => {
       ctx.status = 400;
       ctx.body = {
         success: false,
+        statusCode: 400,
         message: message || 'Bad request data',
       };
     },
@@ -20,6 +21,7 @@ const respondWith = (() => {
       ctx.status = 401;
       ctx.body = {
         success: false,
+        statusCode: 401,
         message: message || 'Protected resource! Authenticate to access it',
       };
     },
@@ -27,7 +29,8 @@ const respondWith = (() => {
       ctx.status = 403;
       ctx.body = {
         success: false,
-        message: message || 'Permission required',
+        statusCode: 403,
+        message: message || 'Forbidden',
       };
     },
 
@@ -36,6 +39,7 @@ const respondWith = (() => {
       ctx.status = 500;
       ctx.body = {
         success: false,
+        statusCode: 500,
         message: 'Internal server error',
         ...body,
       };
