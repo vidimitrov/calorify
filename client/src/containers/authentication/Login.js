@@ -11,7 +11,7 @@ import SubmitButton from '../../components/authentication/SubmitButton';
 import Anchor from '../../components/authentication/Anchor';
 import Image from '../../components/authentication/Image';
 import ValidationLabel from '../../components/authentication/ValidationLabel';
-import { login as loginActionCreator } from '../../actions/authentication';
+import { login as loginActionCreator, resetErrors as resetErrorsAction } from '../../actions/authentication';
 import { isValidEmail } from '../../lib/validations';
 
 export class Login extends React.Component {
@@ -29,6 +29,11 @@ export class Login extends React.Component {
 
   onChangeHandler(key, value) {
     let { validEmail } = this.state;
+    const { error, resetErrors } = this.props;
+
+    if (error) {
+      resetErrors();
+    }
 
     if (key === 'email') {
       if (!isValidEmail(value)) {
@@ -45,7 +50,7 @@ export class Login extends React.Component {
   }
 
   render() {
-    const { login, authenticationError } = this.props;
+    const { login, error, navigate } = this.props;
     const { email, password, validEmail } = this.state;
     return (
       <Wrapper>
@@ -57,7 +62,7 @@ export class Login extends React.Component {
 
           <div>
             <ValidationLabel
-              invalid={authenticationError && authenticationError.statusCode === 400}
+              invalid={error && error.statusCode === 400}
             >
               The email or password you entered is incorrect
             </ValidationLabel>
@@ -76,8 +81,19 @@ export class Login extends React.Component {
               onChange={e => this.onChangeHandler('password', e.target.value)}
             />
             <SubmitButton
+              disabled={!validEmail}
               onClick={() => {
-                login(email, password);
+                login(email, password)
+                  .then(() => {
+                    navigate('/');
+                  })
+                  .catch(() => {
+                    this.setState({
+                      email: '',
+                      password: '',
+                      validEmail: true,
+                    });
+                  });
               }}
             >
               Log In
@@ -103,7 +119,9 @@ export class Login extends React.Component {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  authenticationError: PropTypes.shape({
+  navigate: PropTypes.func.isRequired,
+  resetErrors: PropTypes.func.isRequired,
+  error: PropTypes.shape({
     message: PropTypes.string,
     statusCode: PropTypes.number,
     success: PropTypes.bool,
@@ -111,16 +129,17 @@ Login.propTypes = {
 };
 
 Login.defaultProps = {
-  authenticationError: null,
+  error: null,
 };
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  authenticationError: state.auth.error,
+  error: state.auth.error,
 });
 
 const mapDispatchToProps = dispatch => ({
   login: (email, password) => dispatch(loginActionCreator(email, password)),
+  resetErrors: () => dispatch(resetErrorsAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
