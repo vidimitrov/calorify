@@ -10,8 +10,8 @@ const SubmitButton = styled.button`
   display: inline-block;
   text-transform: uppercase;
   font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(233, 193, 95, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(233, 193, 95, 0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 20px 20px;
