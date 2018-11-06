@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SubmitButton = styled.input`
+const SubmitButton = styled.button`
   background-color: #e5c769;
   border: none;
   color: white;
