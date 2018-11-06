@@ -49,9 +49,8 @@ export const logoutFailure = error => ({
 });
 
 const handleSuccessfulLogin = dispatch => (response) => {
-  if (response.body && response.body.token) {
-    const { body } = response;
-    const { token } = body;
+  if (response.success) {
+    const { token } = response;
     const user = jwt.decode(token);
 
     window.localStorage.setItem('token', token);
@@ -64,8 +63,8 @@ const handleFailedLogin = dispatch => (error) => {
   dispatch(loginFailure(error));
 };
 
-export const login = (email, password) => () => auth.login(email, password)
-  .then(handleSuccessfulLogin)
+export const login = (email, password) => dispatch => auth.login(email, password)
+  .then(handleSuccessfulLogin(dispatch))
   .catch(handleFailedLogin);
 
 const handleSuccessfulSignup = (dispatch, email, password) => () => {
@@ -76,7 +75,7 @@ const handleFailedSignup = dispatch => (error) => {
   dispatch(signupFailure(error));
 };
 
-export const signup = userData => () => {
+export const signup = userData => (dispatch) => {
   const { name, email, password } = userData;
   return auth.signup(name, email, password)
     .then(handleSuccessfulSignup(dispatch, email, password))
