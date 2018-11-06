@@ -5,7 +5,6 @@ import { Redirect } from '@reach/router';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreVert from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,7 +12,6 @@ import Menu from '@material-ui/core/Menu';
 import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
-import CustomIconButton from '../../components/dashboard/CustomIconButton';
 import { logout as logoutActionCreator } from '../../actions/authentication';
 import logo from '../../assets/img/logo.png';
 
@@ -60,9 +58,6 @@ export class Main extends React.Component {
       <Wrapper>
         <AppBar position="static">
           <Toolbar>
-            <CustomIconButton color="secondary" aria-label="Menu">
-              <MenuIcon />
-            </CustomIconButton>
             <Logo src={logo} alt="logo" />
             <CustomTypography variant="h6" color="secondary">
               Calorify
