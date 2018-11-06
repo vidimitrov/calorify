@@ -48,50 +48,66 @@ export const logoutFailure = error => ({
   error,
 });
 
-const handleSuccessfulLogin = dispatch => (response) => {
-  if (response.success) {
-    const { token } = response;
-    const user = jwt.decode(token);
 
-    window.localStorage.setItem('token', token);
-    dispatch(loginSuccess(token, user));
-    return Promise.resolve(token);
-  }
-  return Promise.resolve();
+/**
+ *  Login action response handlers
+ *  */
+const handleLoginSuccess = dispatch => (response) => {
+  const { token } = response;
+  const user = jwt.decode(token);
+
+  window.localStorage.setItem('token', token);
+  dispatch(loginSuccess(token, user));
 };
-const handleFailedLogin = dispatch => (error) => {
+const handleLoginFailure = dispatch => (error) => {
   dispatch(loginFailure(error));
 };
 
+/**
+ *  Login action creator
+ *  */
 export const login = (email, password) => dispatch => auth.login(email, password)
-  .then(handleSuccessfulLogin(dispatch))
-  .catch(handleFailedLogin);
+  .then(handleLoginSuccess(dispatch), handleLoginFailure(dispatch))
+  .catch(handleLoginFailure(dispatch));
 
-const handleSuccessfulSignup = (dispatch, email, password) => () => {
+
+/**
+ * Signup action response handlers
+ *  */
+const handleSignupSuccess = (dispatch, email, password) => () => {
   dispatch(signupSuccess());
   return auth.login(email, password);
 };
-const handleFailedSignup = dispatch => (error) => {
+const handleSignupFailure = dispatch => (error) => {
   dispatch(signupFailure(error));
 };
 
+/**
+ * Signup action creator
+ */
 export const signup = userData => (dispatch) => {
   const { name, email, password } = userData;
+
   return auth.signup(name, email, password)
-    .then(handleSuccessfulSignup(dispatch, email, password))
-    .then(handleSuccessfulLogin)
-    .catch(handleFailedSignup);
+    .then(handleSignupSuccess(dispatch, email, password), handleSignupFailure(dispatch))
+    .then(handleLoginSuccess(dispatch), handleLoginFailure(dispatch))
+    .catch(handleSignupFailure(dispatch));
 };
 
-const handleSuccessfulLogout = dispatch => () => {
+/**
+ * Logout action response handlers
+ */
+const handleLogoutSuccess = dispatch => () => {
   window.localStorage.removeItem('token');
   dispatch(logoutSuccess());
-  return Promise.resolve();
 };
-const handleFailedLogout = dispatch => (error) => {
+const handleLogoutFailure = dispatch => (error) => {
   dispatch(logoutFailure(error));
 };
 
+/**
+ * Logout action creator
+ */
 export const logout = () => dispatch => auth.logout()
-  .then(handleSuccessfulLogout(dispatch))
-  .catch(handleFailedLogout(dispatch));
+  .then(handleLogoutSuccess(dispatch), handleLogoutFailure(dispatch))
+  .catch(handleLogoutFailure(dispatch));
