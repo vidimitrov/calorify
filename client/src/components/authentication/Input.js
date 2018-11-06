@@ -18,6 +18,11 @@ const Input = styled.input`
   transition: all 0.5s ease-in-out;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 5px #ff9a00;
+  }
 `;
 
 export default Input;
