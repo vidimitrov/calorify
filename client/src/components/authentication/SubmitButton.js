@@ -20,6 +20,12 @@ const SubmitButton = styled.button`
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+
+  &:disabled {
+    background-color: #f6f6f6;
+    color: #c2bcbc;
+    box-shadow: none;
+  }
 `;
 
 export default SubmitButton;
