@@ -1,20 +1,10 @@
-import styled, { keyframes } from 'styled-components';
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`;
+import styled from 'styled-components';
 
 const Logo = styled.img.attrs({
   alt: 'logo',
 })`
-  animation: ${rotate} infinite 20s linear;
-  height: 40vmin;
+  height: 25px;
+  margin-right: 10px;
   src: url(${props => props.src});
 `;
 
