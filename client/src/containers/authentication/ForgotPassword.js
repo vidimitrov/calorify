@@ -8,6 +8,7 @@ import Input from '../../components/authentication/Input';
 import SubmitButton from '../../components/authentication/SubmitButton';
 import Anchor from '../../components/authentication/Anchor';
 import Image from '../../components/authentication/Image';
+import ValidationLabel from '../../components/authentication/ValidationLabel';
 
 export const ForgotPassword = () => (
   <Wrapper>
@@ -18,10 +19,11 @@ export const ForgotPassword = () => (
       </FormHeader>
 
       <form>
-        <Input type="text" name="signup" placeholder="email" />
-        <SubmitButton type="submit" value="Submit" />
+        <Input type="text" name="signup" placeholder="What's your email?" valid={false} />
+        <ValidationLabel valid={false}>Emails is incorrect</ValidationLabel>
+        <SubmitButton type="submit" value="Reset password" />
         <SecondaryAction>
-          <Anchor to="/auth/login">Log in</Anchor>
+          <Anchor to="/auth/login">Go back</Anchor>
         </SecondaryAction>
       </form>
 
