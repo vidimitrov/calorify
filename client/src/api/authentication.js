@@ -17,7 +17,11 @@ export const login = async (email, password) => {
   });
   const data = await response.json();
 
-  return data;
+  if (data.success) {
+    return Promise.resolve(data);
+  }
+
+  return Promise.reject(data);
 };
 
 export const signup = async (name, email, password) => {
@@ -27,8 +31,6 @@ export const signup = async (name, email, password) => {
     password,
   };
 
-  if (role) attrs.role = role;
-
   const response = await fetch(`${API_URL}/api/auth/signup`, {
     method: 'POST',
     headers: {
@@ -37,14 +39,22 @@ export const signup = async (name, email, password) => {
     body: JSON.stringify({ attrs }),
   });
 
-  const data = response.json();
+  const data = await response.json();
 
-  return data;
+  if (data.success) {
+    return Promise.resolve(data);
+  }
+
+  return Promise.reject(data);
 };
 
 export const logout = async () => {
   const response = await fetch(`${API_URL}/api/auth/logout`);
   const data = await response.json();
 
-  return data;
+  if (data.success) {
+    return Promise.resolve(data);
+  }
+
+  return Promise.reject(data);
 };
