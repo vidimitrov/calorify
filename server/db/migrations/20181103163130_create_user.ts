@@ -8,7 +8,7 @@ export const up = (knex) => {
       role varchar(50) DEFAULT 'user',
       password text NOT NULL,
       name varchar(200) NOT NULL,
-      email varchar(100) NOT NULL,
+      email varchar(100) NOT NULL UNIQUE,
       provider varchar(50) DEFAULT 'local',
       daily_calories_limit integer DEFAULT 0,
       deleted boolean DEFAULT false,
