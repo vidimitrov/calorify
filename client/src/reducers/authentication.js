@@ -8,6 +8,7 @@ import {
   SIGNUP_FAILURE,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  RESET_AUTH_ERRORS,
 } from '../constants/actionTypes';
 
 function getInitialState() {
@@ -67,6 +68,11 @@ export default function auth(state = getInitialState(), action) {
       return {
         ...state,
         error: action.error,
+      };
+    case RESET_AUTH_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;
