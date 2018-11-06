@@ -72,6 +72,7 @@ export class Signup extends React.Component {
     const {
       signup,
       error,
+      navigate,
     } = this.props;
 
     return (
@@ -158,7 +159,7 @@ export class Signup extends React.Component {
 Signup.propTypes = {
   signup: PropTypes.func.isRequired,
   resetErrors: PropTypes.func.isRequired,
-  // navigate: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
   error: PropTypes.shape({
     message: PropTypes.string,
     statusCode: PropTypes.number,
