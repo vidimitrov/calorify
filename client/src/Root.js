@@ -16,12 +16,12 @@ function Root({ store }) {
       <Router>
         <Dashboard path="/">
           <Main path="/" />
-          <UserSettings path="/settings" />
+          <UserSettings path="settings" />
         </Dashboard>
-        <Authentication path="/auth">
-          <Login path="/login" />
-          <Signup path="/signup" />
-          <ForgotPassword path="/forgot-password" />
+        <Authentication path="auth">
+          <Login path="login" />
+          <Signup path="signup" />
+          <ForgotPassword path="forgot-password" />
         </Authentication>
       </Router>
     </Provider>
