@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Router } from '@reach/router';
 import { Provider } from 'react-redux';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Authentication from './containers/authentication/Authentication';
 import Login from './containers/authentication/Login';
 import Signup from './containers/authentication/Signup';
@@ -10,21 +11,40 @@ import Dashboard from './containers/dashboard/Dashboard';
 import Main from './containers/dashboard/Main';
 import UserSettings from './containers/dashboard/UserSettings';
 
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+  palette: {
+    primary: {
+      main: '#f0cd61',
+    },
+    secondary: {
+      main: '#fc9b5a',
+    },
+    error: {
+      main: '#ff387b',
+    },
+  },
+});
+
 function Root({ store }) {
   return (
-    <Provider store={store}>
-      <Router>
-        <Dashboard path="/">
-          <Main path="/" />
-          <UserSettings path="settings" />
-        </Dashboard>
-        <Authentication path="auth">
-          <Login path="login" />
-          <Signup path="signup" />
-          <ForgotPassword path="forgot-password" />
-        </Authentication>
-      </Router>
-    </Provider>
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <Router>
+          <Dashboard path="/">
+            <Main path="/" />
+            <UserSettings path="settings" />
+          </Dashboard>
+          <Authentication path="auth">
+            <Login path="login" />
+            <Signup path="signup" />
+            <ForgotPassword path="forgot-password" />
+          </Authentication>
+        </Router>
+      </Provider>
+    </MuiThemeProvider>
   );
 }
 
