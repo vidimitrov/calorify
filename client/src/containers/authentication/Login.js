@@ -20,8 +20,8 @@ export const Login = () => (
       </FormHeader>
 
       <form>
-        <Input type="text" name="login" placeholder="email" />
-        <Input type="password" name="login" placeholder="password" />
+        <Input type="text" name="login" placeholder="Email" />
+        <Input type="password" name="login" placeholder="Password" />
         <SubmitButton type="submit" value="Log In" />
         <SecondaryAction>
           <Anchor to="/auth/signup"> Create an account</Anchor>

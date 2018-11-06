@@ -18,10 +18,10 @@ export const Signup = () => (
       </FormHeader>
 
       <form>
-        <Input type="text" name="signup" placeholder="full name" />
-        <Input type="text" name="signup" placeholder="email" />
-        <Input type="password" name="signup" placeholder="password" />
-        <Input type="password" name="signup" placeholder="repeat password" />
+        <Input type="text" name="signup" placeholder="Full name" />
+        <Input type="text" name="signup" placeholder="Email" />
+        <Input type="password" name="signup" placeholder="Password" />
+        <Input type="password" name="signup" placeholder="Repeat password" />
         <SubmitButton type="submit" value="Sign Up" />
         <SecondaryAction>
           <Anchor to="/auth/login">Log in</Anchor>
