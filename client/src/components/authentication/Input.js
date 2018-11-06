@@ -10,7 +10,7 @@ const Input = styled.input`
   font-size: 16px;
   margin: 5px;
   width: 70%;
-  border: 2px solid #f6f6f6;
+  border: ${props => (props.valid ? '2px solid #f6f6f6' : '2px solid #ff387b')} ;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
