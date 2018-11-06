@@ -2,22 +2,25 @@ import cfg from '../../config';
 
 const { API_URL } = cfg;
 
-export const login = (email, password) => {
+export const login = async (email, password) => {
   const attrs = {
     email,
     password,
   };
 
-  return fetch(`${API_URL}/api/auth/login`, {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(attrs),
   });
+  const data = await response.json();
+
+  return data;
 };
 
-export const signup = (name, email, password) => {
+export const signup = async (name, email, password) => {
   const attrs = {
     name,
     email,
@@ -26,13 +29,22 @@ export const signup = (name, email, password) => {
 
   if (role) attrs.role = role;
 
-  return fetch(`${API_URL}/api/auth/signup`, {
+  const response = await fetch(`${API_URL}/api/auth/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ attrs }),
   });
+
+  const data = response.json();
+
+  return data;
 };
 
-export const logout = () => fetch(`${API_URL}/api/auth/logout`);
+export const logout = async () => {
+  const response = await fetch(`${API_URL}/api/auth/logout`);
+  const data = await response.json();
+
+  return data;
+};
