@@ -15,19 +15,40 @@ import CustomTypography from '../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../components/dashboard/CustomIconButton';
 import CustomTextField from '../../components/dashboard/CustomTextField';
 import logo from '../../assets/img/logo.png';
+import { updateUser as updateUserActionCreator } from '../../actions/users';
 
 export class UserSettings extends React.Component {
   constructor(props) {
     super(props);
 
+    const { user } = props;
+    // TODO: Change the snake_case to camelCase
+    /* eslint camelcase: 0 */
+    const { name, daily_calories_limit } = user;
+
     this.state = {
+      name,
+      dailyCalories: daily_calories_limit,
     };
+
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+  }
+
+  onChangeHandler(key, value) {
+    this.setState({
+      [key]: value,
+    });
   }
 
   render() {
     const {
       user,
+      updateUser,
     } = this.props;
+    const {
+      name,
+      dailyCalories,
+    } = this.state;
     const { navigate } = this.props;
 
     if (!user) {
@@ -54,19 +75,34 @@ export class UserSettings extends React.Component {
             <InputWrapper>
               <CustomTextField
                 label="Full name"
-                defaultValue={user.name}
+                value={name}
+                onChange={e => this.onChangeHandler('name', e.target.value)}
               />
             </InputWrapper>
             <InputWrapper>
               <CustomTextField
                 label="Daily calories"
-                defaultValue={user.daily_calories_limit}
                 helperText="It's your expected calorie intake per day"
+                value={dailyCalories}
+                onChange={e => this.onChangeHandler('dailyCalories', e.target.value)}
               />
             </InputWrapper>
           </FormControls>
           {/* TODO: It should be disabled if no changes are made */}
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              updateUser(user.id, {
+                name,
+                daily_calories_limit: dailyCalories,
+              }).then(() => {
+                // TODO: Show positive snackbar
+              }).catch(() => {
+                // TODO: Show negative snackbar. Try again
+              });
+            }}
+          >
             Save Changes
           </Button>
         </Form>
@@ -81,9 +117,9 @@ UserSettings.propTypes = {
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    provider: PropTypes.string.isRequired,
     daily_calories_limit: PropTypes.number.isRequired,
   }),
+  updateUser: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired,
 };
 
@@ -92,7 +128,11 @@ UserSettings.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
+  user: state.user.data,
 });
 
-export default connect(mapStateToProps)(UserSettings);
+const mapDispatchToProps = dispatch => ({
+  updateUser: (userId, updates) => dispatch(updateUserActionCreator(userId, updates)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserSettings);
