@@ -5,13 +5,15 @@ import { Redirect } from '@reach/router';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MoreVert from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MoreVert from '@material-ui/icons/MoreVert';
+import AddIcon from '@material-ui/icons/Add';
 import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
+import FabButton from '../../components/dashboard/FabButton';
 import { logout as logoutActionCreator } from '../../actions/authentication';
 import logo from '../../assets/img/logo.png';
 
@@ -98,6 +100,16 @@ export class Main extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
+        <FabButton
+          variant="fab"
+          color="primary"
+          aria-label="Add"
+          onClick={() => {
+            navigate('/create-meal');
+          }}
+        >
+          <AddIcon />
+        </FabButton>
       </Wrapper>
     );
   }
@@ -111,12 +123,20 @@ Main.propTypes = {
     email: PropTypes.string.isRequired,
     daily_calories_limit: PropTypes.number.isRequired,
   }),
+  // meals: PropTypes.arrayOf(PropTypes.shape({
+  //   id: PropTypes.string.isRequired,
+  //   text: PropTypes.string.isRequired,
+  //   date: PropTypes.string.isRequired,
+  //   time: PropTypes.string.isRequired,
+  //   number_of_calories: PropTypes.number.isRequired,
+  // })),
   navigate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
   user: null,
+  // meals: [],
 };
 
 const mapStateToProps = state => ({
