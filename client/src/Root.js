@@ -11,6 +11,7 @@ import Dashboard from './containers/dashboard/Dashboard';
 import Main from './containers/dashboard/Main';
 import UserSettings from './containers/dashboard/UserSettings';
 import CreateMeal from './containers/dashboard/CreateMeal';
+import UpdateMeal from './containers/dashboard/UpdateMeal';
 
 const theme = createMuiTheme({
   typography: {
@@ -45,6 +46,7 @@ function Root({ store }) {
             <Main path="/" />
             <UserSettings path="settings" />
             <CreateMeal path="create-meal" />
+            <UpdateMeal path="meals/:mealId" />
           </Dashboard>
           <Authentication path="auth">
             <Login path="login" />
