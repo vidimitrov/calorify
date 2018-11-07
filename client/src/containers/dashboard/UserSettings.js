@@ -5,10 +5,15 @@ import { Redirect } from '@reach/router';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import Button from '@material-ui/core/Button';
+import Form from '../../components/dashboard/Form';
+import FormControls from '../../components/dashboard/FormControls';
+import InputWrapper from '../../components/dashboard/InputWrapper';
 import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../components/dashboard/CustomIconButton';
+import CustomTextField from '../../components/dashboard/CustomTextField';
 import logo from '../../assets/img/logo.png';
 
 export class UserSettings extends React.Component {
@@ -44,6 +49,27 @@ export class UserSettings extends React.Component {
             </CustomTypography>
           </Toolbar>
         </AppBar>
+        <Form>
+          <FormControls>
+            <InputWrapper>
+              <CustomTextField
+                label="Full name"
+                defaultValue={user.name}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <CustomTextField
+                label="Daily calories"
+                defaultValue={user.daily_calories_limit}
+                helperText="It's your expected calorie intake per day"
+              />
+            </InputWrapper>
+          </FormControls>
+          {/* TODO: It should be disabled if no changes are made */}
+          <Button variant="contained" color="primary">
+            Save Changes
+          </Button>
+        </Form>
       </Wrapper>
     );
   }
