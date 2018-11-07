@@ -52,10 +52,12 @@ const handleCreateMealFailure = dispatch => (error) => {
 /**
  *  Create meal action creator
  *  */
-export const createMeal = meal => (dispatch) => {
+export const createMeal = meal => (dispatch, getState) => {
   dispatch(createMealStart());
+  const state = getState();
+  const { token } = state.auth;
 
-  return create(meal)
+  return create(token, meal)
     .then(handleCreateMealSuccess(dispatch))
     .catch(handleCreateMealFailure(dispatch));
 };
@@ -93,10 +95,12 @@ const handleFetchMealsFailure = dispatch => (error) => {
 /**
  *  Fetch meals action creator
  *  */
-export const fetchMeals = () => (dispatch) => {
+export const fetchMeals = () => (dispatch, getState) => {
   dispatch(fetchMealsStart());
+  const state = getState();
+  const { token } = state.auth;
 
-  return list()
+  return list(token)
     .then(handleFetchMealsSuccess(dispatch))
     .catch(handleFetchMealsFailure(dispatch));
 };
@@ -135,10 +139,12 @@ const handleUpdateMealFailure = dispatch => (error) => {
 /**
  *  Update meal action creator
  *  */
-export const updateMeal = (mealId, updates) => (dispatch) => {
+export const updateMeal = (mealId, updates) => (dispatch, getState) => {
   dispatch(updateMealStart());
+  const state = getState();
+  const { token } = state.auth;
 
-  return update(mealId, updates)
+  return update(token, mealId, updates)
     .then(handleUpdateMealSuccess(dispatch))
     .catch(handleUpdateMealFailure(dispatch));
 };
@@ -177,10 +183,12 @@ const handleRemoveMealFailure = dispatch => (error) => {
 /**
  *  Remove meal action creator
  *  */
-export const removeMeal = mealId => (dispatch) => {
+export const removeMeal = mealId => (dispatch, getState) => {
   dispatch(removeMealStart());
+  const state = getState();
+  const { token } = state.auth;
 
-  return remove(mealId)
+  return remove(token, mealId)
     .then(handleRemoveMealSuccess(dispatch))
     .catch(handleRemoveMealFailure(dispatch));
 };
