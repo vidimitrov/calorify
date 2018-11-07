@@ -1,7 +1,11 @@
+/* eslint react/no-array-index-key: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from '@reach/router';
+import moment from 'moment';
+import _ from 'lodash';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,6 +20,7 @@ import CustomTypography from '../../components/dashboard/CustomTypography';
 import FabButton from '../../components/dashboard/FabButton';
 import MealsList from '../../components/dashboard/MealsList';
 import ScrollContainer from '../../components/dashboard/ScrollContainer';
+import GroupHeading from '../../components/dashboard/GroupHeading';
 import Card from '../../components/dashboard/Card/Card';
 import CardInfo from '../../components/dashboard/Card/CardInfo';
 import CardDate from '../../components/dashboard/Card/CardDate';
@@ -82,6 +87,8 @@ export class Main extends React.Component {
     } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const mealsGroupedByDate = _.groupBy(meals, 'date');
+    const groupDates = Object.keys(mealsGroupedByDate).sort((a, b) => moment(b).diff(moment(a)));
 
     if (!user) {
       return (
@@ -135,16 +142,21 @@ export class Main extends React.Component {
         </AppBar>
         <MealsList>
           <ScrollContainer>
-            {meals.map(meal => (
-              <Card key={meal.id}>
-                <CardStatus inRange={this.isInRange(meal.date)} />
-                <CardInfo text={meal.text} calories={meal.number_of_calories} />
-                <CardDate date={meal.updated_at} />
-                <CardActions
-                  onEditHandler={() => navigate(`/meals/${meal.id}`)}
-                  onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
-                />
-              </Card>
+            {groupDates.map((gDate, index) => (
+              <div key={index}>
+                <GroupHeading>{(moment(gDate).calendar().split(' at'))[0]}</GroupHeading>
+                {mealsGroupedByDate[gDate].map(meal => (
+                  <Card key={meal.id}>
+                    <CardStatus inRange={this.isInRange(meal.date)} />
+                    <CardInfo text={meal.text} calories={meal.number_of_calories} />
+                    <CardDate date={meal.updated_at} />
+                    <CardActions
+                      onEditHandler={() => navigate(`/meals/${meal.id}`)}
+                      onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
+                    />
+                  </Card>
+                ))}
+              </div>
             ))}
           </ScrollContainer>
         </MealsList>
