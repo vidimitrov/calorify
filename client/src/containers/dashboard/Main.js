@@ -121,7 +121,7 @@ Main.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
+  user: state.user.data,
 });
 
 const mapDispatchToProps = dispatch => ({
