@@ -8,7 +8,9 @@ const Wrapper = styled.div`
   flex-grow:1;
 
   @media (max-width: 420px) {
-    min-width: 105px;
+    min-width: 70px;
+    margin: 0px 15px;
+    width: 200px;
   }
 `;
 
