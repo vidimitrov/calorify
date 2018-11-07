@@ -109,7 +109,6 @@ Main.propTypes = {
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    provider: PropTypes.string.isRequired,
     daily_calories_limit: PropTypes.number.isRequired,
   }),
   navigate: PropTypes.func.isRequired,

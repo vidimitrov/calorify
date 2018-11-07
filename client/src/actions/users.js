@@ -37,6 +37,7 @@ export const updateUserFailure = error => ({
  *  */
 const handleUpdateUserSuccess = dispatch => (response) => {
   const { user } = response;
+  window.localStorage.setItem('user', JSON.stringify(user));
   dispatch(updateUserSuccess(user));
   return Promise.resolve(user);
 };

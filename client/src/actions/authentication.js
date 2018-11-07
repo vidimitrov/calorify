@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-
 import * as auth from '../api/authentication';
 import { storeUserData } from './users';
 import {
@@ -51,10 +49,10 @@ export const resetErrors = () => ({
  *  Login action response handlers
  *  */
 const handleLoginSuccess = dispatch => (response) => {
-  const { token } = response;
-  const user = jwt.decode(token);
+  const { token, user } = response;
 
   window.localStorage.setItem('token', token);
+  window.localStorage.setItem('user', JSON.stringify(user));
   dispatch(loginSuccess(token));
   dispatch(storeUserData(user));
   return Promise.resolve();
@@ -101,6 +99,7 @@ export const signup = userData => (dispatch) => {
  */
 const handleLogoutSuccess = dispatch => () => {
   window.localStorage.removeItem('token');
+  window.localStorage.removeItem('user');
   dispatch(logoutSuccess());
   return Promise.resolve();
 };
