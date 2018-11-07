@@ -12,6 +12,10 @@ const FormContent = styled.div`
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+
+  @media (max-width: 420px) {
+    width: 100%;
+  }
 `;
 
 export default FormContent;

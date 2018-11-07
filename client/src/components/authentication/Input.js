@@ -23,6 +23,10 @@ const Input = styled.input`
   &:focus {
     box-shadow: 0 0 5px #ff9a00;
   }
+
+  @media (max-width: 420px) {
+    width: 60%;
+  }
 `;
 
 export default Input;
