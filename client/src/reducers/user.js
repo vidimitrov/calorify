@@ -1,17 +1,33 @@
+import jwt from 'jsonwebtoken';
 import {
+  STORE_USER_DATA,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
 } from '../constants/actionTypes';
 
-const initialState = {
-  data: [],
-  loading: false,
-  error: null,
-};
+function getInitialState() {
+  const token = localStorage.getItem('token') || null;
+  let data = null;
 
-export default function users(state = initialState, action) {
+  if (token) {
+    data = jwt.decode(token);
+  }
+
+  return {
+    data,
+    loading: false,
+    error: null,
+  };
+}
+
+export default function user(state = getInitialState(), action) {
   switch (action.type) {
+    case STORE_USER_DATA:
+      return {
+        ...state,
+        data: Object.assign(state.data, action.data),
+      };
     case UPDATE_USER_START:
       return {
         ...state,
@@ -20,14 +36,11 @@ export default function users(state = initialState, action) {
       };
     case UPDATE_USER_SUCCESS: {
       const updatedUser = action.payload.user;
-      const indexOfExistingUser = state.data.findIndex(
-        u => u.id === updatedUser.id,
-      );
-      state.data.splice(indexOfExistingUser, 1, updatedUser);
 
       return {
         ...state,
         loading: false,
+        data: Object.assign(state.data, updatedUser),
       };
     }
     case UPDATE_USER_FAILURE:

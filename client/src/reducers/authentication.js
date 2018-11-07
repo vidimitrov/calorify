@@ -1,7 +1,4 @@
-import jwt from 'jsonwebtoken';
-
 import {
-  STORE_USER_DATA,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   SIGNUP_SUCCESS,
@@ -13,36 +10,18 @@ import {
 
 function getInitialState() {
   const token = localStorage.getItem('token') || null;
-  let user = null;
-
-  if (token) {
-    user = jwt.decode(token);
-  }
 
   return {
-    data: {},
     token,
-    user,
   };
 }
 
 export default function auth(state = getInitialState(), action) {
   switch (action.type) {
-    case STORE_USER_DATA:
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          name: action.name,
-          email: action.email,
-          password: action.password,
-        },
-      };
     case LOGIN_SUCCESS:
       return {
         ...state,
         token: action.token,
-        user: action.user,
       };
     case LOGIN_FAILURE:
       return {
