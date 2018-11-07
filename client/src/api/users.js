@@ -2,11 +2,12 @@ import cfg from '../../config';
 
 const { API_URL } = cfg;
 
-export const update = async (userId, updates) => {
+export const update = async (token, userId, updates) => {
   const response = await fetch(`${API_URL}/api/users/${userId}`, {
-    method: 'POST',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       attrs: updates,
