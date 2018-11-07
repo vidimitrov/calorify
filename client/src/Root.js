@@ -26,6 +26,13 @@ const theme = createMuiTheme({
       main: '#ff387b',
     },
   },
+  overrides: {
+    MuiButton: {
+      containedPrimary: {
+        color: 'white',
+      },
+    },
+  },
 });
 
 function Root({ store }) {
