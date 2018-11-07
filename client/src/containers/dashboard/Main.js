@@ -14,9 +14,19 @@ import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
 import FabButton from '../../components/dashboard/FabButton';
+import MealsList from '../../components/dashboard/MealsList';
+import ScrollContainer from '../../components/dashboard/ScrollContainer';
+import Card from '../../components/dashboard/Card/Card';
+import CardInfo from '../../components/dashboard/Card/CardInfo';
+import CardDate from '../../components/dashboard/Card/CardDate';
+import CardActions from '../../components/dashboard/Card/CardActions';
+import CardStatus from '../../components/dashboard/Card/CardStatus';
 import logo from '../../assets/img/logo.png';
 import { logout as logoutActionCreator } from '../../actions/authentication';
-import { fetchMeals as fetchMealsActionCreator } from '../../actions/meals';
+import {
+  fetchMeals as fetchMealsActionCreator,
+  removeMeal as removeMealActionCreator,
+} from '../../actions/meals';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -28,6 +38,7 @@ export class Main extends React.Component {
 
     this.handleMenu = this.handleMenu.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.isInRange = this.isInRange.bind(this);
   }
 
   async componentDidMount() {
@@ -52,13 +63,23 @@ export class Main extends React.Component {
     });
   }
 
+  isInRange(date) {
+    const { meals, user } = this.props;
+    const filteredMeals = meals.filter(m => m.date === date);
+    const totalCalories = filteredMeals
+      .reduce((accumulator, currentValue) => accumulator + currentValue.number_of_calories, 0);
+
+    return totalCalories <= user.daily_calories_limit;
+  }
+
   render() {
     const {
+      navigate,
       user,
       meals,
       logout,
+      removeMeal,
     } = this.props;
-    const { navigate } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -112,9 +133,21 @@ export class Main extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
-        {meals.map(meal => (
-          <div key={meal.id}>{meal.text}</div>
-        ))}
+        <MealsList>
+          <ScrollContainer>
+            {meals.map(meal => (
+              <Card key={meal.id}>
+                <CardStatus inRange={this.isInRange(meal.date)} />
+                <CardInfo text={meal.text} calories={meal.number_of_calories} />
+                <CardDate date={meal.date} time={meal.time} />
+                <CardActions
+                  onEditHandler={() => navigate(`/meals/${meal.id}`)}
+                  onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
+                />
+              </Card>
+            ))}
+          </ScrollContainer>
+        </MealsList>
         <FabButton
           variant="fab"
           color="primary"
@@ -148,6 +181,7 @@ Main.propTypes = {
   navigate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   getAllMeals: PropTypes.func.isRequired,
+  removeMeal: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -163,6 +197,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutActionCreator()),
   getAllMeals: () => dispatch(fetchMealsActionCreator()),
+  removeMeal: mealId => dispatch(removeMealActionCreator(mealId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
