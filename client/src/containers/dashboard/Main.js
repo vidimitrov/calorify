@@ -139,7 +139,7 @@ export class Main extends React.Component {
               <Card key={meal.id}>
                 <CardStatus inRange={this.isInRange(meal.date)} />
                 <CardInfo text={meal.text} calories={meal.number_of_calories} />
-                <CardDate date={meal.date} time={meal.time} />
+                <CardDate date={meal.updated_at} />
                 <CardActions
                   onEditHandler={() => navigate(`/meals/${meal.id}`)}
                   onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
