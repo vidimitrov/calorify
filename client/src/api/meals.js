@@ -50,7 +50,10 @@ export const update = async (token, mealId, updates) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      attrs: updates,
+      attrs: {
+        text: updates.name,
+        number_of_calories: updates.calories,
+      },
     }),
   });
   const data = await response.json();
