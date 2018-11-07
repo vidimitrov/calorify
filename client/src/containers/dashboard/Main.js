@@ -14,8 +14,9 @@ import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
 import FabButton from '../../components/dashboard/FabButton';
-import { logout as logoutActionCreator } from '../../actions/authentication';
 import logo from '../../assets/img/logo.png';
+import { logout as logoutActionCreator } from '../../actions/authentication';
+import { fetchMeals as fetchMealsActionCreator } from '../../actions/meals';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -27,6 +28,16 @@ export class Main extends React.Component {
 
     this.handleMenu = this.handleMenu.bind(this);
     this.handleClose = this.handleClose.bind(this);
+  }
+
+  async componentDidMount() {
+    const { getAllMeals } = this.props;
+    try {
+      await getAllMeals();
+    } catch (error) {
+      // TODO: Show error snackbar here
+      throw error;
+    }
   }
 
   handleMenu(event) {
@@ -44,6 +55,7 @@ export class Main extends React.Component {
   render() {
     const {
       user,
+      meals,
       logout,
     } = this.props;
     const { navigate } = this.props;
@@ -100,6 +112,9 @@ export class Main extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
+        {meals.map(meal => (
+          <div key={meal.id}>{meal.text}</div>
+        ))}
         <FabButton
           variant="fab"
           color="primary"
@@ -123,28 +138,31 @@ Main.propTypes = {
     email: PropTypes.string.isRequired,
     daily_calories_limit: PropTypes.number.isRequired,
   }),
-  // meals: PropTypes.arrayOf(PropTypes.shape({
-  //   id: PropTypes.string.isRequired,
-  //   text: PropTypes.string.isRequired,
-  //   date: PropTypes.string.isRequired,
-  //   time: PropTypes.string.isRequired,
-  //   number_of_calories: PropTypes.number.isRequired,
-  // })),
+  meals: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    number_of_calories: PropTypes.number.isRequired,
+  })),
   navigate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  getAllMeals: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
   user: null,
-  // meals: [],
+  meals: [],
 };
 
 const mapStateToProps = state => ({
   user: state.user.data,
+  meals: state.meals.data,
 });
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutActionCreator()),
+  getAllMeals: () => dispatch(fetchMealsActionCreator()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
