@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 import * as auth from '../api/authentication';
-
+import { storeUserData } from './users';
 import {
-  STORE_USER_DATA,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   SIGNUP_SUCCESS,
@@ -13,12 +12,6 @@ import {
   RESET_AUTH_ERRORS,
 } from '../constants/actionTypes';
 
-export const storeUserDataAction = (name, email, password) => ({
-  type: STORE_USER_DATA,
-  name,
-  email,
-  password,
-});
 
 export const loginSuccess = (token, user) => ({
   type: LOGIN_SUCCESS,
@@ -62,7 +55,8 @@ const handleLoginSuccess = dispatch => (response) => {
   const user = jwt.decode(token);
 
   window.localStorage.setItem('token', token);
-  dispatch(loginSuccess(token, user));
+  dispatch(loginSuccess(token));
+  dispatch(storeUserData(user));
   return Promise.resolve();
 };
 const handleLoginFailure = dispatch => (error) => {

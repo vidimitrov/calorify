@@ -3,13 +3,23 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  STORE_USER_DATA,
 } from '../constants/actionTypes';
+
+/**
+ * Store user data
+ */
+export const storeUserData = data => ({
+  type: STORE_USER_DATA,
+  data,
+});
 
 /**
  *  Update user actions
  *  */
-export const updateUserStart = () => ({
+export const updateUserStart = (userId, updates) => ({
   type: UPDATE_USER_START,
+  payload: { userId, updates },
 });
 
 export const updateUserSuccess = user => ({
@@ -38,10 +48,12 @@ const handleUpdateUserFailure = dispatch => (error) => {
 /**
  *  Update user action creator
  *  */
-export const updateUser = (userId, updates) => (dispatch) => {
-  dispatch(updateUserStart());
+export const updateUser = (userId, updates) => (dispatch, getState) => {
+  dispatch(updateUserStart(userId, updates));
+  const state = getState();
+  const { token } = state.auth;
 
-  return update(userId, updates)
+  return update(token, userId, updates)
     .then(handleUpdateUserSuccess(dispatch))
     .catch(handleUpdateUserFailure(dispatch));
 };
