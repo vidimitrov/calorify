@@ -74,7 +74,7 @@ export class Main extends React.Component {
     const totalCalories = filteredMeals
       .reduce((accumulator, currentValue) => accumulator + currentValue.number_of_calories, 0);
 
-    return totalCalories <= user.daily_calories_limit;
+    return totalCalories < user.daily_calories_limit;
   }
 
   render() {
