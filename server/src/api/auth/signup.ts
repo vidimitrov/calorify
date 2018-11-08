@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import { omit, isEmpty } from 'lodash';
-import User, { UserType } from '../../models/user/User';
+import User, { UserType, schema } from '../../models/user/User';
 import respondWith from '../../lib/respondWith';
 import { isValidEmail } from '../../lib/validations';
 
@@ -20,6 +20,10 @@ const signup = async (ctx: Koa.Context) => {
 
   if (user) {
     return respondWith.forbidden(ctx, 'User already exist');
+  }
+
+  if (!schema.isValid('create', attrs)) {
+    return respondWith.badRequest(ctx);
   }
 
   try {

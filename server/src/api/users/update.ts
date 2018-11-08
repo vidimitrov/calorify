@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import User, { UserType } from '../../models/user/User';
+import User, { UserType, schema } from '../../models/user/User';
 import { USER, UPDATE_OWN } from '../../constants/ac';
 import respondWith from '../../lib/respondWith';
 import guard from '../../lib/guard';
@@ -14,6 +14,10 @@ const update = async (ctx: Koa.Context) => {
   const attrs: UserType = (ctx.request.body as any).attrs;
 
   if (!userId) {
+    return respondWith.badRequest(ctx);
+  }
+
+  if (!schema.isValid('update', attrs)) {
     return respondWith.badRequest(ctx);
   }
 

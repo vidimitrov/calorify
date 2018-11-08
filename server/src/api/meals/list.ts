@@ -15,7 +15,6 @@ const list = async (ctx: Koa.Context) => {
 
   try {
     meals = await Meal.findAll({
-      // TODO: Add the date/time filter
       user_id: userId,
       deleted: false,
     });

@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import Meal, { MealType } from '../../models/meal/Meal';
+import Meal, { MealType, schema } from '../../models/meal/Meal';
 import { MEAL, CREATE_OWN } from '../../constants/ac';
 import respondWith from '../../lib/respondWith';
 import guard from '../../lib/guard';
@@ -15,6 +15,10 @@ const create = async (ctx: Koa.Context) => {
   let meal: MealType;
 
   attrs.user_id = userId;
+
+  if (!schema.isValid('create', attrs)) {
+    return respondWith.badRequest(ctx);
+  }
 
   try {
     meal = await Meal.create(attrs);

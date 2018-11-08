@@ -17,14 +17,12 @@ const PROPS = [
 ];
 
 export interface UserType extends BaseType {
-  organization_id: string;
   password: string;
   provider: string;
   name: string;
   email: string;
-  phone: string;
+  daily_calories_limit: number;
   role: string;
-  avatar: string;
   deleted: boolean;
 }
 
@@ -36,6 +34,19 @@ export interface UserModel {
   update: (criteria: any, attrs: any) => Promise<UserType>;
   remove: (criteria: any) => Promise<UserType>;
 }
+
+export const schema = {
+  isValid: (type, attrs) => {
+    switch (type) {
+      case 'create': {
+        return attrs.password && attrs.name && attrs.email;
+      }
+      case 'update': {
+        return attrs.name || attrs.daily_calories_limit;
+      }
+    }
+  },
+};
 
 export const verifyPassword = async (user: UserType, password: string): Promise<boolean> => {
   let result;

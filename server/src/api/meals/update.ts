@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import Meal, { MealType } from '../../models/meal/Meal';
+import Meal, { MealType, schema } from '../../models/meal/Meal';
 import { MEAL, UPDATE_OWN } from '../../constants/ac';
 import respondWith from '../../lib/respondWith';
 import guard from '../../lib/guard';
@@ -14,6 +14,10 @@ const update = async (ctx: Koa.Context) => {
   const attrs: MealType = (ctx.request.body as any).attrs;
 
   if (!mealId) {
+    return respondWith.badRequest(ctx);
+  }
+
+  if (!schema.isValid('update', attrs)) {
     return respondWith.badRequest(ctx);
   }
 

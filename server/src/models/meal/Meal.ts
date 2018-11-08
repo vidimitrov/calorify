@@ -33,6 +33,19 @@ export interface MealModel {
   remove: (criteria: any) => Promise<MealType>;
 }
 
+export const schema = {
+  isValid: (type, attrs) => {
+    switch (type) {
+      case 'create': {
+        return attrs.text && attrs.number_of_calories && attrs.user_id;
+      }
+      case 'update': {
+        return attrs.text || attrs.number_of_calories;
+      }
+    }
+  },
+};
+
 export default (function Meal(): MealModel {
   return {
     find: async (criteria: any, opts?: any): Promise<MealType> => {
