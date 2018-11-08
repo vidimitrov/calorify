@@ -32,12 +32,19 @@ app.keys = [API_SECRET];
 app
   .use(session(SESSION_CONFIG, app))
   .use(bodyparser())
+  .use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'"],
+      },
+    },
+  }))
   .use(cors({ credentials: true, methods: 'GET,HEAD,PUT,POST,DELETE,PATCH' }))
   .use(passport.initialize())
   .use(passport.session())
   .use(router.routes())
-  .use(router.allowedMethods())
-  .use(helmet());
+  .use(router.allowedMethods());
 
 // Configure Passport
 console.log('Configuring Passport authentication strategies...');
