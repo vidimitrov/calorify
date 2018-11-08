@@ -35,6 +35,7 @@ import { logout as logoutActionCreator } from '../../actions/authentication';
 import {
   fetchMeals as fetchMealsActionCreator,
   removeMeal as removeMealActionCreator,
+  filterMeals as filterMealsAction,
 } from '../../actions/meals';
 
 export class Main extends React.Component {
@@ -89,8 +90,26 @@ export class Main extends React.Component {
   }
 
   handleFilterChange(key, value) {
+    const {
+      filterMeals,
+    } = this.props;
+
     this.setState({
       [key]: value,
+    }, () => {
+      const {
+        dateFrom,
+        dateTo,
+        timeFrom,
+        timeTo,
+      } = this.state;
+
+      filterMeals({
+        dateFrom,
+        dateTo,
+        timeFrom,
+        timeTo,
+      });
     });
   }
 
@@ -107,7 +126,7 @@ export class Main extends React.Component {
     const {
       navigate,
       user,
-      meals,
+      filteredMeals,
       logout,
       removeMeal,
     } = this.props;
@@ -119,6 +138,12 @@ export class Main extends React.Component {
       timeFrom,
       timeTo,
     } = this.state;
+    let { meals } = this.props;
+
+    if (showFilters) {
+      meals = filteredMeals;
+    }
+
     const open = Boolean(anchorEl);
     const mealsGroupedByDate = _.groupBy(meals, 'date');
     const groupDates = Object.keys(mealsGroupedByDate).sort((a, b) => moment(b).diff(moment(a)));
@@ -275,26 +300,37 @@ Main.propTypes = {
     time: PropTypes.string.isRequired,
     number_of_calories: PropTypes.number.isRequired,
   })),
+  filteredMeals: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    number_of_calories: PropTypes.number.isRequired,
+  })),
   navigate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   getAllMeals: PropTypes.func.isRequired,
   removeMeal: PropTypes.func.isRequired,
+  filterMeals: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
   user: null,
   meals: [],
+  filteredMeals: [],
 };
 
 const mapStateToProps = state => ({
   user: state.user.data,
   meals: state.meals.data,
+  filteredMeals: state.meals.filteredData,
 });
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutActionCreator()),
   getAllMeals: () => dispatch(fetchMealsActionCreator()),
   removeMeal: mealId => dispatch(removeMealActionCreator(mealId)),
+  filterMeals: filters => dispatch(filterMealsAction(filters)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
