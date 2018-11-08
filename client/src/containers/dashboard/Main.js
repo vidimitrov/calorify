@@ -255,17 +255,19 @@ export class Main extends React.Component {
             {groupDates.map((gDate, index) => (
               <div key={index}>
                 <GroupHeading>{(moment(gDate).calendar().split(' at'))[0]}</GroupHeading>
-                {mealsGroupedByDate[gDate].map(meal => (
-                  <Card key={meal.id}>
-                    <CardStatus inRange={this.isInRange(meal.date)} />
-                    <CardInfo text={meal.text} calories={meal.number_of_calories} />
-                    <CardDate date={meal.updated_at} />
-                    <CardActions
-                      onEditHandler={() => navigate(`/meals/${meal.id}`)}
-                      onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
-                    />
-                  </Card>
-                ))}
+                {mealsGroupedByDate[gDate]
+                  .sort((a, b) => moment(b.updated_at).diff(moment(a.updated_at)))
+                  .map(meal => (
+                    <Card key={meal.id}>
+                      <CardStatus inRange={this.isInRange(meal.date)} />
+                      <CardInfo text={meal.text} calories={meal.number_of_calories} />
+                      <CardDate date={meal.updated_at} />
+                      <CardActions
+                        onEditHandler={() => navigate(`/meals/${meal.id}`)}
+                        onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
+                      />
+                    </Card>
+                  ))}
               </div>
             ))}
           </ScrollContainer>
