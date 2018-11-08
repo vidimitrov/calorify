@@ -7,16 +7,23 @@ import guard from '../../lib/guard';
 const remove = async (ctx: Koa.Context) => {
   const ROLE = ctx.state && ctx.state.user ? ctx.state.user.role : null;
   const allowed = await guard.checkPermissions(ROLE, DELETE_OWN, MEAL);
-
-  if (!allowed) return respondWith.forbidden(ctx);
-
   const mealId: string = ctx.params.id;
+
+  if (!allowed) {
+    return respondWith.forbidden(ctx);
+  }
 
   if (!mealId) {
     return respondWith.badRequest(ctx);
   }
 
   try {
+    const meal = await Meal.findById(mealId);
+
+    if (meal.user_id !== ctx.state.user.id && ROLE === 'user') {
+      return respondWith.forbidden(ctx);
+    }
+
     const criteria = { id: mealId };
     await Meal.update(criteria, { deleted: true });
   } catch (err) {
