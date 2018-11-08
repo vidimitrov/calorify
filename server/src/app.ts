@@ -43,7 +43,10 @@ app
       },
     },
   }))
-  .use(cors({ credentials: true, methods: 'GET,HEAD,PUT,POST,DELETE,PATCH' }))
+  .use(cors({
+    credentials: true,
+    methods: 'GET,POST,DELETE,PATCH',
+  }))
   .use(passport.initialize())
   .use(passport.session())
   .use(router.routes())
