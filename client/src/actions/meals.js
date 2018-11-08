@@ -17,6 +17,7 @@ import {
   REMOVE_MEAL_START,
   REMOVE_MEAL_SUCCESS,
   REMOVE_MEAL_FAILURE,
+  FILTER_MEALS,
 } from '../constants/actionTypes';
 
 /**
@@ -192,3 +193,11 @@ export const removeMeal = mealId => (dispatch, getState) => {
     .then(handleRemoveMealSuccess(dispatch))
     .catch(handleRemoveMealFailure(dispatch));
 };
+
+/**
+ * Filter meals actions
+ */
+export const filterMeals = filters => ({
+  type: FILTER_MEALS,
+  payload: { filters },
+});

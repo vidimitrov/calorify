@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   FETCH_MEALS_START,
   FETCH_MEALS_SUCCESS,
@@ -11,10 +12,12 @@ import {
   REMOVE_MEAL_START,
   REMOVE_MEAL_SUCCESS,
   REMOVE_MEAL_FAILURE,
+  FILTER_MEALS,
 } from '../constants/actionTypes';
 
 const initialState = {
   data: [],
+  filteredData: [],
   loading: false,
   error: null,
 };
@@ -32,6 +35,7 @@ export default function meals(state = initialState, action) {
         ...state,
         loading: false,
         data: action.payload.meals,
+        filteredData: action.payload.meals,
       };
     case FETCH_MEALS_FAILURE:
       return {
@@ -110,6 +114,19 @@ export default function meals(state = initialState, action) {
         loading: false,
         error: action.payload.error,
       };
+    case FILTER_MEALS: {
+      const { filters } = action.payload;
+      const filteredData = state.data
+        .filter(meal => moment(meal.date).isSameOrAfter(moment(filters.dateFrom))
+          && moment(meal.date).isSameOrBefore(moment(filters.dateTo))
+          && moment(meal.time, 'h:mma').isSameOrAfter(moment(filters.timeFrom, 'h:mma'))
+          && moment(meal.time, 'h:mma').isSameOrBefore(moment(filters.timeTo, 'h:mma')));
+
+      return {
+        ...state,
+        filteredData,
+      };
+    }
     default:
       return state;
   }
