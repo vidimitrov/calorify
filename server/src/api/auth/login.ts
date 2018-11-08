@@ -16,12 +16,10 @@ const login = (ctx: Koa.Context, next): void => {
     }
 
     await ctx.login(user, { session: false });
-    const responseUser = omit(user, 'password');
-    const token = jwt.sign(responseUser, API_SECRET);
+    const token = jwt.sign(omit(user, 'password'), API_SECRET);
 
     return respondWith.success(ctx, {
       token,
-      user: responseUser,
     });
   };
 

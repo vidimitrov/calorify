@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import cfg from '../../config';
 
 const { API_URL } = cfg;
@@ -18,7 +19,10 @@ export const login = async (email, password) => {
   const data = await response.json();
 
   if (data.success) {
-    return Promise.resolve(data);
+    return Promise.resolve({
+      token: data.token,
+      user: jwt.decode(data.token),
+    });
   }
 
   return Promise.reject(data);
