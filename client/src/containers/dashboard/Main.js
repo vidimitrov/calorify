@@ -11,7 +11,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import FilterList from '@material-ui/icons/FilterList';
 import MoreVert from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import Logo from '../../components/dashboard/Logo';
@@ -21,6 +23,8 @@ import FabButton from '../../components/dashboard/FabButton';
 import MealsList from '../../components/dashboard/MealsList';
 import ScrollContainer from '../../components/dashboard/ScrollContainer';
 import GroupHeading from '../../components/dashboard/GroupHeading';
+import Filters from '../../components/dashboard/Filters';
+import FiltersControls from '../../components/dashboard/FiltersControls';
 import Card from '../../components/dashboard/Card/Card';
 import CardInfo from '../../components/dashboard/Card/CardInfo';
 import CardDate from '../../components/dashboard/Card/CardDate';
@@ -37,12 +41,21 @@ export class Main extends React.Component {
   constructor(props) {
     super(props);
 
+    const { user } = props;
+
     this.state = {
       anchorEl: null,
+      showFilters: false,
+      dateFrom: moment(user.created_at).toISOString().split('T')[0],
+      dateTo: moment().toISOString().split('T')[0],
+      timeFrom: '00:00',
+      timeTo: '23:59',
     };
 
     this.handleMenu = this.handleMenu.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.toggleFiltersVisibility = this.toggleFiltersVisibility.bind(this);
     this.isInRange = this.isInRange.bind(this);
   }
 
@@ -68,6 +81,19 @@ export class Main extends React.Component {
     });
   }
 
+  toggleFiltersVisibility() {
+    const { showFilters } = this.state;
+    this.setState({
+      showFilters: !showFilters,
+    });
+  }
+
+  handleFilterChange(key, value) {
+    this.setState({
+      [key]: value,
+    });
+  }
+
   isInRange(date) {
     const { meals, user } = this.props;
     const filteredMeals = meals.filter(m => m.date === date);
@@ -85,7 +111,14 @@ export class Main extends React.Component {
       logout,
       removeMeal,
     } = this.props;
-    const { anchorEl } = this.state;
+    const {
+      anchorEl,
+      showFilters,
+      dateFrom,
+      dateTo,
+      timeFrom,
+      timeTo,
+    } = this.state;
     const open = Boolean(anchorEl);
     const mealsGroupedByDate = _.groupBy(meals, 'date');
     const groupDates = Object.keys(mealsGroupedByDate).sort((a, b) => moment(b).diff(moment(a)));
@@ -140,6 +173,58 @@ export class Main extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
+        <Filters visible={showFilters}>
+          <FiltersControls visible={showFilters}>
+            <TextField
+              label="From"
+              type="date"
+              value={dateFrom}
+              onChange={e => this.handleFilterChange('dateFrom', e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              label="To"
+              type="date"
+              value={dateTo}
+              onChange={e => this.handleFilterChange('dateTo', e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              label="From"
+              type="time"
+              value={timeFrom}
+              onChange={e => this.handleFilterChange('timeFrom', e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              label="To"
+              type="time"
+              value={timeTo}
+              onChange={e => this.handleFilterChange('timeTo', e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </FiltersControls>
+          <div>
+            <IconButton
+              aria-owns={open ? 'menu-appbar' : undefined}
+              aria-haspopup="true"
+              onClick={() => {
+                this.toggleFiltersVisibility();
+              }}
+              color="default"
+            >
+              <FilterList />
+            </IconButton>
+          </div>
+        </Filters>
         <MealsList>
           <ScrollContainer>
             {groupDates.map((gDate, index) => (
