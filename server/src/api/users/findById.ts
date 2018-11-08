@@ -7,11 +7,12 @@ import guard from '../../lib/guard';
 const findById = async (ctx: Koa.Context) => {
   const ROLE = ctx.state && ctx.state.user ? ctx.state.user.role : null;
   const allowed = await guard.checkPermissions(ROLE, READ_OWN, USER);
-
-  if (!allowed) return respondWith.forbidden(ctx);
-
   const userId: string = ctx.params.id;
   let user: UserType;
+
+  if (!allowed) {
+    return respondWith.forbidden(ctx);
+  }
 
   if (!userId) {
     return respondWith.badRequest(ctx);
@@ -19,6 +20,10 @@ const findById = async (ctx: Koa.Context) => {
 
   try {
     user = await User.findById(userId);
+
+    if (user.id !== ctx.state.user.id && ROLE === 'user') {
+      return respondWith.forbidden(ctx);
+    }
   } catch (err) {
     return respondWith.error(ctx, err);
   }

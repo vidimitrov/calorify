@@ -1,16 +1,17 @@
 import Koa from 'koa';
 import User from '../../models/user/User';
-import { USER, DELETE_OWN } from '../../constants/ac';
+import { USER, DELETE_ANY } from '../../constants/ac';
 import respondWith from '../../lib/respondWith';
 import guard from '../../lib/guard';
 
 const remove = async (ctx: Koa.Context) => {
   const ROLE = ctx.state && ctx.state.user ? ctx.state.user.role : null;
-  const allowed = await guard.checkPermissions(ROLE, DELETE_OWN, USER);
-
-  if (!allowed) return respondWith.forbidden(ctx);
-
+  const allowed = await guard.checkPermissions(ROLE, DELETE_ANY, USER);
   const userId: string = ctx.params.id;
+
+  if (!allowed) {
+    return respondWith.forbidden(ctx);
+  }
 
   if (!userId) {
     return respondWith.badRequest(ctx);
