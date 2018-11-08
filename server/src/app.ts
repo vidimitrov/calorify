@@ -36,7 +36,10 @@ app
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        styleSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
+        connectSrc: ["'self'", 'ws://localhost:53972', 'http://localhost:3000'],
       },
     },
   }))
