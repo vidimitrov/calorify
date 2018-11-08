@@ -18,7 +18,7 @@ const create = async (ctx: Koa.Context) => {
   attrs.user_id = userId;
 
   if (ctx.query.userId) {
-    if (ROLE !== 'user') {
+    if (ROLE === 'admin') {
       attrs.user_id = ctx.query.userId;
     } else {
       return respondWith.forbidden(ctx);

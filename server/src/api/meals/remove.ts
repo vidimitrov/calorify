@@ -20,7 +20,7 @@ const remove = async (ctx: Koa.Context) => {
   try {
     const meal = await Meal.findById(mealId);
 
-    if (meal.user_id !== ctx.state.user.id && ROLE === 'user') {
+    if (meal.user_id !== ctx.state.user.id && ROLE !== 'admin') {
       return respondWith.forbidden(ctx);
     }
 
