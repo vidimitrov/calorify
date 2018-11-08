@@ -7,11 +7,12 @@ import guard from '../../lib/guard';
 const update = async (ctx: Koa.Context) => {
   const ROLE = ctx.state && ctx.state.user ? ctx.state.user.role : null;
   const allowed = await guard.checkPermissions(ROLE, UPDATE_OWN, USER);
-
-  if (!allowed) return respondWith.forbidden(ctx);
-
   const userId: string = ctx.params.id;
   const attrs: UserType = (ctx.request.body as any).attrs;
+
+  if (!allowed || (ctx.state.user.role === 'user' && ctx.state.user.id !== userId)) {
+    return respondWith.forbidden(ctx);
+  }
 
   if (!userId) {
     return respondWith.badRequest(ctx);
