@@ -17,13 +17,32 @@ import CustomTextField from '../../components/dashboard/CustomTextField';
 import logo from '../../assets/img/logo.png';
 import { createMeal as createMealActionCreator } from '../../actions/meals';
 
+function convertDateToUTC(date) {
+  return new Date(
+    Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ),
+  );
+}
+
 export class CreateMeal extends React.Component {
   constructor(props) {
     super(props);
 
+    const now = new Date();
+    const dateWithTimeZone = convertDateToUTC(now);
+    const splittedString = dateWithTimeZone.toISOString().split(':');
+    const defaultDate = `${splittedString[0]}:${splittedString[1]}`;
+
     this.state = {
       name: '',
       calories: '',
+      date: defaultDate,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -43,6 +62,7 @@ export class CreateMeal extends React.Component {
     const {
       name,
       calories,
+      date,
     } = this.state;
     const { navigate } = this.props;
 
@@ -81,13 +101,28 @@ export class CreateMeal extends React.Component {
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
             </InputWrapper>
+            <InputWrapper>
+              <CustomTextField
+                placeholder="Date (optional)"
+                value={date}
+                type="datetime-local"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={e => this.onChangeHandler('date', e.target.value)}
+              />
+            </InputWrapper>
           </FormControls>
           {/* TODO: It should be disabled if no changes are made */}
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              createMeal(name, calories)
+              const isoDate = convertDateToUTC(new Date(date)).toISOString();
+              const formattedDate = isoDate.split('T')[0];
+              const formattedTime = isoDate.split('T')[1].split('Z')[0];
+
+              createMeal(name, calories, formattedDate, formattedTime)
                 .then(() => {
                   // TODO: Show positive snackbar
                   navigate('/');
@@ -125,7 +160,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createMeal: (name, calories) => dispatch(createMealActionCreator({ name, calories })),
+  createMeal: (name, calories, date, time) => dispatch(
+    createMealActionCreator({
+      name,
+      calories,
+      date,
+      time,
+    }),
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateMeal);

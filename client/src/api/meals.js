@@ -13,6 +13,8 @@ export const create = async (token, meal) => {
       attrs: {
         text: meal.name,
         number_of_calories: meal.calories,
+        date: meal.date,
+        time: meal.time,
       },
     }),
   });
