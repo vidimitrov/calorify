@@ -30,6 +30,8 @@ const update = async (ctx: Koa.Context) => {
     }
 
     const criteria = { id: mealId };
+    attrs.updated_at = new Date();
+
     await Meal.update(criteria, attrs);
   } catch (err) {
     return respondWith.error(ctx, err);
