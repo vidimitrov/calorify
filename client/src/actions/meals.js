@@ -23,8 +23,9 @@ import {
 /**
  *  Create meal actions
  *  */
-export const createMealStart = () => ({
+export const createMealStart = meal => ({
   type: CREATE_MEAL_START,
+  payload: { meal },
 });
 
 export const createMealSuccess = meal => ({
@@ -54,7 +55,7 @@ const handleCreateMealFailure = dispatch => (error) => {
  *  Create meal action creator
  *  */
 export const createMeal = meal => (dispatch, getState) => {
-  dispatch(createMealStart());
+  dispatch(createMealStart(meal));
   const state = getState();
   const { token } = state.auth;
 
@@ -109,9 +110,9 @@ export const fetchMeals = () => (dispatch, getState) => {
 /**
  *  Update meal actions
  *  */
-export const updateMealStart = mealId => ({
+export const updateMealStart = (mealId, updates) => ({
   type: UPDATE_MEAL_START,
-  payload: { mealId },
+  payload: { mealId, updates },
 });
 
 export const updateMealSuccess = meal => ({
@@ -141,7 +142,7 @@ const handleUpdateMealFailure = dispatch => (error) => {
  *  Update meal action creator
  *  */
 export const updateMeal = (mealId, updates) => (dispatch, getState) => {
-  dispatch(updateMealStart(mealId));
+  dispatch(updateMealStart(mealId, updates));
   const state = getState();
   const { token } = state.auth;
 
@@ -185,7 +186,7 @@ const handleRemoveMealFailure = dispatch => (error) => {
  *  Remove meal action creator
  *  */
 export const removeMeal = mealId => (dispatch, getState) => {
-  dispatch(removeMealStart());
+  dispatch(removeMealStart(mealId));
   const state = getState();
   const { token } = state.auth;
 
