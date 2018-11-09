@@ -164,7 +164,7 @@ UpdateMeal.propTypes = {
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    daily_calories_limit: PropTypes.number.isRequired,
+    dailyCaloriesLimit: PropTypes.number.isRequired,
   }),
   meals: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,

@@ -24,11 +24,11 @@ export class UserSettings extends React.Component {
     const { user } = props;
     // TODO: Change the snake_case to camelCase
     /* eslint camelcase: 0 */
-    const { name, daily_calories_limit } = user;
+    const { name, dailyCaloriesLimit } = user;
 
     this.state = {
       name,
-      dailyCalories: daily_calories_limit,
+      dailyCalories: dailyCaloriesLimit,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -95,7 +95,7 @@ export class UserSettings extends React.Component {
             onClick={() => {
               updateUser(user.id, {
                 name,
-                daily_calories_limit: dailyCalories,
+                dailyCalories,
               }).then(() => {
                 // TODO: Show positive snackbar
               }).catch(() => {
@@ -117,7 +117,7 @@ UserSettings.propTypes = {
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    daily_calories_limit: PropTypes.number.isRequired,
+    dailyCaloriesLimit: PropTypes.number.isRequired,
   }),
   updateUser: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired,

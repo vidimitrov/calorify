@@ -119,7 +119,7 @@ export class Main extends React.Component {
     const totalCalories = filteredMeals
       .reduce((accumulator, currentValue) => accumulator + currentValue.calories, 0);
 
-    return totalCalories < user.daily_calories_limit;
+    return totalCalories < user.dailyCaloriesLimit;
   }
 
   render() {
@@ -297,7 +297,7 @@ Main.propTypes = {
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    daily_calories_limit: PropTypes.number.isRequired,
+    dailyCaloriesLimit: PropTypes.number.isRequired,
   }),
   meals: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
