@@ -11,7 +11,7 @@ import {
  */
 export const storeUserData = data => ({
   type: STORE_USER_DATA,
-  data,
+  payload: data,
 });
 
 /**

@@ -21,7 +21,7 @@ export default function user(state = getInitialState(), action) {
     case STORE_USER_DATA:
       return {
         ...state,
-        data: Object.assign(state.data, action.data),
+        data: Object.assign(state.data, action.payload),
       };
     case UPDATE_USER_START:
       return {
