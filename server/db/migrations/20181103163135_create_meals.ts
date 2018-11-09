@@ -7,7 +7,7 @@ export const up = (knex) => {
       id uuid PRIMARY KEY DEFAULT uuid_generate_v4() UNIQUE,
       user_id uuid NOT NULL REFERENCES ${USERS_TABLE}(id),
       text text NOT NULL,
-      date DATE NOT NULL DEFAULT NOW(),
+      date varchar(50),
       time TIME NOT NULL DEFAULT NOW(),
       number_of_calories integer,
       deleted boolean DEFAULT false,
