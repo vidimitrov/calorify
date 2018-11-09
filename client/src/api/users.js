@@ -23,7 +23,7 @@ export const update = async (token, userId, updates) => {
     body: JSON.stringify({
       attrs: {
         name: updates.name,
-        daily_calories_limit: updates.dailyCaloriesLimit,
+        daily_calories_limit: updates.dailyCalories,
       },
     }),
   });
