@@ -11,15 +11,18 @@ import {
 } from '../constants/actionTypes';
 
 
-export const loginSuccess = (token, user) => ({
+export const loginSuccess = token => ({
   type: LOGIN_SUCCESS,
-  token,
-  user,
+  payload: {
+    token,
+  },
 });
 
 export const loginFailure = error => ({
   type: LOGIN_FAILURE,
-  error,
+  payload: {
+    error,
+  },
 });
 
 export const signupSuccess = () => ({
@@ -28,7 +31,9 @@ export const signupSuccess = () => ({
 
 export const signupFailure = error => ({
   type: SIGNUP_FAILURE,
-  error,
+  payload: {
+    error,
+  },
 });
 
 export const logoutSuccess = () => ({
@@ -37,7 +42,9 @@ export const logoutSuccess = () => ({
 
 export const logoutFailure = error => ({
   type: LOGOUT_FAILURE,
-  error,
+  payload: {
+    error,
+  },
 });
 
 export const resetErrors = () => ({

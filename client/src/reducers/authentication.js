@@ -13,6 +13,7 @@ function getInitialState() {
 
   return {
     token,
+    error: null,
   };
 }
 
@@ -21,22 +22,21 @@ export default function auth(state = getInitialState(), action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.token,
+        token: action.payload.token,
       };
     case LOGIN_FAILURE:
       return {
         ...state,
-        error: action.error,
+        error: action.payload.error,
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        data: {},
       };
     case SIGNUP_FAILURE:
       return {
         ...state,
-        error: action.error,
+        error: action.payload.error,
       };
     case LOGOUT_SUCCESS:
       return {
@@ -46,7 +46,7 @@ export default function auth(state = getInitialState(), action) {
     case LOGOUT_FAILURE:
       return {
         ...state,
-        error: action.error,
+        error: action.payload.error,
       };
     case RESET_AUTH_ERRORS:
       return {
