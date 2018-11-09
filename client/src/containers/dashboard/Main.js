@@ -117,7 +117,7 @@ export class Main extends React.Component {
     const { meals, user } = this.props;
     const filteredMeals = meals.filter(m => m.date === date);
     const totalCalories = filteredMeals
-      .reduce((accumulator, currentValue) => accumulator + currentValue.number_of_calories, 0);
+      .reduce((accumulator, currentValue) => accumulator + currentValue.calories, 0);
 
     return totalCalories < user.daily_calories_limit;
   }
@@ -264,7 +264,7 @@ export class Main extends React.Component {
                   .map(meal => (
                     <Card key={meal.id}>
                       <CardStatus inRange={this.isInRange(meal.date)} />
-                      <CardInfo text={meal.text} calories={meal.number_of_calories} />
+                      <CardInfo name={meal.name} calories={meal.calories} />
                       <CardDate date={`${meal.date}T${meal.time}`} />
                       <CardActions
                         onEditHandler={() => navigate(`/meals/${meal.id}`)}
@@ -301,17 +301,17 @@ Main.propTypes = {
   }),
   meals: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    number_of_calories: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
   })),
   filteredMeals: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    number_of_calories: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
   })),
   navigate: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,

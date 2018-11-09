@@ -28,8 +28,8 @@ export class UpdateMeal extends React.Component {
     const meal = meals.find(m => m.id === mealId);
 
     this.state = {
-      name: meal ? meal.text : '',
-      calories: meal ? meal.number_of_calories : '',
+      name: meal ? meal.name : '',
+      calories: meal ? meal.calories : '',
       date: meal ? meal.date : '',
       time: meal ? meal.time : '',
     };
@@ -46,8 +46,8 @@ export class UpdateMeal extends React.Component {
         const meal = fetchedMeals.find(m => m.id === mealId);
 
         this.setState({
-          name: meal ? meal.text : '',
-          calories: meal ? meal.number_of_calories : '',
+          name: meal ? meal.name : '',
+          calories: meal ? meal.calories : '',
           date: meal ? meal.date : '',
           time: meal ? meal.time : '',
         });
@@ -168,10 +168,10 @@ UpdateMeal.propTypes = {
   }),
   meals: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    number_of_calories: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
   })),
   updateMeal: PropTypes.func.isRequired,
   getAllMeals: PropTypes.func.isRequired,

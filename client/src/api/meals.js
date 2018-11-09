@@ -2,7 +2,19 @@ import cfg from '../../config';
 
 const { API_URL } = cfg;
 
-export const create = async (token, meal) => {
+const parseMeal = meal => ({
+  id: meal.id,
+  name: meal.text,
+  calories: meal.number_of_calories,
+  userId: meal.user_id,
+  date: meal.date,
+  time: meal.time,
+  deleted: meal.deleted,
+  createdAt: meal.created_at,
+  updatedAt: meal.updated_at,
+});
+
+export const create = async (token, mealData) => {
   const response = await fetch(`${API_URL}/api/meals`, {
     method: 'POST',
     headers: {
@@ -11,17 +23,18 @@ export const create = async (token, meal) => {
     },
     body: JSON.stringify({
       attrs: {
-        text: meal.name,
-        number_of_calories: meal.calories,
-        date: meal.date,
-        time: meal.time,
+        text: mealData.name,
+        number_of_calories: mealData.calories,
+        date: mealData.date,
+        time: mealData.time,
       },
     }),
   });
   const data = await response.json();
 
   if (data.success) {
-    return Promise.resolve(data);
+    const meal = parseMeal(data.meal);
+    return Promise.resolve({ meal });
   }
 
   return Promise.reject(data);
@@ -38,7 +51,8 @@ export const list = async (token) => {
   const data = await response.json();
 
   if (data.success) {
-    return Promise.resolve(data);
+    const meals = data.meals.map(meal => (parseMeal(meal)));
+    return Promise.resolve({ meals });
   }
 
   return Promise.reject(data);
@@ -63,7 +77,8 @@ export const update = async (token, mealId, updates) => {
   const data = await response.json();
 
   if (data.success) {
-    return Promise.resolve(data);
+    const meal = parseMeal(data.meal);
+    return Promise.resolve({ meal });
   }
 
   return Promise.reject(data);
@@ -80,7 +95,8 @@ export const remove = async (token, mealId) => {
   const data = await response.json();
 
   if (data.success) {
-    return Promise.resolve(data);
+    const meal = parseMeal(data.meal);
+    return Promise.resolve({ meal });
   }
 
   return Promise.reject(data);

@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Text = styled.h3`
+const Name = styled.h3`
   margin: 0;
   color: #c7b26e;
 
@@ -31,19 +31,19 @@ const Calories = styled.h1`
   }
 `;
 
-const CardInfo = ({ text, calories }) => (
+const CardInfo = ({ name, calories }) => (
   <Wrapper>
     <Calories>
       {calories}
       {' '}
       kCal
     </Calories>
-    <Text>{text}</Text>
+    <Name>{name}</Name>
   </Wrapper>
 );
 
 CardInfo.propTypes = {
-  text: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   calories: PropTypes.number.isRequired,
 };
 
