@@ -21,7 +21,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Users actions', () => {
-  describe('actions', () => {
+  describe('actions creators', () => {
     it('storeUserData action should return the right payload', () => {
       const data = {
         name: 'John Doe',
@@ -67,7 +67,7 @@ describe('Users actions', () => {
     });
   });
 
-  describe('action creators', () => {
+  describe('async action creators', () => {
     afterEach(() => {
       fetchMock.restore();
     });

@@ -6,6 +6,7 @@
     "url": "https://git.toptal.com/screening/veselin-dimitrov"
   },
   "author": "Veselin Dimitrov",
+  "license": "ISC",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
