@@ -16,19 +16,7 @@ import CustomIconButton from '../../components/dashboard/CustomIconButton';
 import CustomTextField from '../../components/dashboard/CustomTextField';
 import logo from '../../assets/img/logo.png';
 import { createMeal as createMealActionCreator } from '../../actions/meals';
-
-function convertDateToUTC(date) {
-  return new Date(
-    Date.UTC(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-    ),
-  );
-}
+import { convertDateToUTC } from '../../lib/dates';
 
 export class CreateMeal extends React.Component {
   constructor(props) {
