@@ -14,6 +14,7 @@ import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../components/dashboard/CustomIconButton';
 import CustomTextField from '../../components/dashboard/CustomTextField';
+import ValidationLabel from '../../components/dashboard/ValidationLabel';
 import logo from '../../assets/img/logo.png';
 import { createMeal as createMealActionCreator } from '../../actions/meals';
 import { convertDateToUTC } from '../../lib/dates';
@@ -31,13 +32,27 @@ export class CreateMeal extends React.Component {
       name: '',
       calories: '',
       date: defaultDate,
+      requiredName: false,
+      requiredCalories: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   onChangeHandler(key, value) {
+    let { requiredName, requiredCalories } = this.state;
+
+    if (key === 'name') {
+      requiredName = false;
+    }
+
+    if (key === 'calories') {
+      requiredCalories = false;
+    }
+
     this.setState({
+      requiredName,
+      requiredCalories,
       [key]: value,
     });
   }
@@ -51,6 +66,8 @@ export class CreateMeal extends React.Component {
       name,
       calories,
       date,
+      requiredName,
+      requiredCalories,
     } = this.state;
     const { navigate } = this.props;
 
@@ -79,15 +96,21 @@ export class CreateMeal extends React.Component {
               <CustomTextField
                 placeholder="Meal name"
                 value={name}
+                error={requiredName}
                 onChange={e => this.onChangeHandler('name', e.target.value)}
               />
+              <ValidationLabel invalid={requiredName}>Meal name is required</ValidationLabel>
             </InputWrapper>
             <InputWrapper>
               <CustomTextField
                 placeholder="Number of calories"
                 value={calories}
+                error={requiredCalories}
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
+              <ValidationLabel invalid={requiredCalories}>
+                Meal calories are required
+              </ValidationLabel>
             </InputWrapper>
             <InputWrapper>
               <CustomTextField
@@ -106,17 +129,24 @@ export class CreateMeal extends React.Component {
             variant="contained"
             color="primary"
             onClick={() => {
-              const isoDate = convertDateToUTC(new Date(date)).toISOString();
-              const formattedDate = isoDate.split('T')[0];
-              const formattedTime = isoDate.split('T')[1].split('Z')[0];
-
-              createMeal(name, calories, formattedDate, formattedTime)
-                .then(() => {
-                  // TODO: Show positive snackbar
-                  navigate('/');
-                }).catch(() => {
-                  // TODO: Show negative snackbar. Try again
+              if (!name || !calories) {
+                this.setState({
+                  requiredName: !name,
+                  requiredCalories: !calories,
                 });
+              } else {
+                const isoDate = convertDateToUTC(new Date(date)).toISOString();
+                const formattedDate = isoDate.split('T')[0];
+                const formattedTime = isoDate.split('T')[1].split('Z')[0];
+
+                createMeal(name, calories, formattedDate, formattedTime)
+                  .then(() => {
+                    // TODO: Show positive snackbar
+                    navigate('/');
+                  }).catch(() => {
+                    // TODO: Show negative snackbar. Try again
+                  });
+              }
             }}
           >
             Create Meal
