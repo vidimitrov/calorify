@@ -20,10 +20,7 @@ describe('Authentication reducers', () => {
   });
 
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({
-      token: null,
-      error: null,
-    });
+    expect(reducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle LOGIN_SUCCESS action', () => {
@@ -55,7 +52,7 @@ describe('Authentication reducers', () => {
     };
 
     expect(reducer(initialState, action)).toEqual({
-      token: null,
+      ...initialState,
       error,
     });
   });
@@ -82,7 +79,7 @@ describe('Authentication reducers', () => {
     };
 
     expect(reducer(initialState, action)).toEqual({
-      token: null,
+      ...initialState,
       error,
     });
   });
@@ -97,10 +94,7 @@ describe('Authentication reducers', () => {
       type: LOGOUT_SUCCESS,
     };
 
-    expect(reducer(state, action)).toEqual({
-      token: null,
-      error: null,
-    });
+    expect(reducer(state, action)).toEqual(initialState);
   });
 
   it('should handle LOGOUT_FAILURE action', () => {
@@ -117,7 +111,7 @@ describe('Authentication reducers', () => {
     };
 
     expect(reducer(initialState, action)).toEqual({
-      token: null,
+      ...initialState,
       error,
     });
   });

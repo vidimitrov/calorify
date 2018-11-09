@@ -18,11 +18,7 @@ describe('Users reducers', () => {
   });
 
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({
-      data: {},
-      loading: false,
-      error: null,
-    });
+    expect(reducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle STORE_USER_DATA action', () => {
@@ -36,9 +32,8 @@ describe('Users reducers', () => {
     };
 
     expect(reducer(initialState, action)).toEqual({
+      ...initialState,
       data: user,
-      loading: false,
-      error: null,
     });
   });
 
@@ -55,9 +50,8 @@ describe('Users reducers', () => {
     };
 
     expect(reducer(initialState, action)).toEqual({
-      data: {},
+      ...initialState,
       loading: true,
-      error: null,
     });
   });
 
@@ -79,11 +73,10 @@ describe('Users reducers', () => {
     };
 
     expect(reducer(state, action)).toEqual({
+      ...initialState,
       data: {
         name: updatedUser.name,
       },
-      loading: false,
-      error: null,
     });
   });
 
@@ -101,8 +94,7 @@ describe('Users reducers', () => {
     };
 
     expect(reducer(initialState, action)).toEqual({
-      data: {},
-      loading: false,
+      ...initialState,
       error,
     });
   });
