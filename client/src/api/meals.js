@@ -55,6 +55,8 @@ export const update = async (token, mealId, updates) => {
       attrs: {
         text: updates.name,
         number_of_calories: updates.calories,
+        date: updates.date,
+        time: updates.time,
       },
     }),
   });

@@ -141,7 +141,7 @@ const handleUpdateMealFailure = dispatch => (error) => {
  *  Update meal action creator
  *  */
 export const updateMeal = (mealId, updates) => (dispatch, getState) => {
-  dispatch(updateMealStart());
+  dispatch(updateMealStart(mealId));
   const state = getState();
   const { token } = state.auth;
 
