@@ -20,16 +20,27 @@ export class Signup extends React.Component {
 
     this.state = {
       name: '',
+      requiredName: false,
       email: '',
       validEmail: true,
+      requiredEmail: false,
       password: '',
       repeatPassword: '',
+      requiredPassword: false,
       passwordMatch: true,
+      requiredRepeatPassword: false,
     };
   }
 
   onChangeHandler(key, value) {
-    let { validEmail, passwordMatch } = this.state;
+    let {
+      validEmail,
+      passwordMatch,
+      requiredEmail,
+      requiredName,
+      requiredPassword,
+      requiredRepeatPassword,
+    } = this.state;
     const { error, resetErrors } = this.props;
 
     if (error) {
@@ -37,6 +48,7 @@ export class Signup extends React.Component {
     }
 
     if (key === 'email') {
+      requiredEmail = false;
       if (!isValidEmail(value)) {
         validEmail = false;
       } else {
@@ -44,7 +56,16 @@ export class Signup extends React.Component {
       }
     }
 
+    if (key === 'name') {
+      requiredName = false;
+    }
+
+    if (key === 'password') {
+      requiredPassword = false;
+    }
+
     if (key === 'repeatPassword') {
+      requiredRepeatPassword = false;
       const { password } = this.state;
       if (password !== value) {
         passwordMatch = false;
@@ -56,6 +77,10 @@ export class Signup extends React.Component {
     this.setState({
       validEmail,
       passwordMatch,
+      requiredEmail,
+      requiredName,
+      requiredPassword,
+      requiredRepeatPassword,
       [key]: value,
     });
   }
@@ -68,6 +93,10 @@ export class Signup extends React.Component {
       password,
       repeatPassword,
       passwordMatch,
+      requiredEmail,
+      requiredName,
+      requiredPassword,
+      requiredRepeatPassword,
     } = this.state;
     const {
       signup,
@@ -98,6 +127,7 @@ export class Signup extends React.Component {
                 this.onChangeHandler('name', e.target.value);
               }}
             />
+            <ValidationLabel invalid={requiredName}>Name is required</ValidationLabel>
             <Input
               type="text"
               name="signup"
@@ -109,6 +139,7 @@ export class Signup extends React.Component {
               }}
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
+            <ValidationLabel invalid={requiredEmail}>Email is required</ValidationLabel>
             <Input
               type="password"
               name="signup"
@@ -118,6 +149,7 @@ export class Signup extends React.Component {
                 this.onChangeHandler('password', e.target.value);
               }}
             />
+            <ValidationLabel invalid={requiredPassword}>Password is required</ValidationLabel>
             <Input
               type="password"
               name="signup"
@@ -128,19 +160,30 @@ export class Signup extends React.Component {
                 this.onChangeHandler('repeatPassword', e.target.value);
               }}
             />
-            <ValidationLabel invalid={!passwordMatch}>Password is not the same</ValidationLabel>
+            <ValidationLabel invalid={!passwordMatch || requiredRepeatPassword}>
+              Password is not the same
+            </ValidationLabel>
             <SubmitButton
               disabled={!passwordMatch || !validEmail}
               onClick={() => {
-                signup(name, email, password)
-                  .then(() => {
-                    navigate('/');
-                  })
-                  .catch(() => {
-                    this.setState({
-                      email: '',
-                    });
+                if (!name || !email || !password || !repeatPassword) {
+                  this.setState({
+                    requiredName: !name,
+                    requiredEmail: !email,
+                    requiredPassword: !password,
+                    requiredRepeatPassword: !repeatPassword,
                   });
+                } else {
+                  signup(name, email, password)
+                    .then(() => {
+                      navigate('/');
+                    })
+                    .catch(() => {
+                      this.setState({
+                        email: '',
+                      });
+                    });
+                }
               }}
             >
               Sign Up

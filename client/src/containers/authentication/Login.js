@@ -21,14 +21,16 @@ export class Login extends React.Component {
     this.state = {
       email: '',
       validEmail: true,
+      requiredEmail: false,
       password: '',
+      requiredPassword: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   onChangeHandler(key, value) {
-    let { validEmail } = this.state;
+    let { validEmail, requiredEmail, requiredPassword } = this.state;
     const { error, resetErrors } = this.props;
 
     if (error) {
@@ -36,6 +38,7 @@ export class Login extends React.Component {
     }
 
     if (key === 'email') {
+      requiredEmail = false;
       if (!isValidEmail(value)) {
         validEmail = false;
       } else {
@@ -43,15 +46,27 @@ export class Login extends React.Component {
       }
     }
 
+    if (key === 'password') {
+      requiredPassword = false;
+    }
+
     this.setState({
       validEmail,
+      requiredEmail,
+      requiredPassword,
       [key]: value,
     });
   }
 
   render() {
     const { login, error, navigate } = this.props;
-    const { email, password, validEmail } = this.state;
+    const {
+      email,
+      password,
+      validEmail,
+      requiredEmail,
+      requiredPassword,
+    } = this.state;
     return (
       <Wrapper>
         <FormContent id="formContent">
@@ -70,30 +85,40 @@ export class Login extends React.Component {
               type="text"
               name="login"
               placeholder="Email"
-              invalid={!validEmail}
+              invalid={!validEmail || requiredEmail}
               onChange={e => this.onChangeHandler('email', e.target.value)}
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
+            <ValidationLabel invalid={requiredEmail}>Email is required</ValidationLabel>
             <Input
               type="password"
               name="login"
               placeholder="Password"
+              invalid={requiredPassword}
               onChange={e => this.onChangeHandler('password', e.target.value)}
             />
+            <ValidationLabel invalid={requiredPassword}>Password is required</ValidationLabel>
             <SubmitButton
               disabled={!validEmail}
               onClick={() => {
-                login(email, password)
-                  .then(() => {
-                    navigate('/');
-                  })
-                  .catch(() => {
-                    this.setState({
-                      email: '',
-                      password: '',
-                      validEmail: true,
-                    });
+                if (!email || !password) {
+                  this.setState({
+                    requiredEmail: !email,
+                    requiredPassword: !password,
                   });
+                } else {
+                  login(email, password)
+                    .then(() => {
+                      navigate('/');
+                    })
+                    .catch(() => {
+                      this.setState({
+                        email: '',
+                        password: '',
+                        validEmail: true,
+                      });
+                    });
+                }
               }}
             >
               Log In
