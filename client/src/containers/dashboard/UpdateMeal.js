@@ -30,6 +30,8 @@ export class UpdateMeal extends React.Component {
     this.state = {
       name: meal ? meal.text : '',
       calories: meal ? meal.number_of_calories : '',
+      date: meal ? meal.date : '',
+      time: meal ? meal.time : '',
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -42,9 +44,12 @@ export class UpdateMeal extends React.Component {
       try {
         const fetchedMeals = await getAllMeals();
         const meal = fetchedMeals.find(m => m.id === mealId);
+
         this.setState({
-          name: meal.text,
-          calories: meal.number_of_calories,
+          name: meal ? meal.text : '',
+          calories: meal ? meal.number_of_calories : '',
+          date: meal ? meal.date : '',
+          time: meal ? meal.time : '',
         });
       } catch (error) {
         // TODO: Show error snackbar
@@ -53,9 +58,16 @@ export class UpdateMeal extends React.Component {
   }
 
   onChangeHandler(key, value) {
-    this.setState({
-      [key]: value,
-    });
+    if (key === 'datetime') {
+      this.setState({
+        date: value.split('T')[0],
+        time: value.split('T')[1],
+      });
+    } else {
+      this.setState({
+        [key]: value,
+      });
+    }
   }
 
   render() {
@@ -67,6 +79,8 @@ export class UpdateMeal extends React.Component {
     const {
       name,
       calories,
+      date,
+      time,
     } = this.state;
     const { navigate } = this.props;
 
@@ -105,13 +119,29 @@ export class UpdateMeal extends React.Component {
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
             </InputWrapper>
+            <InputWrapper>
+              <CustomTextField
+                placeholder="Date"
+                value={`${date}T${time}`}
+                type="datetime-local"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={e => this.onChangeHandler('datetime', e.target.value)}
+              />
+            </InputWrapper>
           </FormControls>
           {/* TODO: It should be disabled if no changes are made */}
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              updateMeal(mealId, { name, calories })
+              updateMeal(mealId, {
+                name,
+                calories,
+                date,
+                time,
+              })
                 .then(() => {
                   // TODO: Show positive snackbar
                   navigate('/');
