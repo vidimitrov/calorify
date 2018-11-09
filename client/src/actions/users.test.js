@@ -72,7 +72,7 @@ describe('Users actions', () => {
       fetchMock.restore();
     });
 
-    it('updateUser action creator should create the proper actions on successful API request', () => {
+    it('updateUser action creator should create UPDATE_USER_START and UPDATE_USER_SUCCESS actions on successful API request', () => {
       const userId = 'some-fake-id-123';
       const updates = {
         email: 'john@email.com',
@@ -128,7 +128,7 @@ describe('Users actions', () => {
         });
     });
 
-    it('updateUser action creator should create the proper actions on failed API request', () => {
+    it('updateUser action creator should create UPDATE_USER_START and UPDATE_USER_FAILURE actions on failed API request', () => {
       const userId = 'some-fake-id-123';
       const updates = {
         email: 'john@email.com',
