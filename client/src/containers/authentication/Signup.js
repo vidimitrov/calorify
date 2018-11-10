@@ -106,7 +106,7 @@ export class Signup extends React.Component {
 
     return (
       <Wrapper>
-        <FormContent id="formContent">
+        <FormContent id="signup-form-content">
           <FormHeader>
             <Image src={logo} alt="Calorify Logo" />
             <h1>Calorify</h1>
@@ -120,17 +120,22 @@ export class Signup extends React.Component {
             </ValidationLabel>
             <Input
               type="text"
-              name="signup"
+              name="name"
               placeholder="Full name"
               value={name}
               onChange={(e) => {
                 this.onChangeHandler('name', e.target.value);
               }}
             />
-            <ValidationLabel invalid={requiredName}>Name is required</ValidationLabel>
+            <ValidationLabel
+              name={requiredName && 'required-name'}
+              invalid={requiredName}
+            >
+              Name is required
+            </ValidationLabel>
             <Input
               type="text"
-              name="signup"
+              name="email"
               placeholder="Email"
               invalid={!validEmail}
               value={email}
@@ -139,20 +144,30 @@ export class Signup extends React.Component {
               }}
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
-            <ValidationLabel invalid={requiredEmail}>Email is required</ValidationLabel>
+            <ValidationLabel
+              name={requiredEmail && 'required-email'}
+              invalid={requiredEmail}
+            >
+              Email is required
+            </ValidationLabel>
             <Input
               type="password"
-              name="signup"
+              name="password"
               placeholder="Password"
               value={password}
               onChange={(e) => {
                 this.onChangeHandler('password', e.target.value);
               }}
             />
-            <ValidationLabel invalid={requiredPassword}>Password is required</ValidationLabel>
+            <ValidationLabel
+              name={requiredPassword && 'required-password'}
+              invalid={requiredPassword}
+            >
+              Password is required
+            </ValidationLabel>
             <Input
               type="password"
-              name="signup"
+              name="repeat-password"
               placeholder="Repeat password"
               invalid={!passwordMatch}
               value={repeatPassword}
@@ -165,6 +180,7 @@ export class Signup extends React.Component {
             </ValidationLabel>
             <SubmitButton
               disabled={!passwordMatch || !validEmail}
+              id="signup-submit"
               onClick={() => {
                 if (!name || !email || !password || !repeatPassword) {
                   this.setState({

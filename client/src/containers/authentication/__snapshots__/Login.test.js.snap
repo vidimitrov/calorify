@@ -6,7 +6,7 @@ exports[`Login container renders correctly 1`] = `
 >
   <div
     className="FormContent-sc-7xu7iv-0 egRBsD"
-    id="formContent"
+    id="login-form-content"
   >
     <div
       className="FormHeader-la3hb0-0 gObcbi"
@@ -28,7 +28,7 @@ exports[`Login container renders correctly 1`] = `
       </p>
       <input
         className="Input-sc-1i6e4g7-0 eABVIJ"
-        name="login"
+        name="email"
         onChange={[Function]}
         placeholder="Email"
         type="text"
@@ -40,24 +40,27 @@ exports[`Login container renders correctly 1`] = `
       </p>
       <p
         className="ValidationLabel-ol62xd-0 jgOKXL"
+        name={false}
       >
         Email is required
       </p>
       <input
         className="Input-sc-1i6e4g7-0 eABVIJ"
-        name="login"
+        name="password"
         onChange={[Function]}
         placeholder="Password"
         type="password"
       />
       <p
         className="ValidationLabel-ol62xd-0 jgOKXL"
+        name={false}
       >
         Password is required
       </p>
       <button
         className="SubmitButton-x5zdfd-0 frSvnw"
         disabled={false}
+        id="login-submit"
         onClick={[Function]}
       >
         Log In

@@ -69,7 +69,7 @@ export class Login extends React.Component {
     } = this.state;
     return (
       <Wrapper>
-        <FormContent id="formContent">
+        <FormContent id="login-form-content">
           <FormHeader>
             <Image src={logo} alt="Calorify Logo" />
             <h1>Calorify</h1>
@@ -83,23 +83,34 @@ export class Login extends React.Component {
             </ValidationLabel>
             <Input
               type="text"
-              name="login"
+              name="email"
               placeholder="Email"
               invalid={!validEmail || requiredEmail}
               onChange={e => this.onChangeHandler('email', e.target.value)}
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
-            <ValidationLabel invalid={requiredEmail}>Email is required</ValidationLabel>
+            <ValidationLabel
+              name={requiredEmail && 'required-email'}
+              invalid={requiredEmail}
+            >
+              Email is required
+            </ValidationLabel>
             <Input
               type="password"
-              name="login"
+              name="password"
               placeholder="Password"
               invalid={requiredPassword}
               onChange={e => this.onChangeHandler('password', e.target.value)}
             />
-            <ValidationLabel invalid={requiredPassword}>Password is required</ValidationLabel>
+            <ValidationLabel
+              name={requiredPassword && 'required-password'}
+              invalid={requiredPassword}
+            >
+              Password is required
+            </ValidationLabel>
             <SubmitButton
               disabled={!validEmail}
+              id="login-submit"
               onClick={() => {
                 if (!email || !password) {
                   this.setState({
