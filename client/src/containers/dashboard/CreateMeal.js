@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from '@reach/router';
+import { isEmpty } from 'lodash';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
@@ -178,7 +179,7 @@ CreateMeal.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  user: state.user.data,
+  user: isEmpty(state.user.data) ? null : state.user.data,
 });
 
 const mapDispatchToProps = dispatch => ({

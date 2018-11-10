@@ -43,11 +43,12 @@ export class Main extends React.Component {
     super(props);
 
     const { user } = props;
+    const { createdAt } = user || {};
 
     this.state = {
       anchorEl: null,
       showFilters: false,
-      dateFrom: moment(user.created_at).toISOString().split('T')[0],
+      dateFrom: moment(createdAt).toISOString().split('T')[0],
       dateTo: moment().toISOString().split('T')[0],
       timeFrom: '00:00',
       timeTo: '23:59',
@@ -327,7 +328,7 @@ Main.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  user: state.user.data,
+  user: _.isEmpty(state.user.data) ? null : state.user.data,
   meals: state.meals.data,
   filteredMeals: state.meals.filteredData,
 });
