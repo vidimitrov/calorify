@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard/Logo component renders correctly 1`] = `
+.c0 {
+  height: 25px;
+  margin-right: 10px;
+  src: url(../../assets/img/logo.png);
+}
+
+<img
+  alt="logo"
+  className="c0"
+  src="../../assets/img/logo.png"
+/>
+`;

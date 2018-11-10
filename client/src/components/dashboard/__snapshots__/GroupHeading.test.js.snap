@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard/GroupHeading component renders correctly 1`] = `
+.c0 {
+  color: #75736d;
+  margin-top: 0px;
+}
+
+<h2
+  className="c0"
+>
+  Group 1
+</h2>
+`;

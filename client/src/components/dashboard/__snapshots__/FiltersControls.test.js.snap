@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard/FiltersControls component renders correctly 1`] = `
+.c0 {
+  display: none;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c0 > div {
+  margin: 0 10px;
+}
+
+@media (max-width:420px) {
+  .c0 > div {
+    margin: 10px;
+  }
+}
+
+<div
+  className="c0"
+/>
+`;
