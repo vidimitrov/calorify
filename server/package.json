@@ -4,7 +4,7 @@
   "description": "An application that helps you tracking your daily calories",
   "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "node dist/src/server.js",
     "build": "rm -rf dist && npm run build-ts && npm run lint",
     "build-ts": "tsc",
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
@@ -34,9 +34,6 @@
     "@types/node": "^10.12.2",
     "concurrently": "^4.0.1",
     "jest": "^23.6.0",
-    "nodemon": "^1.18.5",
-    "pm2": "^3.2.2",
-    "rimraf": "^2.6.2",
     "supertest": "^3.3.0",
     "ts-jest": "^23.10.4",
     "ts-node": "6.2.0",
@@ -57,9 +54,12 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.0",
     "lodash": "^4.17.11",
+    "nodemon": "^1.18.5",
+    "pm2": "^3.2.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pg": "^7.6.0",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "rimraf": "^2.6.2"
   }
 }

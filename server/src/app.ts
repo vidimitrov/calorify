@@ -53,11 +53,9 @@ app
   .use(router.allowedMethods());
 
 // Configure Passport
-console.log('Configuring Passport authentication strategies...');
 import '../config/passport';
 
 // Configure access control
-console.log('Loading permissions...');
 import { init as initAccessControl } from '../config/access-control/ac';
 initAccessControl();
 
