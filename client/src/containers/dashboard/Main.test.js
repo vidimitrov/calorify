@@ -19,7 +19,7 @@ it('Main container renders correctly', () => {
     meals: [{
       id: 'some-fake-meal-id',
       name: 'some-name',
-      date: '2018-11-10',
+      date: '2018-05-10',
       time: '13:35',
       calories: 320,
     }],

@@ -3,6 +3,7 @@
 exports[`Main container renders correctly 1`] = `
 <div
   className="Wrapper-m60uq5-0 hkWJUG"
+  data-testid="dashboard"
 >
   <header
     className="MuiPaper-root-10 MuiPaper-elevation4-16 MuiAppBar-root-1 MuiAppBar-positionStatic-5 MuiAppBar-colorPrimary-8"
@@ -271,7 +272,7 @@ exports[`Main container renders correctly 1`] = `
         <h2
           className="GroupHeading__InputWrapper-sc-1140iy9-0 bAAVPR"
         >
-          Today
+          05/10/2018
         </h2>
         <div
           className="Card-sc-1astb0w-0 bRrYbQ"
@@ -301,7 +302,7 @@ exports[`Main container renders correctly 1`] = `
             <h3
               className="CardDate__FormattedDate-pveplr-1 kxClMg"
             >
-              Today at 1:35 PM
+              05/10/2018
             </h3>
           </div>
           <div
