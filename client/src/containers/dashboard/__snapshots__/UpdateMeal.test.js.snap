@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateMeal container renders correctly 1`] = `
+<div
+  className="Wrapper-m60uq5-0 hkWJUG"
+>
+  <header
+    className="MuiPaper-root-10 MuiPaper-elevation4-16 MuiAppBar-root-1 MuiAppBar-positionStatic-5 MuiAppBar-colorPrimary-8"
+  >
+    <div
+      className="MuiToolbar-root-37 MuiToolbar-regular-39 MuiToolbar-gutters-38"
+    >
+      <button
+        aria-label="Menu"
+        className="MuiButtonBase-root-47 MuiIconButton-root-41 MuiIconButton-colorSecondary-44 CustomIconButton-sc-1edavx9-0 eiNqgO"
+        disabled={false}
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label-46"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-50"
+            focusable="false"
+            onClick={[Function]}
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root-154"
+        />
+      </button>
+      <img
+        alt="logo"
+        className="Logo-sc-1vcm3wd-0 lmrySJ"
+        src="logo.png"
+      />
+      <h6
+        className="MuiTypography-root-59 MuiTypography-h6-76 MuiTypography-colorSecondary-90 CustomTypography-e31nmz-0 kgGAHm"
+      >
+        Update Meal
+      </h6>
+    </div>
+  </header>
+  <div
+    className="Form-ycfidt-0 jwaFmv"
+  >
+    <div
+      className="FormControls-sc-7fqkjw-0 dcNCfX"
+    >
+      <div
+        className="InputWrapper-sc-1a0h3fv-0 hchKYo"
+      >
+        <div
+          className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
+        >
+          <div
+            className="MuiInputBase-root-111 MuiInput-root-98 MuiInput-underline-102 MuiInputBase-formControl-112 MuiInput-formControl-99"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              className="MuiInputBase-input-121 MuiInput-input-106"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Meal name"
+              required={false}
+              type="text"
+              value="some-name"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="InputWrapper-sc-1a0h3fv-0 hchKYo"
+      >
+        <div
+          className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
+        >
+          <div
+            className="MuiInputBase-root-111 MuiInput-root-98 MuiInput-underline-102 MuiInputBase-formControl-112 MuiInput-formControl-99"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              className="MuiInputBase-input-121 MuiInput-input-106"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Number of calories"
+              required={false}
+              type="text"
+              value={320}
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="InputWrapper-sc-1a0h3fv-0 hchKYo"
+      >
+        <div
+          className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
+        >
+          <div
+            className="MuiInputBase-root-111 MuiInput-root-98 MuiInput-underline-102 MuiInputBase-formControl-112 MuiInput-formControl-99"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              className="MuiInputBase-input-121 MuiInput-input-106 MuiInputBase-inputType-124 MuiInput-inputType-109"
+              disabled={false}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="Date"
+              required={false}
+              type="datetime-local"
+              value="2018-11-10T13:35"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      className="MuiButtonBase-root-47 MuiButtonBase-disabled-48 MuiButton-root-128 MuiButton-contained-139 MuiButton-containedPrimary-140 MuiButton-raised-142 MuiButton-raisedPrimary-143 MuiButton-disabled-148"
+      disabled={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="-1"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-129"
+      >
+        Update Meal
+      </span>
+    </button>
+  </div>
+</div>
+`;
