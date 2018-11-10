@@ -127,15 +127,6 @@ export class Login extends React.Component {
               <Anchor to="/auth/signup"> Create an account</Anchor>
             </SecondaryAction>
           </div>
-
-          {/*
-            TODO: Add "forgot password" functionality in case there is any time left
-
-            <FormFooter id="formFooter">
-              <Anchor to="/auth/forgot-password"> Forgot Password?</Anchor>
-            </FormFooter>
-          */}
-
         </FormContent>
       </Wrapper>
     );

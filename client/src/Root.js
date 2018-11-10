@@ -6,7 +6,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Authentication from './containers/authentication/Authentication';
 import Login from './containers/authentication/Login';
 import Signup from './containers/authentication/Signup';
-import ForgotPassword from './containers/authentication/ForgotPassword';
 import Dashboard from './containers/dashboard/Dashboard';
 import Main from './containers/dashboard/Main';
 import UserSettings from './containers/dashboard/UserSettings';
@@ -51,7 +50,6 @@ function Root({ store }) {
           <Authentication path="auth">
             <Login path="login" />
             <Signup path="signup" />
-            <ForgotPassword path="forgot-password" />
           </Authentication>
         </Router>
       </Provider>
