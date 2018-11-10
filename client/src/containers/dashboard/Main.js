@@ -156,7 +156,7 @@ export class Main extends React.Component {
     }
 
     return (
-      <Wrapper>
+      <Wrapper data-testid="dashboard">
         <AppBar position="static">
           <Toolbar>
             <Logo src={logo} alt="logo" />
