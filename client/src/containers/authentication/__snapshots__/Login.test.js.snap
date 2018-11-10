@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login container renders correctly 1`] = `
+<div
+  className="Wrapper-lhbnd-0 ipWKTt"
+>
+  <div
+    className="FormContent-sc-7xu7iv-0 egRBsD"
+    id="formContent"
+  >
+    <div
+      className="FormHeader-la3hb0-0 gObcbi"
+    >
+      <img
+        alt="Calorify Logo"
+        className="Image-sc-1ufkk63-0 jvkVsO"
+        src="logo.png"
+      />
+      <h1>
+        Calorify
+      </h1>
+    </div>
+    <div>
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        The email or password you entered is incorrect
+      </p>
+      <input
+        className="Input-sc-1i6e4g7-0 eABVIJ"
+        name="login"
+        onChange={[Function]}
+        placeholder="Email"
+        type="text"
+      />
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Email is incorrect
+      </p>
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Email is required
+      </p>
+      <input
+        className="Input-sc-1i6e4g7-0 eABVIJ"
+        name="login"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+      />
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Password is required
+      </p>
+      <button
+        className="SubmitButton-x5zdfd-0 frSvnw"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Log In
+      </button>
+      <div
+        className="SecondaryAction-cirh9v-0 iBEjhO"
+      >
+        <a
+          className="Anchor-sc-1c4e1zf-0 grrGrN"
+          href="/auth/signup"
+          onClick={[Function]}
+        >
+           Create an account
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

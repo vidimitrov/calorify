@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup container renders correctly 1`] = `
+<div
+  className="Wrapper-lhbnd-0 ipWKTt"
+>
+  <div
+    className="FormContent-sc-7xu7iv-0 egRBsD"
+    id="formContent"
+  >
+    <div
+      className="FormHeader-la3hb0-0 gObcbi"
+    >
+      <img
+        alt="Calorify Logo"
+        className="Image-sc-1ufkk63-0 jvkVsO"
+        src="logo.png"
+      />
+      <h1>
+        Calorify
+      </h1>
+    </div>
+    <div>
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Email is already taken
+      </p>
+      <input
+        className="Input-sc-1i6e4g7-0 eABVIJ"
+        name="signup"
+        onChange={[Function]}
+        placeholder="Full name"
+        type="text"
+        value=""
+      />
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Name is required
+      </p>
+      <input
+        className="Input-sc-1i6e4g7-0 eABVIJ"
+        name="signup"
+        onChange={[Function]}
+        placeholder="Email"
+        type="text"
+        value=""
+      />
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Email is incorrect
+      </p>
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Email is required
+      </p>
+      <input
+        className="Input-sc-1i6e4g7-0 eABVIJ"
+        name="signup"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Password is required
+      </p>
+      <input
+        className="Input-sc-1i6e4g7-0 eABVIJ"
+        name="signup"
+        onChange={[Function]}
+        placeholder="Repeat password"
+        type="password"
+        value=""
+      />
+      <p
+        className="ValidationLabel-ol62xd-0 jgOKXL"
+      >
+        Password is not the same
+      </p>
+      <button
+        className="SubmitButton-x5zdfd-0 frSvnw"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Sign Up
+      </button>
+      <div
+        className="SecondaryAction-cirh9v-0 iBEjhO"
+      >
+        <a
+          className="Anchor-sc-1c4e1zf-0 grrGrN"
+          href="/auth/login"
+          onClick={[Function]}
+        >
+          Log in
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
