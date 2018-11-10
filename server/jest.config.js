@@ -9,7 +9,10 @@ module.exports = {
     "json",
     "node",
   ],
-  testRegex: '(/__tests__/.*|(\\.|/)(spec))\\.(ts|js)?$',
+  testMatch: [
+    '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
+    '<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}',
+  ],
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
