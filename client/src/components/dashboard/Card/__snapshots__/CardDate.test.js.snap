@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard/Card/CardDate component renders correctly 1`] = `
+.c0 {
+  color: #f0cd61;
+  margin: 0px 20px;
+  max-width: 100px;
+}
+
+.c1 {
+  margin: 0;
+  color: #c7b26e;
+}
+
+@media (min-width:320px) and (max-width:360px) {
+  .c0 {
+    min-width: 60px;
+    margin: 0px 5px;
+  }
+}
+
+@media (min-width:360px) and (max-width:420px) {
+  .c0 {
+    min-width: 70px;
+    margin: 0px 5px;
+  }
+}
+
+@media (max-width:420px) {
+  .c1 {
+    font-size: 16px;
+  }
+}
+
+<div
+  className="c0"
+>
+  <h3
+    className="c1"
+  >
+    Today at 1:22 PM
+  </h3>
+</div>
+`;

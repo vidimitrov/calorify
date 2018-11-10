@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard/Card/CardStatus component renders correctly 1`] = `
+.c0 {
+  background-color: rgb(153,204,0);
+  height: 100%;
+  width: 10px;
+  border-radius: 3px;
+}
+
+<div
+  className="c0"
+/>
+`;
