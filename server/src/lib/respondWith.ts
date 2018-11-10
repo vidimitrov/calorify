@@ -6,6 +6,7 @@ const respondWith = (() => {
       ctx.status = 200;
       ctx.body = {
         success: true,
+        statusCode: 200,
         ...body,
       };
     },
@@ -35,7 +36,6 @@ const respondWith = (() => {
     },
 
     error: async (ctx: Koa.Context, body?: any) => {
-      console.error(body);
       ctx.status = 500;
       ctx.body = {
         success: false,
