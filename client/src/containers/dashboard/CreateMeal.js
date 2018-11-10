@@ -34,6 +34,7 @@ export class CreateMeal extends React.Component {
       date: defaultDate,
       requiredName: false,
       requiredCalories: false,
+      change: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -51,6 +52,7 @@ export class CreateMeal extends React.Component {
     }
 
     this.setState({
+      change: true,
       requiredName,
       requiredCalories,
       [key]: value,
@@ -68,6 +70,7 @@ export class CreateMeal extends React.Component {
       date,
       requiredName,
       requiredCalories,
+      change,
     } = this.state;
     const { navigate } = this.props;
 
@@ -128,6 +131,7 @@ export class CreateMeal extends React.Component {
           <Button
             variant="contained"
             color="primary"
+            disabled={!change}
             onClick={() => {
               if (!name || !calories) {
                 this.setState({

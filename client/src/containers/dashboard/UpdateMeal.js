@@ -32,6 +32,7 @@ export class UpdateMeal extends React.Component {
       calories: meal ? meal.calories : '',
       date: meal ? meal.date : '',
       time: meal ? meal.time : '',
+      change: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -65,6 +66,7 @@ export class UpdateMeal extends React.Component {
       });
     } else {
       this.setState({
+        change: true,
         [key]: value,
       });
     }
@@ -81,6 +83,7 @@ export class UpdateMeal extends React.Component {
       calories,
       date,
       time,
+      change,
     } = this.state;
     const { navigate } = this.props;
 
@@ -135,6 +138,7 @@ export class UpdateMeal extends React.Component {
           <Button
             variant="contained"
             color="primary"
+            disabled={!change}
             onClick={() => {
               updateMeal(mealId, {
                 name,

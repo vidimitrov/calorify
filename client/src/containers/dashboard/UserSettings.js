@@ -22,13 +22,12 @@ export class UserSettings extends React.Component {
     super(props);
 
     const { user } = props;
-    // TODO: Change the snake_case to camelCase
-    /* eslint camelcase: 0 */
     const { name, dailyCaloriesLimit } = user;
 
     this.state = {
       name,
       dailyCalories: dailyCaloriesLimit,
+      change: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -36,6 +35,7 @@ export class UserSettings extends React.Component {
 
   onChangeHandler(key, value) {
     this.setState({
+      change: true,
       [key]: value,
     });
   }
@@ -48,6 +48,7 @@ export class UserSettings extends React.Component {
     const {
       name,
       dailyCalories,
+      change,
     } = this.state;
     const { navigate } = this.props;
 
@@ -92,6 +93,7 @@ export class UserSettings extends React.Component {
           <Button
             variant="contained"
             color="primary"
+            disabled={!change}
             onClick={() => {
               updateUser(user.id, {
                 name,
