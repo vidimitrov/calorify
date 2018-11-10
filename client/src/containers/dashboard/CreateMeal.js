@@ -24,7 +24,7 @@ export class CreateMeal extends React.Component {
   constructor(props) {
     super(props);
 
-    const now = new Date();
+    const now = props.initialDate || new Date();
     const dateWithTimeZone = convertDateToUTC(now);
     const splittedString = dateWithTimeZone.toISOString().split(':');
     const defaultDate = `${splittedString[0]}:${splittedString[1]}`;
@@ -172,10 +172,12 @@ CreateMeal.propTypes = {
   }),
   createMeal: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired,
+  initialDate: PropTypes.instanceOf(Date),
 };
 
 CreateMeal.defaultProps = {
   user: null,
+  initialDate: null,
 };
 
 const mapStateToProps = state => ({
