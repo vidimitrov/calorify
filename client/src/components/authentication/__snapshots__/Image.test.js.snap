@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authentication/Image component renders correctly 1`] = `
+.c0 {
+  width: 85px;
+}
+
+@media (max-width:420px) {
+  .c0 {
+    width: 65px;
+  }
+}
+
+<img
+  className="c0"
+  src="../../assets/img/logo.png"
+/>
+`;

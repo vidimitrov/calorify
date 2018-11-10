@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authentication/Anchor component renders correctly 1`] = `
+.c0 {
+  color: #e5c769;
+  display: inline-block;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+<a
+  className="c0"
+  href="/auth/login"
+  onClick={[Function]}
+>
+  Login
+</a>
+`;
