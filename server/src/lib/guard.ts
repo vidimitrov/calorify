@@ -1,6 +1,6 @@
 import { init as getAccessControlInstance } from '../../config/access-control/ac';
 
-export default (function guard() {
+export default function guard(acInstance?: any) {
   return {
     /**
      * Check permissions, based on the role of the current user, action
@@ -14,8 +14,8 @@ export default (function guard() {
      * @returns {boolean} The result of the permission check
      */
     checkPermissions: async (role: string, action: string, resource: string) => {
-      const ac = await getAccessControlInstance();
+      const ac = acInstance || await getAccessControlInstance();
       return ac.can(role)[action](resource).granted;
     },
   };
-})();
+}

@@ -7,7 +7,7 @@ import guard from '../../lib/guard';
 
 const create = async (ctx: Koa.Context) => {
   const ROLE = ctx.state && ctx.state.user ? ctx.state.user.role : null;
-  const allowed = await guard.checkPermissions(ROLE, CREATE_ANY, USER);
+  const allowed = await guard().checkPermissions(ROLE, CREATE_ANY, USER);
   const attrs: UserType = (ctx.request.body as any).attrs;
   let user: UserType;
 

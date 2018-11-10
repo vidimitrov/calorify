@@ -6,7 +6,7 @@ import guard from '../../lib/guard';
 
 const list = async (ctx: Koa.Context) => {
   const ROLE = ctx.state && ctx.state.user ? ctx.state.user.role : null;
-  const allowed = await guard.checkPermissions(ROLE, READ_OWN, MEAL);
+  const allowed = await guard().checkPermissions(ROLE, READ_OWN, MEAL);
   let userId = ctx.state.user.id;
   let meals: MealType[];
 
