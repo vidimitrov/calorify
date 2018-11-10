@@ -1,4 +1,4 @@
-import User, { UserType, verifyPassword, generatePassword } from './User';
+import User, { UserType, verifyPassword, generatePassword, schema } from './User';
 
 describe('User model', () => {
   it('should exist', () => {
@@ -39,5 +39,31 @@ describe('User model', () => {
 
   it('exports a generatePassword function', () => {
     expect(generatePassword).toBeDefined();
+  });
+
+  it('exports a function for validating the "create" Meal schema', () => {
+    const validUser = {
+      password: 'pass123',
+      name: 'John Doe',
+      email: 'john@email.com',
+    };
+    const invalidUser = {
+      daily_calories_limit: 2200,
+    };
+
+    expect(schema.isValid).toBeDefined();
+    expect(schema.isValid('create', validUser)).toBeTruthy();
+    expect(schema.isValid('create', invalidUser)).toBeFalsy();
+  });
+
+  it('exports a function for validating the "update" Meal schema', () => {
+    const validUser = {
+      daily_calories_limit: 2200,
+    };
+    const invalidUser = {};
+
+    expect(schema.isValid).toBeDefined();
+    expect(schema.isValid('update', validUser)).toBeTruthy();
+    expect(schema.isValid('update', invalidUser)).toBeFalsy();
   });
 });
