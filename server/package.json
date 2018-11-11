@@ -4,6 +4,7 @@
   "description": "An application that helps you tracking your daily calories",
   "main": "src/server.ts",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node dist/src/server.js",
     "start:test": "NODE_ENV=test npm run dev",
     "setup:test": "NODE_ENV=test npm run migrate && NODE_ENV=test npm run seed",
@@ -20,6 +21,9 @@
     "seed": "npm run _knex -- seed:run",
     "rollback": "npm run _knex -- migrate:rollback",
     "migrate:make": "npm run _knex -- migrate:make"
+  },
+  "engines": {
+    "node": "10.x"
   },
   "repository": {
     "type": "git",
