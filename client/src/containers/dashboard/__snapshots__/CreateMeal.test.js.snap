@@ -71,7 +71,7 @@ exports[`CreateMeal container renders correctly 1`] = `
       className="FormControls-sc-7fqkjw-0 dcNCfX"
     >
       <div
-        className="InputWrapper-sc-1a0h3fv-0 hchKYo"
+        className="InputWrapper-sc-1a0h3fv-0 bkNglj"
       >
         <div
           className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
@@ -103,7 +103,7 @@ exports[`CreateMeal container renders correctly 1`] = `
         </p>
       </div>
       <div
-        className="InputWrapper-sc-1a0h3fv-0 hchKYo"
+        className="InputWrapper-sc-1a0h3fv-0 bkNglj"
       >
         <div
           className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
@@ -135,7 +135,7 @@ exports[`CreateMeal container renders correctly 1`] = `
         </p>
       </div>
       <div
-        className="InputWrapper-sc-1a0h3fv-0 hchKYo"
+        className="InputWrapper-sc-1a0h3fv-0 bkNglj"
       >
         <div
           className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
