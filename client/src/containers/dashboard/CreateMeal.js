@@ -7,6 +7,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CustomSnackbar from '../../components/common/CustomSnackbar';
 import Form from '../../components/dashboard/Form';
 import FormControls from '../../components/dashboard/FormControls';
 import InputWrapper from '../../components/dashboard/InputWrapper';
@@ -36,6 +38,8 @@ export class CreateMeal extends React.Component {
       requiredName: false,
       requiredCalories: false,
       change: false,
+      positiveSnackbarOpen: false,
+      negativeSnackbarOpen: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -60,6 +64,22 @@ export class CreateMeal extends React.Component {
     });
   }
 
+  handlePositiveSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ positiveSnackbarOpen: false });
+  }
+
+  handleNegativeSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ negativeSnackbarOpen: false });
+  }
+
   render() {
     const {
       user,
@@ -72,6 +92,8 @@ export class CreateMeal extends React.Component {
       requiredName,
       requiredCalories,
       change,
+      positiveSnackbarOpen,
+      negativeSnackbarOpen,
     } = this.state;
     const { navigate } = this.props;
 
@@ -157,10 +179,16 @@ export class CreateMeal extends React.Component {
 
                 createMeal(name, calories, formattedDate, formattedTime)
                   .then(() => {
-                    // TODO: Show positive snackbar
-                    navigate('/');
+                    this.setState({
+                      positiveSnackbarOpen: true,
+                    });
+                    setTimeout(() => {
+                      navigate('/');
+                    }, 1000);
                   }).catch(() => {
-                    // TODO: Show negative snackbar. Try again
+                    this.setState({
+                      negativeSnackbarOpen: true,
+                    });
                   });
               }
             }}
@@ -168,6 +196,36 @@ export class CreateMeal extends React.Component {
             Create Meal
           </Button>
         </Form>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={positiveSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={this.handlePositiveSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handlePositiveSnackbarClose}
+            variant="success"
+            message="Meal created successfully"
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={negativeSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={this.handleNegativeSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handleNegativeSnackbarClose}
+            variant="error"
+            message="Couldn\'t create meal. Please try again"
+          />
+        </Snackbar>
       </Wrapper>
     );
   }

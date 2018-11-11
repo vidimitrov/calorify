@@ -7,6 +7,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CustomSnackbar from '../../components/common/CustomSnackbar';
 import Form from '../../components/dashboard/Form';
 import FormControls from '../../components/dashboard/FormControls';
 import InputWrapper from '../../components/dashboard/InputWrapper';
@@ -34,9 +36,15 @@ export class UpdateMeal extends React.Component {
       date: meal ? meal.date : '',
       time: meal ? meal.time : '',
       change: false,
+      positiveSnackbarOpen: false,
+      negativeSnackbarOpen: false,
+      positiveMessage: null,
+      negativeMessage: null,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.handlePositiveSnackbarClose = this.handlePositiveSnackbarClose.bind(this);
+    this.handleNegativeSnackbarClose = this.handleNegativeSnackbarClose.bind(this);
   }
 
   async componentDidMount() {
@@ -54,7 +62,10 @@ export class UpdateMeal extends React.Component {
           time: meal ? meal.time : '',
         });
       } catch (error) {
-        // TODO: Show error snackbar
+        this.setState({
+          negativeSnackbarOpen: true,
+          negativeMessage: 'Something went wrong!',
+        });
       }
     }
   }
@@ -73,6 +84,28 @@ export class UpdateMeal extends React.Component {
     }
   }
 
+  handlePositiveSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      positiveSnackbarOpen: false,
+      positiveMessage: null,
+    });
+  }
+
+  handleNegativeSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      negativeSnackbarOpen: false,
+      negativeMessage: null,
+    });
+  }
+
   render() {
     const {
       user,
@@ -85,6 +118,10 @@ export class UpdateMeal extends React.Component {
       date,
       time,
       change,
+      positiveSnackbarOpen,
+      negativeSnackbarOpen,
+      positiveMessage,
+      negativeMessage,
     } = this.state;
     const { navigate } = this.props;
 
@@ -151,16 +188,54 @@ export class UpdateMeal extends React.Component {
                 time,
               })
                 .then(() => {
-                  // TODO: Show positive snackbar
-                  navigate('/');
+                  this.setState({
+                    positiveSnackbarOpen: true,
+                    positiveMessage: 'Meal updated successfully',
+                  });
+                  setTimeout(() => {
+                    navigate('/');
+                  }, 1000);
                 }).catch(() => {
-                  // TODO: Show negative snackbar. Try again
+                  this.setState({
+                    negativeSnackbarOpen: true,
+                    negativeMessage: 'Couldn\'t update meals. Try again!',
+                  });
                 });
             }}
           >
             Update Meal
           </Button>
         </Form>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={positiveSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={this.handlePositiveSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handlePositiveSnackbarClose}
+            variant="success"
+            message={positiveMessage}
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={negativeSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={this.handleNegativeSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handleNegativeSnackbarClose}
+            variant="error"
+            message={negativeMessage}
+          />
+        </Snackbar>
       </Wrapper>
     );
   }

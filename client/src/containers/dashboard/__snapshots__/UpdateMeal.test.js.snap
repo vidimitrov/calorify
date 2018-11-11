@@ -49,7 +49,7 @@ exports[`UpdateMeal container renders correctly 1`] = `
           </svg>
         </span>
         <span
-          className="MuiTouchRipple-root-154"
+          className="MuiTouchRipple-root-161"
         />
       </button>
       <img

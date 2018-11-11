@@ -10,10 +10,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FilterList from '@material-ui/icons/FilterList';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add';
+import CustomSnackbar from '../../components/common/CustomSnackbar';
 import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
@@ -50,6 +52,10 @@ export class Main extends React.Component {
       dateTo: moment().toISOString().split('T')[0],
       timeFrom: '00:00',
       timeTo: '23:59',
+      positiveSnackbarOpen: false,
+      negativeSnackbarOpen: false,
+      positiveMessage: null,
+      negativeMessage: null,
     };
 
     this.handleMenu = this.handleMenu.bind(this);
@@ -57,6 +63,8 @@ export class Main extends React.Component {
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.toggleFiltersVisibility = this.toggleFiltersVisibility.bind(this);
     this.isInRange = this.isInRange.bind(this);
+    this.handlePositiveSnackbarClose = this.handlePositiveSnackbarClose.bind(this);
+    this.handleNegativeSnackbarClose = this.handleNegativeSnackbarClose.bind(this);
   }
 
   async componentDidMount() {
@@ -78,6 +86,28 @@ export class Main extends React.Component {
   handleClose() {
     this.setState({
       anchorEl: null,
+    });
+  }
+
+  handlePositiveSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      positiveSnackbarOpen: false,
+      positiveMessage: null,
+    });
+  }
+
+  handleNegativeSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      negativeSnackbarOpen: false,
+      negativeMessage: null,
     });
   }
 
@@ -136,6 +166,10 @@ export class Main extends React.Component {
       dateTo,
       timeFrom,
       timeTo,
+      positiveSnackbarOpen,
+      negativeSnackbarOpen,
+      positiveMessage,
+      negativeMessage,
     } = this.state;
     let { meals } = this.props;
 
@@ -249,7 +283,18 @@ export class Main extends React.Component {
                       <CardDate date={`${meal.date}T${meal.time}`} />
                       <CardActions
                         onEditHandler={() => navigate(`/meals/${meal.id}`)}
-                        onDeleteHandler={() => removeMeal(meal.id).then(() => this.forceUpdate())}
+                        onDeleteHandler={() => removeMeal(meal.id)
+                          .then(() => {
+                            this.setState({
+                              positiveSnackbarOpen: true,
+                              positiveMessage: 'Meal deleted successfully!',
+                            });
+                          })
+                          .catch(() => this.setState({
+                            negativeSnackbarOpen: true,
+                            negativeMessage: 'Couldn\'t delete meal. Try again!',
+                          }))
+                        }
                       />
                     </Card>
                   ))}
@@ -268,6 +313,36 @@ export class Main extends React.Component {
         >
           <AddIcon />
         </FabButton>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={positiveSnackbarOpen}
+          autoHideDuration={3000}
+          onClose={this.handlePositiveSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handlePositiveSnackbarClose}
+            variant="success"
+            message={positiveMessage}
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={negativeSnackbarOpen}
+          autoHideDuration={3000}
+          onClose={this.handleNegativeSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handleNegativeSnackbarClose}
+            variant="error"
+            message={negativeMessage}
+          />
+        </Snackbar>
       </Wrapper>
     );
   }
