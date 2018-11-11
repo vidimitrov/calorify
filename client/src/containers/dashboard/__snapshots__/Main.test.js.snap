@@ -270,7 +270,7 @@ exports[`Main container renders correctly 1`] = `
     >
       <div>
         <h2
-          className="GroupHeading__InputWrapper-sc-1140iy9-0 bAAVPR"
+          className="GroupHeading__InputWrapper-sc-1140iy9-0 hEhltp"
         >
           05/10/2018
            
@@ -280,6 +280,7 @@ exports[`Main container renders correctly 1`] = `
           /
            
           2000
+           kCal
           )
         </h2>
         <div

@@ -4,6 +4,13 @@ exports[`Dashboard/GroupHeading component renders correctly 1`] = `
 .c0 {
   color: #75736d;
   margin-top: 0px;
+  font-size: 24px;
+}
+
+@media (max-width:420px) {
+  .c0 {
+    font-size: 16px;
+  }
 }
 
 <h2
