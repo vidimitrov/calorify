@@ -14,6 +14,7 @@ import FormControls from '../../components/dashboard/FormControls';
 import InputWrapper from '../../components/dashboard/InputWrapper';
 import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
+import ValidationLabel from '../../components/dashboard/ValidationLabel';
 import CustomTypography from '../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../components/dashboard/CustomIconButton';
 import CustomTextField from '../../components/dashboard/CustomTextField';
@@ -22,6 +23,10 @@ import {
   fetchMeals as fetchMealsActionCreator,
   updateMeal as updateMealActionCreator,
 } from '../../actions/meals';
+
+function isNumber(str) {
+  return /^[0-9]*$/.test(str);
+}
 
 export class UpdateMeal extends React.Component {
   constructor(props) {
@@ -32,7 +37,10 @@ export class UpdateMeal extends React.Component {
 
     this.state = {
       name: meal ? meal.name : '',
+      requiredName: false,
       calories: meal ? meal.calories : '',
+      validCalories: true,
+      requiredCalories: false,
       date: meal ? meal.date : '',
       time: meal ? meal.time : '',
       change: false,
@@ -73,11 +81,42 @@ export class UpdateMeal extends React.Component {
   onChangeHandler(key, value) {
     if (key === 'datetime') {
       this.setState({
+        change: true,
         date: value.split('T')[0],
         time: value.split('T')[1],
       });
     } else {
+      let {
+        requiredName,
+        requiredCalories,
+        validCalories,
+      } = this.state;
+
+      if (key === 'calories') {
+        if (value && !isNumber(value)) {
+          requiredCalories = false;
+          validCalories = false;
+        } else if (value) {
+          requiredCalories = false;
+          validCalories = true;
+        } else {
+          requiredCalories = true;
+          validCalories = true;
+        }
+      }
+
+      if (key === 'name') {
+        if (!value) {
+          requiredName = true;
+        } else {
+          requiredName = false;
+        }
+      }
+
       this.setState({
+        requiredName,
+        requiredCalories,
+        validCalories,
         change: true,
         [key]: value,
       });
@@ -118,6 +157,9 @@ export class UpdateMeal extends React.Component {
       date,
       time,
       change,
+      validCalories,
+      requiredCalories,
+      requiredName,
       positiveSnackbarOpen,
       negativeSnackbarOpen,
       positiveMessage,
@@ -146,7 +188,7 @@ export class UpdateMeal extends React.Component {
         </AppBar>
         <Form>
           <FormControls>
-            <InputWrapper>
+            <InputWrapper invalid={requiredName}>
               <CustomTextField
                 placeholder="Meal name"
                 value={name}
@@ -154,7 +196,12 @@ export class UpdateMeal extends React.Component {
                 onChange={e => this.onChangeHandler('name', e.target.value)}
               />
             </InputWrapper>
-            <InputWrapper>
+            <ValidationLabel
+              invalid={requiredName}
+            >
+              Meal name is required
+            </ValidationLabel>
+            <InputWrapper invalid={requiredCalories || !validCalories}>
               <CustomTextField
                 placeholder="Number of calories"
                 value={calories}
@@ -162,6 +209,16 @@ export class UpdateMeal extends React.Component {
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
             </InputWrapper>
+            <ValidationLabel
+              invalid={requiredCalories}
+            >
+              Number of calories is required
+            </ValidationLabel>
+            <ValidationLabel
+              invalid={!validCalories}
+            >
+              Number of calories should contain only numbers
+            </ValidationLabel>
             <InputWrapper>
               <CustomTextField
                 placeholder="Date"
