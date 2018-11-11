@@ -305,6 +305,7 @@ export class Main extends React.Component {
                   /
                   {' '}
                   {user.dailyCaloriesLimit}
+                  {' kCal'}
                   )
                 </GroupHeading>
                 {mealsGroupedByDate[gDate]
