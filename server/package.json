@@ -5,6 +5,8 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "node dist/src/server.js",
+    "start:test": "NODE_ENV=test npm run dev",
+    "setup:test": "NODE_ENV=test npm run migrate && NODE_ENV=test npm run seed",
     "build": "rm -rf dist && npm run build-ts && npm run lint",
     "build-ts": "tsc",
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
@@ -15,6 +17,7 @@
     "clean": "rimraf coverage build tmp",
     "_knex": "node_modules/.bin/knex --cwd db",
     "migrate": "npm run _knex -- migrate:latest",
+    "seed": "npm run _knex -- seed:run",
     "rollback": "npm run _knex -- migrate:rollback",
     "migrate:make": "npm run _knex -- migrate:make"
   },
