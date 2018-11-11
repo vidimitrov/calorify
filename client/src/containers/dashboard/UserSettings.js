@@ -78,6 +78,8 @@ export class UserSettings extends React.Component {
               <CustomTextField
                 label="Full name"
                 value={name}
+                id="name"
+                name="name"
                 onChange={e => this.onChangeHandler('name', e.target.value)}
               />
             </InputWrapper>
@@ -86,6 +88,8 @@ export class UserSettings extends React.Component {
                 label="Daily calories"
                 helperText="It's your expected calorie intake per day"
                 value={dailyCalories}
+                id="calories"
+                name="calories"
                 onChange={e => this.onChangeHandler('dailyCalories', e.target.value)}
               />
             </InputWrapper>
@@ -94,6 +98,7 @@ export class UserSettings extends React.Component {
           <Button
             variant="contained"
             color="primary"
+            name="submit-account-update"
             disabled={!change}
             onClick={() => {
               updateUser(user.id, {

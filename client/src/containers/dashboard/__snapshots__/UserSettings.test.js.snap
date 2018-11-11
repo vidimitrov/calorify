@@ -78,6 +78,7 @@ exports[`UserSettings container renders correctly 1`] = `
           <label
             className="MuiFormLabel-root-109 MuiFormLabel-filled-113 MuiInputLabel-root-98 MuiInputLabel-formControl-103 MuiInputLabel-animated-106 MuiInputLabel-shrink-105"
             data-shrink={true}
+            htmlFor="name"
           >
             Full name
           </label>
@@ -89,6 +90,8 @@ exports[`UserSettings container renders correctly 1`] = `
               aria-invalid={false}
               className="MuiInputBase-input-139 MuiInput-input-124"
               disabled={false}
+              id="name"
+              name="name"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -103,11 +106,13 @@ exports[`UserSettings container renders correctly 1`] = `
         className="InputWrapper-sc-1a0h3fv-0 hchKYo"
       >
         <div
+          aria-describedby="calories-helper-text"
           className="MuiFormControl-root-94 CustomTextField-uzoay-0 ewXInx"
         >
           <label
             className="MuiFormLabel-root-109 MuiFormLabel-filled-113 MuiInputLabel-root-98 MuiInputLabel-formControl-103 MuiInputLabel-animated-106 MuiInputLabel-shrink-105"
             data-shrink={true}
+            htmlFor="calories"
           >
             Daily calories
           </label>
@@ -119,6 +124,8 @@ exports[`UserSettings container renders correctly 1`] = `
               aria-invalid={false}
               className="MuiInputBase-input-139 MuiInput-input-124"
               disabled={false}
+              id="calories"
+              name="calories"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -129,6 +136,7 @@ exports[`UserSettings container renders correctly 1`] = `
           </div>
           <p
             className="MuiFormHelperText-root-146 MuiFormHelperText-filled-152"
+            id="calories-helper-text"
           >
             It's your expected calorie intake per day
           </p>
@@ -138,6 +146,7 @@ exports[`UserSettings container renders correctly 1`] = `
     <button
       className="MuiButtonBase-root-47 MuiButtonBase-disabled-48 MuiButton-root-154 MuiButton-contained-165 MuiButton-containedPrimary-166 MuiButton-raised-168 MuiButton-raisedPrimary-169 MuiButton-disabled-174"
       disabled={true}
+      name="submit-account-update"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
