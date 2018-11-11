@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FilterList from '@material-ui/icons/FilterList';
+import Close from '@material-ui/icons/Close';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add';
 import CustomSnackbar from '../../components/common/CustomSnackbar';
@@ -37,6 +38,7 @@ import {
   fetchMeals as fetchMealsActionCreator,
   removeMeal as removeMealActionCreator,
   filterMeals as filterMealsAction,
+  resetMealsFilters as resetMealsFiltersAction,
 } from '../../actions/meals';
 
 export class Main extends React.Component {
@@ -115,8 +117,22 @@ export class Main extends React.Component {
   }
 
   toggleFiltersVisibility() {
+    const { user, resetMealsFilters } = this.props;
     const { showFilters } = this.state;
+    let updates = {};
+
+    if (showFilters) {
+      resetMealsFilters();
+      updates = {
+        dateFrom: moment(user.createdAt).toISOString().split('T')[0],
+        dateTo: moment().toISOString().split('T')[0],
+        timeFrom: '00:00',
+        timeTo: '23:59',
+      };
+    }
+
     this.setState({
+      ...updates,
       showFilters: !showFilters,
     });
   }
@@ -264,7 +280,7 @@ export class Main extends React.Component {
               }}
               color="default"
             >
-              <FilterList />
+              {!showFilters ? <FilterList /> : <Close />}
             </IconButton>
           </div>
         </Filters>
@@ -303,7 +319,7 @@ export class Main extends React.Component {
                   ))}
               </div>
             ))}
-            {groupDates.length === 0
+            {groupDates.length === 0 && !showFilters
               && <EmptyMealsList />
             }
           </ScrollContainer>
@@ -381,6 +397,7 @@ Main.propTypes = {
   getAllMeals: PropTypes.func.isRequired,
   removeMeal: PropTypes.func.isRequired,
   filterMeals: PropTypes.func.isRequired,
+  resetMealsFilters: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -400,6 +417,7 @@ const mapDispatchToProps = dispatch => ({
   getAllMeals: () => dispatch(fetchMealsActionCreator()),
   removeMeal: mealId => dispatch(removeMealActionCreator(mealId)),
   filterMeals: filters => dispatch(filterMealsAction(filters)),
+  resetMealsFilters: () => dispatch(resetMealsFiltersAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
