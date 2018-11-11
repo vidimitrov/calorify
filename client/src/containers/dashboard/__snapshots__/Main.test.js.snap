@@ -273,6 +273,14 @@ exports[`Main container renders correctly 1`] = `
           className="GroupHeading__InputWrapper-sc-1140iy9-0 bAAVPR"
         >
           05/10/2018
+           
+          (
+          320
+           
+          /
+           
+          2000
+          )
         </h2>
         <div
           className="Card-sc-1astb0w-0 bRrYbQ"

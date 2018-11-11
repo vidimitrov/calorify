@@ -66,6 +66,7 @@ export class Main extends React.Component {
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.toggleFiltersVisibility = this.toggleFiltersVisibility.bind(this);
     this.isInRange = this.isInRange.bind(this);
+    this.getTotalCaloriesForDate = this.getTotalCaloriesForDate.bind(this);
     this.handlePositiveSnackbarClose = this.handlePositiveSnackbarClose.bind(this);
     this.handleNegativeSnackbarClose = this.handleNegativeSnackbarClose.bind(this);
   }
@@ -80,6 +81,22 @@ export class Main extends React.Component {
         negativeMessage: 'Something went wrong!',
       });
     }
+  }
+
+  getTotalCaloriesForDate(date) {
+    const { meals } = this.props;
+    const filteredMeals = meals.filter(m => m.date === date);
+    const totalCalories = filteredMeals
+      .reduce((accumulator, currentValue) => accumulator + currentValue.calories, 0);
+
+    return totalCalories;
+  }
+
+  isInRange(date) {
+    const { user } = this.props;
+    const totalCalories = this.getTotalCaloriesForDate(date);
+
+    return totalCalories < user.dailyCaloriesLimit;
   }
 
   handleMenu(event) {
@@ -159,15 +176,6 @@ export class Main extends React.Component {
         timeTo,
       });
     });
-  }
-
-  isInRange(date) {
-    const { meals, user } = this.props;
-    const filteredMeals = meals.filter(m => m.date === date);
-    const totalCalories = filteredMeals
-      .reduce((accumulator, currentValue) => accumulator + currentValue.calories, 0);
-
-    return totalCalories < user.dailyCaloriesLimit;
   }
 
   render() {
@@ -288,7 +296,17 @@ export class Main extends React.Component {
           <ScrollContainer>
             {groupDates.length > 0 && groupDates.map((gDate, index) => (
               <div key={index}>
-                <GroupHeading>{(moment(gDate).calendar().split(' at'))[0]}</GroupHeading>
+                <GroupHeading>
+                  {(moment(gDate).calendar().split(' at'))[0]}
+                  {' '}
+                  (
+                  {this.getTotalCaloriesForDate(gDate)}
+                  {' '}
+                  /
+                  {' '}
+                  {user.dailyCaloriesLimit}
+                  )
+                </GroupHeading>
                 {mealsGroupedByDate[gDate]
                   .sort((a, b) => {
                     const from = `${a.date}T${a.time}`;
