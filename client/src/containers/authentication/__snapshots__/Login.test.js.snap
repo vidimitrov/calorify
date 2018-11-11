@@ -40,7 +40,7 @@ exports[`Login container renders correctly 1`] = `
       </p>
       <p
         className="ValidationLabel-ol62xd-0 jgOKXL"
-        name={false}
+        name=""
       >
         Email is required
       </p>
@@ -53,7 +53,7 @@ exports[`Login container renders correctly 1`] = `
       />
       <p
         className="ValidationLabel-ol62xd-0 jgOKXL"
-        name={false}
+        name=""
       >
         Password is required
       </p>

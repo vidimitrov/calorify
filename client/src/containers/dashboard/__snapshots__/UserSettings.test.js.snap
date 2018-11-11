@@ -48,7 +48,7 @@ exports[`UserSettings container renders correctly 1`] = `
           </svg>
         </span>
         <span
-          className="MuiTouchRipple-root-180"
+          className="MuiTouchRipple-root-187"
         />
       </button>
       <img

@@ -97,7 +97,7 @@ exports[`CreateMeal container renders correctly 1`] = `
         </div>
         <p
           className="ValidationLabel-sc-1uikjc9-0 gbgFrP"
-          name={false}
+          name=""
         >
           Meal name is required
         </p>
@@ -129,7 +129,7 @@ exports[`CreateMeal container renders correctly 1`] = `
         </div>
         <p
           className="ValidationLabel-sc-1uikjc9-0 gbgFrP"
-          name={false}
+          name=""
         >
           Meal calories are required
         </p>
