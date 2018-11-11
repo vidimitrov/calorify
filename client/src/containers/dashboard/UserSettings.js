@@ -7,6 +7,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CustomSnackbar from '../../components/common/CustomSnackbar';
 import Form from '../../components/dashboard/Form';
 import FormControls from '../../components/dashboard/FormControls';
 import InputWrapper from '../../components/dashboard/InputWrapper';
@@ -29,15 +31,39 @@ export class UserSettings extends React.Component {
       name,
       dailyCalories: dailyCaloriesLimit,
       change: false,
+      positiveSnackbarOpen: false,
+      negativeSnackbarOpen: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.handlePositiveSnackbarClose = this.handlePositiveSnackbarClose.bind(this);
+    this.handleNegativeSnackbarClose = this.handleNegativeSnackbarClose.bind(this);
   }
 
   onChangeHandler(key, value) {
     this.setState({
       change: true,
       [key]: value,
+    });
+  }
+
+  handlePositiveSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      positiveSnackbarOpen: false,
+    });
+  }
+
+  handleNegativeSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      negativeSnackbarOpen: false,
     });
   }
 
@@ -50,6 +76,8 @@ export class UserSettings extends React.Component {
       name,
       dailyCalories,
       change,
+      positiveSnackbarOpen,
+      negativeSnackbarOpen,
     } = this.state;
     const { navigate } = this.props;
 
@@ -94,7 +122,6 @@ export class UserSettings extends React.Component {
               />
             </InputWrapper>
           </FormControls>
-          {/* TODO: It should be disabled if no changes are made */}
           <Button
             variant="contained"
             color="primary"
@@ -105,15 +132,49 @@ export class UserSettings extends React.Component {
                 name,
                 dailyCalories,
               }).then(() => {
-                // TODO: Show positive snackbar
+                this.setState({
+                  positiveSnackbarOpen: true,
+                });
               }).catch(() => {
-                // TODO: Show negative snackbar. Try again
+                this.setState({
+                  negativeSnackbarOpen: true,
+                });
               });
             }}
           >
             Save Changes
           </Button>
         </Form>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={positiveSnackbarOpen}
+          autoHideDuration={3000}
+          onClose={this.handlePositiveSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handlePositiveSnackbarClose}
+            variant="success"
+            message="Account is updated successfully!"
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={negativeSnackbarOpen}
+          autoHideDuration={3000}
+          onClose={this.handleNegativeSnackbarClose}
+        >
+          <CustomSnackbar
+            onClose={this.handleNegativeSnackbarClose}
+            variant="error"
+            message="There was some problem. Please try again"
+          />
+        </Snackbar>
       </Wrapper>
     );
   }
