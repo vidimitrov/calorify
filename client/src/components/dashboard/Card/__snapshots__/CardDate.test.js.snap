@@ -38,7 +38,7 @@ exports[`Dashboard/Card/CardDate component renders correctly 1`] = `
   <h3
     className="c1"
   >
-    Today at 1:22 PM
+    05/10/2018
   </h3>
 </div>
 `;

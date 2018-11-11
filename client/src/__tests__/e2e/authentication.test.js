@@ -3,7 +3,6 @@ import faker from 'faker';
 import cfg from '../../../config';
 
 const { APP_URL } = cfg;
-
 const LOGIN_DATA = {
   email: 'john@email.com',
   password: '123123',
