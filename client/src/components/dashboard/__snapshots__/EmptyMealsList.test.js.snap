@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard/EmptyMealsList component renders correctly 1`] = `
+.c0 {
+  text-align: center;
+}
+
+.c1 {
+  width: 150px;
+}
+
+.c2 {
+  color: #f6cd48;
+}
+
+<div
+  className="c0"
+>
+  <img
+    className="c1"
+    src="empty.png"
+  />
+  <h2
+    className="c2"
+  >
+    Add your first meal
+  </h2>
+</div>
+`;
