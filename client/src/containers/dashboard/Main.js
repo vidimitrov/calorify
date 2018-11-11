@@ -30,6 +30,7 @@ import CardInfo from '../../components/dashboard/Card/CardInfo';
 import CardDate from '../../components/dashboard/Card/CardDate';
 import CardActions from '../../components/dashboard/Card/CardActions';
 import CardStatus from '../../components/dashboard/Card/CardStatus';
+import EmptyMealsList from '../../components/dashboard/EmptyMealsList';
 import logo from '../../assets/img/logo.png';
 import { logout as logoutActionCreator } from '../../actions/authentication';
 import {
@@ -72,8 +73,10 @@ export class Main extends React.Component {
     try {
       await getAllMeals();
     } catch (error) {
-      // TODO: Show error snackbar here
-      throw error;
+      this.setState({
+        negativeSnackbarOpen: true,
+        negativeMessage: 'Something went wrong!',
+      });
     }
   }
 
@@ -267,7 +270,7 @@ export class Main extends React.Component {
         </Filters>
         <MealsList>
           <ScrollContainer>
-            {groupDates.map((gDate, index) => (
+            {groupDates.length > 0 && groupDates.map((gDate, index) => (
               <div key={index}>
                 <GroupHeading>{(moment(gDate).calendar().split(' at'))[0]}</GroupHeading>
                 {mealsGroupedByDate[gDate]
@@ -300,6 +303,9 @@ export class Main extends React.Component {
                   ))}
               </div>
             ))}
+            {groupDates.length === 0
+              && <EmptyMealsList />
+            }
           </ScrollContainer>
         </MealsList>
         <FabButton
