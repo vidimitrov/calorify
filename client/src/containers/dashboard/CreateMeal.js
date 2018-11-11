@@ -43,6 +43,8 @@ export class CreateMeal extends React.Component {
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.handlePositiveSnackbarClose = this.handlePositiveSnackbarClose.bind(this);
+    this.handleNegativeSnackbarClose = this.handleNegativeSnackbarClose.bind(this);
   }
 
   onChangeHandler(key, value) {
