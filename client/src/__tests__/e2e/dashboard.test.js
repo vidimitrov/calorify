@@ -75,13 +75,112 @@ describe('In the Dashboard flow', () => {
     expect(calories).toEqual(newCalories);
   }, 100000);
 
-  it('A user can create a new meal', async () => { }, 100000);
+  it('A user can create a new meal', async () => {
+    await page.click('button[name=add-meal-fab]');
+    await page.waitForSelector('[data-testid="create-meal-page"]');
 
-  it('A user cannot create a new meal without specifying name and calories', async () => { }, 100000);
+    await page.type('input[name=name]', 'Chicken with rice');
+    await page.type('input[name=calories]', '450');
+    await page.click('button[name=submit-create-meal]');
+    await delay(3000);
 
-  it('A user can update an existing meal', async () => { }, 100000);
+    await page.waitForSelector('[data-testid="dashboard"]');
+  }, 100000);
 
-  it('A user can delete an existing meal', async () => { }, 100000);
+  it('A user cannot create a new meal without specifying a name', async () => {
+    await page.click('button[name=add-meal-fab]');
+    await page.waitForSelector('[data-testid="create-meal-page"]');
+
+    await page.type('input[name=calories]', '450');
+    await page.click('button[name=submit-create-meal]');
+    await delay(3000);
+
+    await page.waitForSelector('p[name="required-name"]');
+  }, 100000);
+
+  it('A user cannot create a new meal without specifying a calories', async () => {
+    await page.click('button[name=add-meal-fab]');
+    await page.waitForSelector('[data-testid="create-meal-page"]');
+
+    await page.type('input[name=name]', 'Chicken with rice');
+    await page.click('button[name=submit-create-meal]');
+    await delay(3000);
+
+    await page.waitForSelector('p[name="required-calories"]');
+  }, 100000);
+
+  it('A user can update an existing meal', async () => {
+    // Create a meal
+    await page.click('button[name=add-meal-fab]');
+    await page.waitForSelector('[data-testid="create-meal-page"]');
+
+    await page.type('input[name=name]', 'Rice with chicken');
+    await page.type('input[name=calories]', '250');
+    await page.click('button[name=submit-create-meal]');
+    await delay(3000);
+
+    // Wait until the page is redirected to the dashboard
+    await page.waitForSelector('[data-testid="dashboard"]');
+
+    // Get the name of the first meal
+    await page.waitForSelector('div[name=meal-card]');
+    const firstMealName = await page.evaluate(() => document.querySelector('div[name=meal-card] h3[name=meal-name]').innerText);
+
+    // Click the update button of the first meal and wait for selector in the update view
+    const updateBtn = await page.$('button[name=edit-meal]');
+    await updateBtn.click();
+    await delay(1000);
+    await page.waitForSelector('[data-testid="update-meal"]');
+
+    // Do the tripple click magic and update the meal name
+    const nameToUpdate = 'Pork with rice';
+    const name = await page.$('input[name=name]');
+    await name.click();
+    await name.focus();
+    await name.click({ clickCount: 3 });
+    await name.press('Backspace');
+    await name.type(nameToUpdate);
+    await page.click('button[name=submit-update-meal]');
+
+    // Wait for the selector in the dashboard and get the first meal name again
+    await page.waitForSelector('[data-testid="dashboard"]');
+    const updatedFirstMealName = await page.evaluate(() => document.querySelector('div[name=meal-card] h3[name=meal-name]').innerText);
+
+    // Expect the value to be equal to the updated value
+    expect(updatedFirstMealName !== firstMealName).toBe(true);
+    expect(updatedFirstMealName).toBe(nameToUpdate);
+  }, 100000);
+
+  it('A user can delete an existing meal', async () => {
+    // Create a meal
+    await page.click('button[name=add-meal-fab]');
+    await page.waitForSelector('[data-testid="create-meal-page"]');
+
+    await page.type('input[name=name]', 'Chicken with rice');
+    await page.type('input[name=calories]', '450');
+    await page.click('button[name=submit-create-meal]');
+    await delay(3000);
+
+    // Wait until the page is redirected to the dashboard
+    await page.waitForSelector('[data-testid="dashboard"]');
+
+    // Get the number of all meals
+    await page.waitForSelector('div[name=meal-card]');
+    const initialMeals = await page.$$('div[name=meal-card]');
+    const initialNumberOfMeals = initialMeals.length;
+
+    // Click the delete icon
+    const deleteBtn = await page.$('button[name=delete-meal]');
+    await deleteBtn.click();
+    await delay(1000);
+
+    // Get the number of meals again
+    const currentMeals = await page.$$('div[name=meal-card]');
+    const numberOfCurrentMeals = currentMeals.length;
+
+    // Expect the number of meals to be the initial number - 1
+    expect(numberOfCurrentMeals).toBe(initialNumberOfMeals - 1);
+  }, 100000);
 
   afterEach(async () => {
     await page.goto('about:blank');
