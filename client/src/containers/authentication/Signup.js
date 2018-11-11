@@ -128,7 +128,7 @@ export class Signup extends React.Component {
               }}
             />
             <ValidationLabel
-              name={requiredName && 'required-name'}
+              name={requiredName ? 'required-name' : ''}
               invalid={requiredName}
             >
               Name is required
@@ -145,7 +145,7 @@ export class Signup extends React.Component {
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
             <ValidationLabel
-              name={requiredEmail && 'required-email'}
+              name={requiredEmail ? 'required-email' : ''}
               invalid={requiredEmail}
             >
               Email is required
@@ -160,7 +160,7 @@ export class Signup extends React.Component {
               }}
             />
             <ValidationLabel
-              name={requiredPassword && 'required-password'}
+              name={requiredPassword ? 'required-password' : ''}
               invalid={requiredPassword}
             >
               Password is required

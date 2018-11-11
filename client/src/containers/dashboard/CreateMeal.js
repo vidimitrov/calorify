@@ -105,7 +105,7 @@ export class CreateMeal extends React.Component {
                 onChange={e => this.onChangeHandler('name', e.target.value)}
               />
               <ValidationLabel
-                name={requiredName && 'required-name'}
+                name={requiredName ? 'required-name' : ''}
                 invalid={requiredName}
               >
                 Meal name is required
@@ -120,7 +120,7 @@ export class CreateMeal extends React.Component {
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
               <ValidationLabel
-                name={requiredCalories && 'required-calories'}
+                name={requiredCalories ? 'required-calories' : ''}
                 invalid={requiredCalories}
               >
                 Meal calories are required

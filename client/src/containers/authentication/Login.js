@@ -90,7 +90,7 @@ export class Login extends React.Component {
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
             <ValidationLabel
-              name={requiredEmail && 'required-email'}
+              name={requiredEmail ? 'required-email' : ''}
               invalid={requiredEmail}
             >
               Email is required
@@ -103,7 +103,7 @@ export class Login extends React.Component {
               onChange={e => this.onChangeHandler('password', e.target.value)}
             />
             <ValidationLabel
-              name={requiredPassword && 'required-password'}
+              name={requiredPassword ? 'required-password' : ''}
               invalid={requiredPassword}
             >
               Password is required
