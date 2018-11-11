@@ -33,7 +33,7 @@ exports[`Dashboard/EmptyMealsList component renders correctly 1`] = `
 >
   <img
     className="c1"
-    src="empty.png"
+    src="logo.png"
   />
   <h2
     className="c2"

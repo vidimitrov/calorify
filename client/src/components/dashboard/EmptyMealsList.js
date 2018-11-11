@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from '../../assets/img/empty.png';
+import img from '../../assets/img/logo.png';
 
 const Wrapper = styled.div`
   text-align: center;
