@@ -13,6 +13,7 @@ import {
   REMOVE_MEAL_SUCCESS,
   REMOVE_MEAL_FAILURE,
   FILTER_MEALS,
+  RESET_MEALS_FILTERS,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -127,6 +128,11 @@ export default function meals(state = initialState, action) {
         filteredData,
       };
     }
+    case RESET_MEALS_FILTERS:
+      return {
+        ...state,
+        filteredData: state.data,
+      };
     default:
       return state;
   }

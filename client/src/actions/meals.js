@@ -18,6 +18,7 @@ import {
   REMOVE_MEAL_SUCCESS,
   REMOVE_MEAL_FAILURE,
   FILTER_MEALS,
+  RESET_MEALS_FILTERS,
 } from '../constants/actionTypes';
 
 /**
@@ -201,4 +202,8 @@ export const removeMeal = mealId => (dispatch, getState) => {
 export const filterMeals = filters => ({
   type: FILTER_MEALS,
   payload: { filters },
+});
+
+export const resetMealsFilters = () => ({
+  type: RESET_MEALS_FILTERS,
 });
