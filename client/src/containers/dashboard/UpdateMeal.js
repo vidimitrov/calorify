@@ -95,7 +95,7 @@ export class UpdateMeal extends React.Component {
     }
 
     return (
-      <Wrapper>
+      <Wrapper data-testid="update-meal">
         <AppBar position="static">
           <Toolbar>
             <CustomIconButton color="secondary" aria-label="Menu">
@@ -113,6 +113,7 @@ export class UpdateMeal extends React.Component {
               <CustomTextField
                 placeholder="Meal name"
                 value={name}
+                name="name"
                 onChange={e => this.onChangeHandler('name', e.target.value)}
               />
             </InputWrapper>
@@ -120,6 +121,7 @@ export class UpdateMeal extends React.Component {
               <CustomTextField
                 placeholder="Number of calories"
                 value={calories}
+                name="calories"
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
             </InputWrapper>
@@ -140,6 +142,7 @@ export class UpdateMeal extends React.Component {
             variant="contained"
             color="primary"
             disabled={!change}
+            name="submit-update-meal"
             onClick={() => {
               updateMeal(mealId, {
                 name,

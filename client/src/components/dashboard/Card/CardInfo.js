@@ -33,12 +33,12 @@ const Calories = styled.h1`
 
 const CardInfo = ({ name, calories }) => (
   <Wrapper>
-    <Calories>
+    <Calories name="meal-calories">
       {calories}
       {' '}
       kCal
     </Calories>
-    <Name>{name}</Name>
+    <Name name="meal-name">{name}</Name>
   </Wrapper>
 );
 

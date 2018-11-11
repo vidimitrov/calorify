@@ -17,12 +17,14 @@ function CardActions({
     <Wrapper>
       <IconButton
         onClick={onEditHandler}
+        name="edit-meal"
         color="default"
       >
         <Edit />
       </IconButton>
       <IconButton
         onClick={onDeleteHandler}
+        name="delete-meal"
         color="default"
       >
         <Delete />

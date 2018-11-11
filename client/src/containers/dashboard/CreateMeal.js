@@ -82,7 +82,7 @@ export class CreateMeal extends React.Component {
     }
 
     return (
-      <Wrapper>
+      <Wrapper data-testid="create-meal-page">
         <AppBar position="static">
           <Toolbar>
             <CustomIconButton color="secondary" aria-label="Menu">
@@ -100,19 +100,29 @@ export class CreateMeal extends React.Component {
               <CustomTextField
                 placeholder="Meal name"
                 value={name}
+                name="name"
                 error={requiredName}
                 onChange={e => this.onChangeHandler('name', e.target.value)}
               />
-              <ValidationLabel invalid={requiredName}>Meal name is required</ValidationLabel>
+              <ValidationLabel
+                name={requiredName && 'required-name'}
+                invalid={requiredName}
+              >
+                Meal name is required
+              </ValidationLabel>
             </InputWrapper>
             <InputWrapper>
               <CustomTextField
                 placeholder="Number of calories"
                 value={calories}
+                name="calories"
                 error={requiredCalories}
                 onChange={e => this.onChangeHandler('calories', e.target.value)}
               />
-              <ValidationLabel invalid={requiredCalories}>
+              <ValidationLabel
+                name={requiredCalories && 'required-calories'}
+                invalid={requiredCalories}
+              >
                 Meal calories are required
               </ValidationLabel>
             </InputWrapper>
@@ -132,6 +142,7 @@ export class CreateMeal extends React.Component {
           <Button
             variant="contained"
             color="primary"
+            name="submit-create-meal"
             disabled={!change}
             onClick={() => {
               if (!name || !calories) {

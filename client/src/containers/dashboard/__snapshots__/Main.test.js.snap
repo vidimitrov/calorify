@@ -276,6 +276,7 @@ exports[`Main container renders correctly 1`] = `
         </h2>
         <div
           className="Card-sc-1astb0w-0 bRrYbQ"
+          name="meal-card"
         >
           <div
             className="CardStatus-sc-1qy5vwr-0 AykxL"
@@ -285,6 +286,7 @@ exports[`Main container renders correctly 1`] = `
           >
             <h1
               className="CardInfo__Calories-sc-1xghcvm-2 jiDjuh"
+              name="meal-calories"
             >
               320
                
@@ -292,6 +294,7 @@ exports[`Main container renders correctly 1`] = `
             </h1>
             <h3
               className="CardInfo__Name-sc-1xghcvm-1 jsbjuo"
+              name="meal-name"
             >
               some-name
             </h3>
@@ -311,6 +314,7 @@ exports[`Main container renders correctly 1`] = `
             <button
               className="MuiButtonBase-root-82 MuiIconButton-root-76"
               disabled={false}
+              name="edit-meal"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -351,6 +355,7 @@ exports[`Main container renders correctly 1`] = `
             <button
               className="MuiButtonBase-root-82 MuiIconButton-root-76"
               disabled={false}
+              name="delete-meal"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -397,6 +402,7 @@ exports[`Main container renders correctly 1`] = `
     aria-label="Add"
     className="MuiButtonBase-root-82 MuiButton-root-146 MuiButton-fab-163 MuiButton-contained-157 MuiButton-containedPrimary-158 MuiButton-raised-160 MuiButton-raisedPrimary-161 FabButton-sc-1kemqdv-0 jPpghY"
     disabled={false}
+    name="add-meal-fab"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}

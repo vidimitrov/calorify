@@ -44,6 +44,7 @@ exports[`Dashboard/Card/CardInfo component renders correctly 1`] = `
 >
   <h1
     className="c1"
+    name="meal-calories"
   >
     320
      
@@ -51,6 +52,7 @@ exports[`Dashboard/Card/CardInfo component renders correctly 1`] = `
   </h1>
   <h3
     className="c2"
+    name="meal-name"
   >
     Chicken with rice
   </h3>

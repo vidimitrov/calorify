@@ -11,6 +11,7 @@ exports[`Dashboard/Card/CardActions component renders correctly 1`] = `
   <button
     className="MuiButtonBase-root-7 MuiIconButton-root-1"
     disabled={false}
+    name="edit-meal"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -51,6 +52,7 @@ exports[`Dashboard/Card/CardActions component renders correctly 1`] = `
   <button
     className="MuiButtonBase-root-7 MuiIconButton-root-1"
     disabled={false}
+    name="delete-meal"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}

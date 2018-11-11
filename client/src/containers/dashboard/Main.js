@@ -243,7 +243,7 @@ export class Main extends React.Component {
                     return moment(to).diff(moment(from));
                   })
                   .map(meal => (
-                    <Card key={meal.id}>
+                    <Card key={meal.id} name="meal-card">
                       <CardStatus inRange={this.isInRange(meal.date)} />
                       <CardInfo name={meal.name} calories={meal.calories} />
                       <CardDate date={`${meal.date}T${meal.time}`} />
@@ -260,6 +260,7 @@ export class Main extends React.Component {
         <FabButton
           variant="fab"
           color="primary"
+          name="add-meal-fab"
           aria-label="Add"
           onClick={() => {
             navigate('/create-meal');

@@ -3,6 +3,7 @@
 exports[`UpdateMeal container renders correctly 1`] = `
 <div
   className="Wrapper-m60uq5-0 hkWJUG"
+  data-testid="update-meal"
 >
   <header
     className="MuiPaper-root-10 MuiPaper-elevation4-16 MuiAppBar-root-1 MuiAppBar-positionStatic-5 MuiAppBar-colorPrimary-8"
@@ -83,6 +84,7 @@ exports[`UpdateMeal container renders correctly 1`] = `
               aria-invalid={false}
               className="MuiInputBase-input-121 MuiInput-input-106"
               disabled={false}
+              name="name"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -108,6 +110,7 @@ exports[`UpdateMeal container renders correctly 1`] = `
               aria-invalid={false}
               className="MuiInputBase-input-121 MuiInput-input-106"
               disabled={false}
+              name="calories"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -148,6 +151,7 @@ exports[`UpdateMeal container renders correctly 1`] = `
     <button
       className="MuiButtonBase-root-47 MuiButtonBase-disabled-48 MuiButton-root-128 MuiButton-contained-139 MuiButton-containedPrimary-140 MuiButton-raised-142 MuiButton-raisedPrimary-143 MuiButton-disabled-148"
       disabled={true}
+      name="submit-update-meal"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
