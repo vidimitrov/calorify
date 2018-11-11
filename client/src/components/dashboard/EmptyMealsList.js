@@ -7,11 +7,22 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 150px;
+  width: 350px;
+
+  @media (max-width: 420px) {
+    width: 150px;
+  }
 `;
 
 const Headline = styled.h2`
   color: #f6cd48;
+  font-size: 32px;
+    margin: 40px auto 0;
+
+  @media (max-width: 420px) {
+    width: 150px;
+    font-size: 28px;
+  }
 `;
 
 const EmptyMealsList = () => (
