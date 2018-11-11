@@ -9,12 +9,10 @@ import _ from 'lodash';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FilterList from '@material-ui/icons/FilterList';
-import MoreVert from '@material-ui/icons/MoreVert';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add';
 import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
@@ -165,37 +163,19 @@ export class Main extends React.Component {
             </CustomTypography>
             <div>
               <IconButton
-                aria-owns={open ? 'menu-appbar' : undefined}
-                aria-haspopup="true"
+                name="account-settings"
                 onClick={() => navigate('/settings')}
                 color="secondary"
               >
                 <AccountCircle />
               </IconButton>
               <IconButton
-                aria-owns={open ? 'menu-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenu}
+                name="logout-button"
+                onClick={() => logout().then(() => navigate('/auth/login'))}
                 color="secondary"
               >
-                <MoreVert />
+                <ExitToApp />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={this.handleClose}
-              >
-                <MenuItem onClick={() => logout().then(() => navigate('/auth/login'))}>Logout</MenuItem>
-              </Menu>
             </div>
           </Toolbar>
         </AppBar>
