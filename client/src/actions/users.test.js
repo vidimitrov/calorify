@@ -13,9 +13,6 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
-  UPDATE_ACCOUNT_START,
-  UPDATE_ACCOUNT_SUCCESS,
-  UPDATE_ACCOUNT_FAILURE,
 } from '../constants/actionTypes';
 import cfg from '../../config';
 
