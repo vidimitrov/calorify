@@ -15,6 +15,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import FilterList from '@material-ui/icons/FilterList';
 import Close from '@material-ui/icons/Close';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import People from '@material-ui/icons/People';
+import Fastfood from '@material-ui/icons/Fastfood';
 import AddIcon from '@material-ui/icons/Add';
 import CustomSnackbar from '../../components/common/CustomSnackbar';
 import Logo from '../../components/dashboard/Logo';
@@ -223,8 +225,29 @@ export class Main extends React.Component {
               Calorify
             </CustomTypography>
             <div>
+              {user.role === 'admin' && (
+                <IconButton
+                  name="meals"
+                  title="All meals"
+                  onClick={() => navigate('/meals')}
+                  color="secondary"
+                >
+                  <Fastfood />
+                </IconButton>
+              )}
+              {(user.role === 'manager' || user.role === 'admin') && (
+                <IconButton
+                  name="users"
+                  title="All users"
+                  onClick={() => navigate('/users')}
+                  color="secondary"
+                >
+                  <People />
+                </IconButton>
+              )}
               <IconButton
                 name="account-settings"
+                title="Account settings"
                 onClick={() => navigate('/settings')}
                 color="secondary"
               >
@@ -232,6 +255,7 @@ export class Main extends React.Component {
               </IconButton>
               <IconButton
                 name="logout-button"
+                title="Log out"
                 onClick={() => logout().then(() => navigate('/auth/login'))}
                 color="secondary"
               >

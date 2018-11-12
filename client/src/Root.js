@@ -9,6 +9,10 @@ import Signup from './containers/authentication/Signup';
 import Dashboard from './containers/dashboard/Dashboard';
 import Main from './containers/dashboard/Main';
 import UserSettings from './containers/dashboard/UserSettings';
+import Users from './containers/dashboard/manager/Users';
+import CreateUser from './containers/dashboard/manager/CreateUser';
+import UpdateUser from './containers/dashboard/manager/UpdateUser';
+import Meals from './containers/dashboard/admin/Meals';
 import CreateMeal from './containers/dashboard/CreateMeal';
 import UpdateMeal from './containers/dashboard/UpdateMeal';
 
@@ -43,7 +47,11 @@ function Root({ store }) {
         <Router>
           <Dashboard path="/">
             <Main path="/" />
+            <Users path="users" />
+            <CreateUser path="create-user" />
+            <UpdateUser path="users/:userId" />
             <UserSettings path="settings" />
+            <Meals path="meals" />
             <CreateMeal path="create-meal" />
             <UpdateMeal path="meals/:mealId" />
           </Dashboard>
