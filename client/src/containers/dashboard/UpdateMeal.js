@@ -23,10 +23,7 @@ import {
   fetchMeals as fetchMealsActionCreator,
   updateMeal as updateMealActionCreator,
 } from '../../actions/meals';
-
-function isNumber(str) {
-  return /^[0-9]*$/.test(str);
-}
+import { isNumber } from '../../lib/validations';
 
 export class UpdateMeal extends React.Component {
   constructor(props) {
