@@ -27,6 +27,12 @@ const update = async (ctx: Koa.Context) => {
   }
 
   try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return respondWith.badRequest(ctx);
+    }
+
     const criteria = { id: userId };
     attrs.updated_at = new Date();
     await User.update(criteria, attrs);
