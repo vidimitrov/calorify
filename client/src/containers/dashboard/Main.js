@@ -1,5 +1,3 @@
-/* eslint react/no-array-index-key: 0 */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -206,14 +204,16 @@ export class Main extends React.Component {
     }
 
     const open = Boolean(anchorEl);
-    const mealsGroupedByDate = _.groupBy(meals, 'date');
-    const groupDates = Object.keys(mealsGroupedByDate).sort((a, b) => moment(b).diff(moment(a)));
 
     if (!account) {
       return (
         <Redirect to="/auth/login" />
       );
     }
+
+    const mealsGroupedByDate = _.groupBy(meals, 'date');
+    const groupDates = Object.keys(mealsGroupedByDate).sort((a, b) => moment(b).diff(moment(a)));
+    /* eslint react/no-array-index-key: 0 */
 
     return (
       <Wrapper data-testid="dashboard">

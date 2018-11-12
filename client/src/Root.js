@@ -51,7 +51,7 @@ function Root({ store }) {
             <CreateUser path="create-user" />
             <UpdateUser path="users/:userId" />
             <UserSettings path="settings" />
-            <Meals path="meals" />
+            <Meals path="users/:userId/meals" />
             <CreateMeal path="create-meal" />
             <UpdateMeal path="meals/:mealId" />
           </Dashboard>
