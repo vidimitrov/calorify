@@ -6,7 +6,7 @@ it('CreateMeal container renders correctly', () => {
   const props = {
     createMeal: () => { },
     navigate: () => { },
-    user: {
+    account: {
       id: 'some-fake-id',
       name: 'John',
       dailyCaloriesLimit: 2000,

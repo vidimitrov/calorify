@@ -9,7 +9,7 @@ it('Main container renders correctly', () => {
     removeMeal: () => { },
     filterMeals: () => { },
     navigate: () => { },
-    user: {
+    account: {
       id: 'some-fake-id',
       name: 'John',
       dailyCaloriesLimit: 2000,

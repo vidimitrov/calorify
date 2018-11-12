@@ -6,7 +6,7 @@ it('UserSettings container renders correctly', () => {
   const props = {
     updateUser: () => { },
     navigate: () => { },
-    user: {
+    account: {
       id: 'some-fake-id',
       name: 'John',
       dailyCaloriesLimit: 2000,

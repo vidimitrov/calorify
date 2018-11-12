@@ -38,6 +38,7 @@ exports[`Main container renders correctly 1`] = `
           onTouchMove={[Function]}
           onTouchStart={[Function]}
           tabIndex="0"
+          title="Account settings"
           type="button"
         >
           <span
@@ -79,6 +80,7 @@ exports[`Main container renders correctly 1`] = `
           onTouchMove={[Function]}
           onTouchStart={[Function]}
           tabIndex="0"
+          title="Log out"
           type="button"
         >
           <span
@@ -263,7 +265,7 @@ exports[`Main container renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="MealsList-hfcb7x-0 eOsDlS"
+    className="CustomList__MealsList-sc-1ydji88-0 cQrfEN"
   >
     <div
       className="ScrollContainer__Form-sc-1eluxdx-0 leIDbD"

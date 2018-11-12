@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Root from './Root';
 
 const mockState = {
-  user: {
+  account: {
     data: {
       id: 'fake-id',
       name: '',
