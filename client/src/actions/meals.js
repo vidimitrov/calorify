@@ -98,12 +98,12 @@ const handleFetchMealsFailure = dispatch => (error) => {
 /**
  *  Fetch meals action creator
  *  */
-export const fetchMeals = () => (dispatch, getState) => {
+export const fetchMeals = userId => (dispatch, getState) => {
   dispatch(fetchMealsStart());
   const state = getState();
   const { token } = state.auth;
 
-  return list(token)
+  return list(token, userId)
     .then(handleFetchMealsSuccess(dispatch))
     .catch(handleFetchMealsFailure(dispatch));
 };

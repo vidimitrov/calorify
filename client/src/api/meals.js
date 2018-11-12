@@ -40,8 +40,9 @@ export const create = async (token, mealData) => {
   return Promise.reject(data);
 };
 
-export const list = async (token) => {
-  const response = await fetch(`${API_URL}/api/meals`, {
+export const list = async (token, userId) => {
+  const URL = userId ? `${API_URL}/api/meals?userId=${userId}` : `${API_URL}/api/meals`;
+  const response = await fetch(URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
