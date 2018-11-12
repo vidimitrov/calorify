@@ -95,19 +95,20 @@ export default function meals(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        mealId: action.payload.mealId,
       };
     case REMOVE_MEAL_SUCCESS: {
       const indexOfExistingMeal = state.data.findIndex(
         meal => meal.id === action.payload.meal.id,
       );
-      state.data.splice(
+      const dataWithRemovedMeal = Object.assign([], state.data);
+      dataWithRemovedMeal.splice(
         indexOfExistingMeal,
         1,
       );
 
       return {
         ...state,
+        data: dataWithRemovedMeal,
         loading: false,
       };
     }
