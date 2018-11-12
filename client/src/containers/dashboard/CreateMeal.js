@@ -188,7 +188,6 @@ export class CreateMeal extends React.Component {
               />
             </InputWrapper>
           </FormControls>
-          {/* TODO: It should be disabled if no changes are made */}
           <Button
             variant="contained"
             color="primary"
