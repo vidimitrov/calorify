@@ -147,6 +147,7 @@ export class UpdateMeal extends React.Component {
       account,
       mealId,
       updateMeal,
+      userId,
     } = this.props;
     const {
       name,
@@ -175,7 +176,14 @@ export class UpdateMeal extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <CustomIconButton color="secondary" aria-label="Menu">
-              <ArrowBack onClick={() => navigate('/')} />
+              <ArrowBack onClick={() => {
+                if (userId) {
+                  navigate(`/users/${userId}/meals`);
+                } else {
+                  navigate('/');
+                }
+              }}
+              />
             </CustomIconButton>
             <Logo src={logo} alt="logo" />
             <CustomTypography variant="h6" color="secondary">
@@ -247,7 +255,11 @@ export class UpdateMeal extends React.Component {
                     positiveMessage: 'Meal updated successfully',
                   });
                   setTimeout(() => {
-                    navigate('/');
+                    if (userId) {
+                      navigate(`/users/${userId}/meals`);
+                    } else {
+                      navigate('/');
+                    }
                   }, 1000);
                 }).catch(() => {
                   this.setState({
@@ -314,11 +326,13 @@ UpdateMeal.propTypes = {
   getAllMeals: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired,
   mealId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };
 
 UpdateMeal.defaultProps = {
   account: null,
   meals: null,
+  userId: null,
 };
 
 const mapStateToProps = state => ({

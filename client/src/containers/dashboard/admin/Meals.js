@@ -166,6 +166,7 @@ export class Meals extends React.Component {
       navigate,
       removeMeal,
       filteredMeals,
+      userId,
     } = this.props;
     const {
       anchorEl,
@@ -293,7 +294,7 @@ export class Meals extends React.Component {
                       <CardInfo title={`${meal.calories} kCal`} subtitle={meal.name} />
                       <CardDate date={`${meal.date}T${meal.time}`} />
                       <CardActions
-                        onEditHandler={() => navigate(`/meals/${meal.id}`)}
+                        onEditHandler={() => navigate(`/users/${userId}/meals/${meal.id}`)}
                         onDeleteHandler={() => removeMeal(meal.id)
                           .then(() => {
                             this.setState({
@@ -322,7 +323,7 @@ export class Meals extends React.Component {
           name="add-meal-fab"
           aria-label="Add"
           onClick={() => {
-            navigate('/create-meal');
+            navigate(`/users/${userId}/meals/create`);
           }}
         >
           <AddIcon />
@@ -389,6 +390,7 @@ Meals.propTypes = {
   getAllMealsForUser: PropTypes.func.isRequired,
   filterMeals: PropTypes.func.isRequired,
   resetMealsFilters: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 Meals.defaultProps = {

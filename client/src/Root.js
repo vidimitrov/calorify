@@ -46,14 +46,16 @@ function Root({ store }) {
       <Provider store={store}>
         <Router>
           <Dashboard path="/">
-            <Main path="/" />
             <Users path="users" />
             <CreateUser path="create-user" />
             <UpdateUser path="users/:userId" />
-            <UserSettings path="settings" />
             <Meals path="users/:userId/meals" />
+            <CreateMeal path="users/:userId/meals/create" />
+            <UpdateMeal path="users/:userId/meals/:mealId" />
+            <Main path="/" />
             <CreateMeal path="create-meal" />
             <UpdateMeal path="meals/:mealId" />
+            <UserSettings path="settings" />
           </Dashboard>
           <Authentication path="auth">
             <Login path="login" />

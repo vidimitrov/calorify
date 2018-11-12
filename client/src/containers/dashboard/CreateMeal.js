@@ -106,6 +106,7 @@ export class CreateMeal extends React.Component {
     const {
       account,
       createMeal,
+      userId,
     } = this.props;
     const {
       name,
@@ -131,7 +132,14 @@ export class CreateMeal extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <CustomIconButton color="secondary" aria-label="Menu">
-              <ArrowBack onClick={() => navigate('/')} />
+              <ArrowBack onClick={() => {
+                if (userId) {
+                  navigate(`/users/${userId}/meals`);
+                } else {
+                  navigate('/');
+                }
+              }}
+              />
             </CustomIconButton>
             <Logo src={logo} alt="logo" />
             <CustomTypography variant="h6" color="secondary">
@@ -210,7 +218,11 @@ export class CreateMeal extends React.Component {
                       positiveSnackbarOpen: true,
                     });
                     setTimeout(() => {
-                      navigate('/');
+                      if (userId) {
+                        navigate(`/users/${userId}/meals`);
+                      } else {
+                        navigate('/');
+                      }
                     }, 1000);
                   }).catch(() => {
                     this.setState({
@@ -269,11 +281,13 @@ CreateMeal.propTypes = {
   createMeal: PropTypes.func.isRequired,
   navigate: PropTypes.func.isRequired,
   initialDate: PropTypes.instanceOf(Date),
+  userId: PropTypes.string,
 };
 
 CreateMeal.defaultProps = {
   account: null,
   initialDate: null,
+  userId: null,
 };
 
 const mapStateToProps = state => ({
