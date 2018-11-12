@@ -21,6 +21,45 @@ const initialState = {
 
 export default function users(state = initialState, action) {
   switch (action.type) {
+    case FETCH_USERS_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case FETCH_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload.users,
+      };
+    case FETCH_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+        data: [],
+      };
+    case CREATE_USER_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: [
+          ...state.data,
+          action.payload.user,
+        ],
+      };
+    case CREATE_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
     case UPDATE_USER_START:
       return {
         ...state,
@@ -47,7 +86,33 @@ export default function users(state = initialState, action) {
         loading: false,
         error: action.payload.error,
       };
+    case REMOVE_USER_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case REMOVE_USER_SUCCESS: {
+      const indexOfExistingUser = state.data.findIndex(
+        user => user.id === action.payload.user.id,
+      );
+      const dataWithRemovedUser = Object.assign([], state.data);
+      dataWithRemovedUser.splice(
+        indexOfExistingUser,
+        1,
+      );
 
+      return {
+        ...state,
+        data: dataWithRemovedUser,
+        loading: false,
+      };
+    }
+    case REMOVE_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
     default:
       return state;
   }
