@@ -21,6 +21,7 @@ import ValidationLabel from '../../components/dashboard/ValidationLabel';
 import logo from '../../assets/img/logo.png';
 import { createMeal as createMealActionCreator } from '../../actions/meals';
 import { convertDateToUTC } from '../../lib/dates';
+import { isNumber } from '../../lib/validations';
 
 export class CreateMeal extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ export class CreateMeal extends React.Component {
       date: defaultDate,
       requiredName: false,
       requiredCalories: false,
+      validCalories: true,
       change: false,
       positiveSnackbarOpen: false,
       negativeSnackbarOpen: false,
@@ -48,20 +50,38 @@ export class CreateMeal extends React.Component {
   }
 
   onChangeHandler(key, value) {
-    let { requiredName, requiredCalories } = this.state;
+    let {
+      requiredName,
+      requiredCalories,
+      validCalories,
+    } = this.state;
 
     if (key === 'name') {
-      requiredName = false;
+      if (!value) {
+        requiredName = true;
+      } else {
+        requiredName = false;
+      }
     }
 
     if (key === 'calories') {
-      requiredCalories = false;
+      if (value && !isNumber(value)) {
+        requiredCalories = false;
+        validCalories = false;
+      } else if (value) {
+        requiredCalories = false;
+        validCalories = true;
+      } else {
+        requiredCalories = true;
+        validCalories = true;
+      }
     }
 
     this.setState({
       change: true,
       requiredName,
       requiredCalories,
+      validCalories,
       [key]: value,
     });
   }
@@ -93,6 +113,7 @@ export class CreateMeal extends React.Component {
       date,
       requiredName,
       requiredCalories,
+      validCalories,
       change,
       positiveSnackbarOpen,
       negativeSnackbarOpen,
@@ -120,7 +141,7 @@ export class CreateMeal extends React.Component {
         </AppBar>
         <Form>
           <FormControls>
-            <InputWrapper>
+            <InputWrapper invalid={requiredName}>
               <CustomTextField
                 placeholder="Meal name"
                 value={name}
@@ -135,7 +156,7 @@ export class CreateMeal extends React.Component {
                 Meal name is required
               </ValidationLabel>
             </InputWrapper>
-            <InputWrapper>
+            <InputWrapper invalid={requiredCalories || !validCalories}>
               <CustomTextField
                 placeholder="Number of calories"
                 value={calories}
@@ -148,6 +169,11 @@ export class CreateMeal extends React.Component {
                 invalid={requiredCalories}
               >
                 Meal calories are required
+              </ValidationLabel>
+              <ValidationLabel
+                invalid={!validCalories}
+              >
+                Number of calories should contain only numbers
               </ValidationLabel>
             </InputWrapper>
             <InputWrapper>

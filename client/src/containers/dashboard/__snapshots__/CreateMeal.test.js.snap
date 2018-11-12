@@ -133,6 +133,11 @@ exports[`CreateMeal container renders correctly 1`] = `
         >
           Meal calories are required
         </p>
+        <p
+          className="ValidationLabel-sc-1uikjc9-0 gbgFrP"
+        >
+          Number of calories should contain only numbers
+        </p>
       </div>
       <div
         className="InputWrapper-sc-1a0h3fv-0 bkNglj"
