@@ -10,6 +10,11 @@ If you are interested in the **REST API** only, you can check it here: [http://a
 
 To help you out in testing the API only you can use the following [Postman](https://www.getpostman.com/) collection: [LINK](https://www.getpostman.com/collections/e62ee7edf56dc366277f)
 
+# Documentation
+You can find all the project related information (both for the client and the API) on the following link: [https://vidimi7rov.gitbook.io/calorify](https://vidimi7rov.gitbook.io/calorify)
+
+There are instructions on how to setup the project if you want to run it **locally**, details about the project architecture, main tools and technologies that are used and how all the modules work. 
+
 # Tech stack
 The codebase contains two projects. One for the **client application** and one for the **REST API**.
 
@@ -29,8 +34,3 @@ The codebase contains two projects. One for the **client application** and one f
 * **ESLint** (with airbnb linter rules)
 * **Jest** (for unit, snapshot and end-to-end testing)
 * **Puppeteer** (for end-to-end testing)
-
-# Documentation
-You can find all the project related information (both for the client and the API) on the following link: [https://vidimi7rov.gitbook.io/calorify](https://vidimi7rov.gitbook.io/calorify)
-
-There are instructions on how to setup the project if you want to run it **locally**, details about the project architecture, main tools and technologies that are used and how all the modules work. 
