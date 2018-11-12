@@ -63,6 +63,7 @@ export const update = async (token, userId, updates) => {
       attrs: {
         name: updates.name,
         email: updates.email,
+        role: updates.role,
         daily_calories_limit: updates.dailyCalories,
       },
     }),

@@ -8,6 +8,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import CustomSnackbar from '../../../components/common/CustomSnackbar';
 import Form from '../../../components/dashboard/Form';
 import FormControls from '../../../components/dashboard/FormControls';
@@ -39,6 +43,7 @@ export class UpdateUser extends React.Component {
       validEmail: true,
       requiredEmail: false,
       dailyCalories: user ? user.dailyCaloriesLimit : '',
+      role: user ? user.role : 'user',
       change: false,
       positiveSnackbarOpen: false,
       negativeSnackbarOpen: false,
@@ -63,6 +68,7 @@ export class UpdateUser extends React.Component {
           name: user ? user.name : '',
           email: user ? user.email : '',
           dailyCalories: user ? user.dailyCaloriesLimit : '',
+          role: user ? user.role : 'user',
         });
       } catch (error) {
         this.setState({
@@ -149,6 +155,7 @@ export class UpdateUser extends React.Component {
       name,
       email,
       dailyCalories,
+      role,
       change,
       validEmail,
       requiredName,
@@ -224,6 +231,21 @@ export class UpdateUser extends React.Component {
                 onChange={e => this.onChangeHandler('dailyCalories', e.target.value)}
               />
             </InputWrapper>
+            <FormControl style={{ width: '200px' }}>
+              <InputLabel htmlFor="role">Role</InputLabel>
+              <Select
+                value={role}
+                onChange={e => this.onChangeHandler('role', e.target.value)}
+                inputProps={{
+                  name: 'role',
+                  id: 'role',
+                }}
+              >
+                <MenuItem value="user">User</MenuItem>
+                <MenuItem value="manager">Manager</MenuItem>
+                <MenuItem value="admin">Admin</MenuItem>
+              </Select>
+            </FormControl>
           </FormControls>
           <Button
             variant="contained"
@@ -235,6 +257,7 @@ export class UpdateUser extends React.Component {
                 name,
                 email,
                 dailyCalories,
+                role,
               })
                 .then(() => {
                   this.setState({

@@ -8,6 +8,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import CustomSnackbar from '../../../components/common/CustomSnackbar';
 import Form from '../../../components/dashboard/Form';
 import FormControls from '../../../components/dashboard/FormControls';
@@ -30,6 +34,7 @@ export class CreateUser extends React.Component {
       name: '',
       email: '',
       password: '',
+      role: 'user',
       requiredName: false,
       requiredEmail: false,
       validEmail: true,
@@ -116,6 +121,7 @@ export class CreateUser extends React.Component {
       name,
       email,
       password,
+      role,
       requiredName,
       requiredEmail,
       requiredPassword,
@@ -199,6 +205,21 @@ export class CreateUser extends React.Component {
                 Password is required
               </ValidationLabel>
             </InputWrapper>
+            <FormControl style={{ width: '200px' }}>
+              <InputLabel htmlFor="role">Role</InputLabel>
+              <Select
+                value={role}
+                onChange={e => this.onChangeHandler('role', e.target.value)}
+                inputProps={{
+                  name: 'role',
+                  id: 'role',
+                }}
+              >
+                <MenuItem value="user">User</MenuItem>
+                <MenuItem value="manager">Manager</MenuItem>
+                <MenuItem value="admin">Admin</MenuItem>
+              </Select>
+            </FormControl>
           </FormControls>
           <Button
             variant="contained"
@@ -213,7 +234,7 @@ export class CreateUser extends React.Component {
                   requiredPassword: !password,
                 });
               } else {
-                createUser(name, email, password)
+                createUser(name, email, password, role)
                   .then(() => {
                     this.setState({
                       positiveSnackbarOpen: true,
@@ -288,11 +309,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createUser: (name, email, password) => dispatch(
+  createUser: (name, email, password, role) => dispatch(
     createUserActionCreator({
       name,
       email,
       password,
+      role,
     }),
   ),
 });
