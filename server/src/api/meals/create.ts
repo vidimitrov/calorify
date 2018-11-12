@@ -15,14 +15,12 @@ const create = async (ctx: Koa.Context) => {
     return respondWith.forbidden(ctx);
   }
 
-  attrs.user_id = userId;
-
-  if (ctx.query.userId) {
-    if (ROLE === 'admin') {
-      attrs.user_id = ctx.query.userId;
-    } else {
+  if (attrs.user_id) {
+    if (ROLE !== 'admin') {
       return respondWith.forbidden(ctx);
     }
+  } else {
+    attrs.user_id = userId;
   }
 
   if (!schema.isValid('create', attrs)) {
