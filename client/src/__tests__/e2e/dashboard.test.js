@@ -124,7 +124,7 @@ describe('In the Dashboard flow', () => {
 
     // Get the name of the first meal
     await page.waitForSelector('div[name=meal-card]');
-    const firstMealName = await page.evaluate(() => document.querySelector('div[name=meal-card] h3[name=meal-name]').innerText);
+    const firstMealName = await page.evaluate(() => document.querySelector('div[name=meal-card] h3[name=card-info-subtitle]').innerText);
 
     // Click the update button of the first meal and wait for selector in the update view
     const updateBtn = await page.$('button[name=edit-meal]');
@@ -144,7 +144,7 @@ describe('In the Dashboard flow', () => {
 
     // Wait for the selector in the dashboard and get the first meal name again
     await page.waitForSelector('[data-testid="dashboard"]');
-    const updatedFirstMealName = await page.evaluate(() => document.querySelector('div[name=meal-card] h3[name=meal-name]').innerText);
+    const updatedFirstMealName = await page.evaluate(() => document.querySelector('div[name=meal-card] h3[name=card-info-subtitle]').innerText);
 
     // Expect the value to be equal to the updated value
     expect(updatedFirstMealName !== firstMealName).toBe(true);

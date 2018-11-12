@@ -198,7 +198,6 @@ describe('Meals reducers', () => {
     expect(reducer(initialState, action)).toEqual({
       ...initialState,
       loading: true,
-      mealId: id,
     });
   });
 
