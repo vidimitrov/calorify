@@ -1,5 +1,5 @@
 import * as auth from '../api/authentication';
-import { storeUserData } from './users';
+import { storeAccountData } from './account';
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -60,7 +60,7 @@ const handleLoginSuccess = dispatch => (response) => {
 
   window.localStorage.setItem('token', token);
   dispatch(loginSuccess(token));
-  dispatch(storeUserData(user));
+  dispatch(storeAccountData(user));
   return Promise.resolve();
 };
 const handleLoginFailure = dispatch => (error) => {
@@ -105,7 +105,6 @@ export const signup = userData => (dispatch) => {
  */
 const handleLogoutSuccess = dispatch => () => {
   window.localStorage.removeItem('token');
-  window.localStorage.removeItem('user');
   dispatch(logoutSuccess());
   return Promise.resolve();
 };

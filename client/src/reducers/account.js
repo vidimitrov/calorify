@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import {
-  STORE_USER_DATA,
-  UPDATE_USER_START,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE,
+  STORE_ACCOUNT_DATA,
+  UPDATE_ACCOUNT_FAILURE,
+  UPDATE_ACCOUNT_START,
+  UPDATE_ACCOUNT_SUCCESS,
 } from '../constants/actionTypes';
 import { parseUser } from '../api/users';
 
@@ -18,29 +18,27 @@ function getInitialState() {
   };
 }
 
-export default function user(state = getInitialState(), action) {
+export default function account(state = getInitialState(), action) {
   switch (action.type) {
-    case STORE_USER_DATA:
+    case STORE_ACCOUNT_DATA:
       return {
         ...state,
         data: Object.assign(state.data, action.payload),
       };
-    case UPDATE_USER_START:
+    case UPDATE_ACCOUNT_START:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case UPDATE_USER_SUCCESS: {
-      const updatedUser = action.payload.user;
-
+    case UPDATE_ACCOUNT_SUCCESS: {
       return {
         ...state,
         loading: false,
-        data: Object.assign(state.data, updatedUser),
+        data: Object.assign(state.data, action.payload.user),
       };
     }
-    case UPDATE_USER_FAILURE:
+    case UPDATE_ACCOUNT_FAILURE:
       return {
         ...state,
         loading: false,

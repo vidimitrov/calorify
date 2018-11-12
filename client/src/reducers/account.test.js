@@ -1,14 +1,14 @@
-import reducer from './user';
+import reducer from './account';
 import {
-  STORE_USER_DATA,
-  UPDATE_USER_START,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE,
+  STORE_ACCOUNT_DATA,
+  UPDATE_ACCOUNT_FAILURE,
+  UPDATE_ACCOUNT_START,
+  UPDATE_ACCOUNT_SUCCESS,
 } from '../constants/actionTypes';
 
 let initialState = {};
 
-describe('Users reducers', () => {
+describe('Account reducers', () => {
   beforeEach(() => {
     initialState = {
       data: {},
@@ -21,13 +21,13 @@ describe('Users reducers', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle STORE_USER_DATA action', () => {
+  it('should handle STORE_ACCOUNT_DATA action', () => {
     const user = {
       name: 'John Doe',
       email: 'john@email.com',
     };
     const action = {
-      type: STORE_USER_DATA,
+      type: STORE_ACCOUNT_DATA,
       payload: user,
     };
 
@@ -37,12 +37,12 @@ describe('Users reducers', () => {
     });
   });
 
-  it('should handle UPDATE_USER_START action', () => {
+  it('should handle UPDATE_ACCOUNT_START action', () => {
     const updates = {
       name: 'John Doe Passos',
     };
     const action = {
-      type: UPDATE_USER_START,
+      type: UPDATE_ACCOUNT_START,
       payload: {
         userId: 'some-fake-id',
         updates,
@@ -55,7 +55,7 @@ describe('Users reducers', () => {
     });
   });
 
-  it('should handle UPDATE_USER_SUCCESS action', () => {
+  it('should handle UPDATE_ACCOUNT_SUCCESS action', () => {
     const state = {
       ...initialState,
       data: {
@@ -66,7 +66,7 @@ describe('Users reducers', () => {
       name: 'John Doe Passos',
     };
     const action = {
-      type: UPDATE_USER_SUCCESS,
+      type: UPDATE_ACCOUNT_SUCCESS,
       payload: {
         user: updatedUser,
       },
@@ -80,14 +80,14 @@ describe('Users reducers', () => {
     });
   });
 
-  it('should handle UPDATE_USER_FAILURE action', () => {
+  it('should handle UPDATE_ACCOUNT_FAILURE action', () => {
     const error = {
       success: false,
       statusCode: 400,
       message: 'Bad request',
     };
     const action = {
-      type: UPDATE_USER_FAILURE,
+      type: UPDATE_ACCOUNT_FAILURE,
       payload: {
         error,
       },
