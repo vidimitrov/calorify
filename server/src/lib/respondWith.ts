@@ -2,11 +2,11 @@ import Koa from 'koa';
 
 const respondWith = (() => {
   return {
-    success: async (ctx: Koa.Context, body?: any) => {
-      ctx.status = 200;
+    success: async (ctx: Koa.Context, body?: any, status?: number) => {
+      ctx.status = status || 200;
       ctx.body = {
         success: true,
-        statusCode: 200,
+        statusCode: status || 200,
         ...body,
       };
     },
