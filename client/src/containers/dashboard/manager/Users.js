@@ -12,7 +12,7 @@ import CustomTypography from '../../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../../components/dashboard/CustomIconButton';
 import Logo from '../../../components/dashboard/Logo';
 import Wrapper from '../../../components/dashboard/Wrapper';
-import MealsList from '../../../components/dashboard/MealsList';
+import CustomList from '../../../components/dashboard/CustomList';
 import FabButton from '../../../components/dashboard/FabButton';
 import CustomSnackbar from '../../../components/common/CustomSnackbar';
 import ScrollContainer from '../../../components/dashboard/ScrollContainer';
@@ -100,9 +100,9 @@ export class Users extends React.Component {
             </CustomTypography>
           </Toolbar>
         </AppBar>
-        <MealsList>
+        <CustomList>
           <ScrollContainer />
-        </MealsList>
+        </CustomList>
         <FabButton
           variant="fab"
           color="primary"

@@ -23,7 +23,7 @@ import Logo from '../../components/dashboard/Logo';
 import Wrapper from '../../components/dashboard/Wrapper';
 import CustomTypography from '../../components/dashboard/CustomTypography';
 import FabButton from '../../components/dashboard/FabButton';
-import MealsList from '../../components/dashboard/MealsList';
+import CustomList from '../../components/dashboard/CustomList';
 import ScrollContainer from '../../components/dashboard/ScrollContainer';
 import GroupHeading from '../../components/dashboard/GroupHeading';
 import Filters from '../../components/dashboard/Filters';
@@ -316,7 +316,7 @@ export class Main extends React.Component {
             </IconButton>
           </div>
         </Filters>
-        <MealsList>
+        <CustomList>
           <ScrollContainer>
             {groupDates.length > 0 && groupDates.map((gDate, index) => (
               <div key={index}>
@@ -366,7 +366,7 @@ export class Main extends React.Component {
               && <EmptyMealsList />
             }
           </ScrollContainer>
-        </MealsList>
+        </CustomList>
         <FabButton
           variant="fab"
           color="primary"

@@ -12,7 +12,7 @@ import CustomTypography from '../../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../../components/dashboard/CustomIconButton';
 import Logo from '../../../components/dashboard/Logo';
 import Wrapper from '../../../components/dashboard/Wrapper';
-import MealsList from '../../../components/dashboard/MealsList';
+import CustomList from '../../../components/dashboard/CustomList';
 import FabButton from '../../../components/dashboard/FabButton';
 import CustomSnackbar from '../../../components/common/CustomSnackbar';
 import ScrollContainer from '../../../components/dashboard/ScrollContainer';
@@ -97,17 +97,17 @@ export class Meals extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <CustomIconButton color="secondary" aria-label="Menu">
-              <ArrowBack onClick={() => navigate('/')} />
+              <ArrowBack onClick={() => navigate('/users')} />
             </CustomIconButton>
             <Logo src={logo} alt="logo" />
             <CustomTypography variant="h6" color="secondary">
-              All Meals
+              All (User) Meals
             </CustomTypography>
           </Toolbar>
         </AppBar>
-        <MealsList>
+        <CustomList>
           <ScrollContainer />
-        </MealsList>
+        </CustomList>
         <FabButton
           variant="fab"
           color="primary"
