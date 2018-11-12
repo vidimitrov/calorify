@@ -27,6 +27,11 @@ const create = async (ctx: Koa.Context) => {
     return respondWith.badRequest(ctx);
   }
 
+  if (!attrs.date) {
+    const date = new Date();
+    attrs.date = date.toISOString().split('T')[0];
+  }
+
   try {
     meal = await Meal.create(attrs);
   } catch (err) {
