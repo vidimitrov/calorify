@@ -1,6 +1,4 @@
-<center>![Logo](https://storage.googleapis.com/app.calorify.jsoutof.space/icon-96x96.7b7efda0.png)</center>
-
-# Calorify - your daily calories tracker
+# ![](https://storage.googleapis.com/app.calorify.jsoutof.space/logo-25x25.png) Calorify ![](https://storage.googleapis.com/app.calorify.jsoutof.space/logo-25x25.png) your daily calories tracker
 
 **Calorify** is an web application that helps you track your daily calories. Once you create your account you can start adding every meal you eat during the day. You can set your own daily calories limit and filter all the consumed meals over time in order to see once the meals that you are interested in.
 
