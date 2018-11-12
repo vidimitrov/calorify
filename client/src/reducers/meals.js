@@ -76,10 +76,12 @@ export default function meals(state = initialState, action) {
       const indexOfExistingMeal = state.data.findIndex(
         meal => meal.id === updatedMeal.id,
       );
-      state.data.splice(indexOfExistingMeal, 1, updatedMeal);
+      const dataWithUpdatedMeal = Object.assign([], state.data);
+      dataWithUpdatedMeal.splice(indexOfExistingMeal, 1, updatedMeal);
 
       return {
         ...state,
+        data: dataWithUpdatedMeal,
         loading: false,
       };
     }
