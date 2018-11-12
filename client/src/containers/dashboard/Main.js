@@ -16,7 +16,6 @@ import FilterList from '@material-ui/icons/FilterList';
 import Close from '@material-ui/icons/Close';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import People from '@material-ui/icons/People';
-import Fastfood from '@material-ui/icons/Fastfood';
 import AddIcon from '@material-ui/icons/Add';
 import CustomSnackbar from '../../components/common/CustomSnackbar';
 import Logo from '../../components/dashboard/Logo';
@@ -225,16 +224,6 @@ export class Main extends React.Component {
               Calorify
             </CustomTypography>
             <div>
-              {account.role === 'admin' && (
-                <IconButton
-                  name="meals"
-                  title="All meals"
-                  onClick={() => navigate('/meals')}
-                  color="secondary"
-                >
-                  <Fastfood />
-                </IconButton>
-              )}
               {(account.role === 'manager' || account.role === 'admin') && (
                 <IconButton
                   name="users"
@@ -341,7 +330,7 @@ export class Main extends React.Component {
                   .map(meal => (
                     <Card key={meal.id} name="meal-card">
                       <CardStatus inRange={this.isInRange(meal.date)} />
-                      <CardInfo name={meal.name} calories={meal.calories} />
+                      <CardInfo title={`${meal.calories} kCal`} subtitle={meal.name} />
                       <CardDate date={`${meal.date}T${meal.time}`} />
                       <CardActions
                         onEditHandler={() => navigate(`/meals/${meal.id}`)}

@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Snackbar from '@material-ui/core/Snackbar';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import Fastfood from '@material-ui/icons/Fastfood';
 import AddIcon from '@material-ui/icons/Add';
 import CustomTypography from '../../../components/dashboard/CustomTypography';
 import CustomIconButton from '../../../components/dashboard/CustomIconButton';
@@ -16,7 +17,14 @@ import CustomList from '../../../components/dashboard/CustomList';
 import FabButton from '../../../components/dashboard/FabButton';
 import CustomSnackbar from '../../../components/common/CustomSnackbar';
 import ScrollContainer from '../../../components/dashboard/ScrollContainer';
+import Card from '../../../components/dashboard/Card/Card';
+import CardInfo from '../../../components/dashboard/Card/CardInfo';
+import CardActions from '../../../components/dashboard/Card/CardActions';
 import logo from '../../../assets/img/logo.png';
+import {
+  fetchUsers as fetchUsersActionCreator,
+  removeUser as removeUserActionCreator,
+} from '../../../actions/users';
 
 export class Users extends React.Component {
   constructor(props) {
@@ -34,13 +42,15 @@ export class Users extends React.Component {
   }
 
   async componentDidMount() {
-    // try {
-    // } catch (error) {
-    //   this.setState({
-    //     negativeSnackbarOpen: true,
-    //     negativeMessage: 'Something went wrong!',
-    //   });
-    // }
+    const { getAllUsers } = this.props;
+    try {
+      await getAllUsers();
+    } catch (error) {
+      this.setState({
+        negativeSnackbarOpen: true,
+        negativeMessage: 'Something went wrong!',
+      });
+    }
   }
 
   handlePositiveSnackbarClose(event, reason) {
@@ -68,7 +78,9 @@ export class Users extends React.Component {
   render() {
     const {
       account,
+      users,
       navigate,
+      removeUser,
     } = this.props;
     const {
       positiveSnackbarOpen,
@@ -100,8 +112,39 @@ export class Users extends React.Component {
             </CustomTypography>
           </Toolbar>
         </AppBar>
-        <CustomList>
-          <ScrollContainer />
+        <CustomList top>
+          <ScrollContainer>
+            {users.map(user => (
+              <Card key={user.id} user name="user-card">
+                <CardInfo title={user.name} subtitle={user.email} />
+                <CardActions
+                  wide
+                  customAction={account.role === 'admin' ? {
+                    icon: (<Fastfood />),
+                    handler: () => navigate(`/users/${user.id}/meals`),
+                    name: 'user-meals',
+                    title: 'User meals',
+                  } : null}
+                  onEditHandler={() => navigate(`/users/${user.id}`)}
+                  onDeleteHandler={() => removeUser(user.id)
+                    .then(() => {
+                      this.setState({
+                        positiveSnackbarOpen: true,
+                        positiveMessage: 'User deleted successfully!',
+                      });
+                    })
+                    .catch(() => this.setState({
+                      negativeSnackbarOpen: true,
+                      negativeMessage: 'Couldn\'t delete user. Try again!',
+                    }))
+                  }
+                />
+              </Card>
+            ))}
+            {users.length === 0
+              && <div />
+            }
+          </ScrollContainer>
         </CustomList>
         <FabButton
           variant="fab"
@@ -157,25 +200,30 @@ Users.propTypes = {
     email: PropTypes.string.isRequired,
     dailyCaloriesLimit: PropTypes.number.isRequired,
   }),
-  // meals: PropTypes.arrayOf(PropTypes.shape({
-  //   id: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   date: PropTypes.string.isRequired,
-  //   time: PropTypes.string.isRequired,
-  //   calories: PropTypes.number.isRequired,
-  // })),
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    dailyCaloriesLimit: PropTypes.number.isRequired,
+  })),
   navigate: PropTypes.func.isRequired,
+  removeUser: PropTypes.func.isRequired,
 };
 
 Users.defaultProps = {
   account: null,
+  users: [],
 };
 
 const mapStateToProps = state => ({
   account: _.isEmpty(state.account.data) ? null : state.account.data,
+  users: state.users.data,
 });
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = dispatch => ({
+  getAllUsers: () => dispatch(fetchUsersActionCreator()),
+  removeUser: userId => dispatch(removeUserActionCreator(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

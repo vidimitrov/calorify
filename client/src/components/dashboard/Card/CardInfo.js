@@ -14,7 +14,15 @@ const Wrapper = styled.div`
   }
 `;
 
-const Name = styled.h3`
+const Title = styled.h1`
+  margin: 0;
+
+  @media (max-width: 420px) {
+    font-size: 18px;
+  }
+`;
+
+const Subtitle = styled.h3`
   margin: 0;
   color: #c7b26e;
 
@@ -23,28 +31,16 @@ const Name = styled.h3`
   }
 `;
 
-const Calories = styled.h1`
-  margin: 0;
-
-  @media (max-width: 420px) {
-    font-size: 18px;
-  }
-`;
-
-const CardInfo = ({ name, calories }) => (
+const CardInfo = ({ title, subtitle }) => (
   <Wrapper>
-    <Calories name="meal-calories">
-      {calories}
-      {' '}
-      kCal
-    </Calories>
-    <Name name="meal-name">{name}</Name>
+    <Title name="card-info-title">{title}</Title>
+    <Subtitle name="card-info-subtitle">{subtitle}</Subtitle>
   </Wrapper>
 );
 
 CardInfo.propTypes = {
-  name: PropTypes.string.isRequired,
-  calories: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
 };
 
 export default CardInfo;
