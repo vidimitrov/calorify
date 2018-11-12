@@ -18,6 +18,12 @@ const remove = async (ctx: Koa.Context) => {
   }
 
   try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return respondWith.badRequest(ctx);
+    }
+
     const criteria = { id: userId };
     await User.update(criteria, { deleted: true });
   } catch (err) {
