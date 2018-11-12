@@ -45,14 +45,14 @@ export class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    const { user } = props;
+    const { user, initialDate } = props;
     const { createdAt } = user || {};
 
     this.state = {
       anchorEl: null,
       showFilters: false,
       dateFrom: moment(createdAt).toISOString().split('T')[0],
-      dateTo: moment().toISOString().split('T')[0],
+      dateTo: initialDate || moment().toISOString().split('T')[0],
       timeFrom: '00:00',
       timeTo: '23:59',
       positiveSnackbarOpen: false,
@@ -134,7 +134,7 @@ export class Main extends React.Component {
   }
 
   toggleFiltersVisibility() {
-    const { user, resetMealsFilters } = this.props;
+    const { user, resetMealsFilters, initialDate } = this.props;
     const { showFilters } = this.state;
     let updates = {};
 
@@ -142,7 +142,7 @@ export class Main extends React.Component {
       resetMealsFilters();
       updates = {
         dateFrom: moment(user.createdAt).toISOString().split('T')[0],
-        dateTo: moment().toISOString().split('T')[0],
+        dateTo: initialDate || moment().toISOString().split('T')[0],
         timeFrom: '00:00',
         timeTo: '23:59',
       };
@@ -417,12 +417,14 @@ Main.propTypes = {
   removeMeal: PropTypes.func.isRequired,
   filterMeals: PropTypes.func.isRequired,
   resetMealsFilters: PropTypes.func.isRequired,
+  initialDate: PropTypes.instanceOf(Date),
 };
 
 Main.defaultProps = {
   user: null,
   meals: [],
   filteredMeals: [],
+  initialDate: null,
 };
 
 const mapStateToProps = state => ({

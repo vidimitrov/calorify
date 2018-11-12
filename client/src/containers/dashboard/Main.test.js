@@ -15,6 +15,7 @@ it('Main container renders correctly', () => {
       dailyCaloriesLimit: 2000,
       role: 'user',
       email: 'john@email.com',
+      createdAt: '2018-09-10',
     },
     meals: [{
       id: 'some-fake-meal-id',
@@ -23,6 +24,7 @@ it('Main container renders correctly', () => {
       time: '13:35',
       calories: 320,
     }],
+    initialDate: '2018-09-10',
   };
   const tree = renderer.create(
     <Main {...props} />,
