@@ -8,7 +8,7 @@ const parseMeal = meal => ({
   calories: meal.number_of_calories,
   userId: meal.user_id,
   date: meal.date,
-  time: meal.time,
+  time: meal.time ? meal.time.split('.')[0] : '',
   deleted: meal.deleted,
   createdAt: meal.created_at,
   updatedAt: meal.updated_at,
