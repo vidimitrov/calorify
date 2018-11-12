@@ -73,7 +73,7 @@ export const update = async (token, userId, updates) => {
     return Promise.resolve({ user });
   }
 
-  return Promise.reject(data);
+  return Promise.reject(data, userId);
 };
 
 export const remove = async (token, userId) => {
