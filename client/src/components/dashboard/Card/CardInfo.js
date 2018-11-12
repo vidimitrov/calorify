@@ -28,6 +28,7 @@ const Subtitle = styled.h3`
 
   @media (max-width: 420px) {
     font-size: 16px;
+    word-break: break-all;
   }
 `;
 

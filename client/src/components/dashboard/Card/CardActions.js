@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   ${props => props.wide && css`
     width: 150px;
   `}
+
+  @media (max-width: 420px) {
+    width: 80px;
+  }
 `;
 
 function CardActions({
