@@ -10,13 +10,13 @@ exports[`Dashboard/Card/CardInfo component renders correctly 1`] = `
   flex-grow: 1;
 }
 
+.c1 {
+  margin: 0;
+}
+
 .c2 {
   margin: 0;
   color: #c7b26e;
-}
-
-.c1 {
-  margin: 0;
 }
 
 @media (max-width:420px) {
@@ -28,14 +28,14 @@ exports[`Dashboard/Card/CardInfo component renders correctly 1`] = `
 }
 
 @media (max-width:420px) {
-  .c2 {
-    font-size: 16px;
+  .c1 {
+    font-size: 18px;
   }
 }
 
 @media (max-width:420px) {
-  .c1 {
-    font-size: 18px;
+  .c2 {
+    font-size: 16px;
   }
 }
 
@@ -44,17 +44,11 @@ exports[`Dashboard/Card/CardInfo component renders correctly 1`] = `
 >
   <h1
     className="c1"
-    name="meal-calories"
-  >
-    320
-     
-    kCal
-  </h1>
+    name="card-info-title"
+  />
   <h3
     className="c2"
-    name="meal-name"
-  >
-    Chicken with rice
-  </h3>
+    name="card-info-subtitle"
+  />
 </div>
 `;

@@ -296,16 +296,14 @@ exports[`Main container renders correctly 1`] = `
             className="CardInfo__Wrapper-sc-1xghcvm-0 oWCwm"
           >
             <h1
-              className="CardInfo__Calories-sc-1xghcvm-2 jiDjuh"
-              name="meal-calories"
+              className="CardInfo__Title-sc-1xghcvm-1 jUdaYB"
+              name="card-info-title"
             >
-              320
-               
-              kCal
+              320 kCal
             </h1>
             <h3
-              className="CardInfo__Name-sc-1xghcvm-1 jsbjuo"
-              name="meal-name"
+              className="CardInfo__Subtitle-sc-1xghcvm-2 gnGzVS"
+              name="card-info-subtitle"
             >
               some-name
             </h3>
