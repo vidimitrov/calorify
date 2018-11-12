@@ -252,7 +252,7 @@ export class UpdateMeal extends React.Component {
                 }).catch(() => {
                   this.setState({
                     negativeSnackbarOpen: true,
-                    negativeMessage: 'Couldn\'t update meals. Try again!',
+                    negativeMessage: 'Couldn\'t update meal. Try again!',
                   });
                 });
             }}
