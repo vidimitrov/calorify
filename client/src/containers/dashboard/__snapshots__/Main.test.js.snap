@@ -286,7 +286,7 @@ exports[`Main container renders correctly 1`] = `
           )
         </h2>
         <div
-          className="Card-sc-1astb0w-0 bRrYbQ"
+          className="Card-sc-1astb0w-0 cNebRc"
           name="meal-card"
         >
           <div
@@ -302,7 +302,7 @@ exports[`Main container renders correctly 1`] = `
               320 kCal
             </h1>
             <h3
-              className="CardInfo__Subtitle-sc-1xghcvm-2 gnGzVS"
+              className="CardInfo__Subtitle-sc-1xghcvm-2 ggYDsx"
               name="card-info-subtitle"
             >
               some-name
@@ -318,7 +318,7 @@ exports[`Main container renders correctly 1`] = `
             </h3>
           </div>
           <div
-            className="CardActions__Wrapper-il8ivv-0 iSeIUb"
+            className="CardActions__Wrapper-il8ivv-0 ifaYpI"
           >
             <button
               className="MuiButtonBase-root-82 MuiIconButton-root-76"

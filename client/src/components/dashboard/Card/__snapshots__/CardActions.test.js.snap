@@ -5,6 +5,12 @@ exports[`Dashboard/Card/CardActions component renders correctly 1`] = `
   width: 100px;
 }
 
+@media (max-width:420px) {
+  .c0 {
+    width: 80px;
+  }
+}
+
 <div
   className="c0"
 >
