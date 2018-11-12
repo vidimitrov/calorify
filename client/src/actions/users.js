@@ -40,26 +40,24 @@ export const updateUserFailure = error => ({
 /**
  * Update user action response handlers
  *  */
-const handleUpdateUserSuccess = (dispatch, getState) => (response) => {
-  const state = getState();
+const handleUpdateUserSuccess = (dispatch, state) => (response) => {
   const { account } = state;
   const { user } = response;
 
   dispatch(updateUserSuccess(user));
 
-  if (account.id === user.id) {
+  if (account.data.id === user.id) {
     dispatch(updateAccountSuccess(user));
   }
 
   return Promise.resolve(user);
 };
-const handleUpdateUserFailure = (dispatch, getState) => (error, userId) => {
-  const state = getState();
+const handleUpdateUserFailure = (dispatch, state) => (error, userId) => {
   const { account } = state;
 
   dispatch(updateUserFailure(error));
 
-  if (account.id === userId) {
+  if (account.data.id === userId) {
     dispatch(updateAccountFailure(error));
   }
 
@@ -72,15 +70,15 @@ const handleUpdateUserFailure = (dispatch, getState) => (error, userId) => {
 export const updateUser = (userId, updates) => (dispatch, getState) => {
   const state = getState();
   const { token } = state.auth;
-  const { account } = state.account;
+  const { account } = state;
 
   dispatch(updateUserStart(userId, updates));
 
-  if (account.id === userId) {
+  if (account.data.id === userId) {
     dispatch(updateAccountStart(userId, updates));
   }
 
   return update(token, userId, updates)
-    .then(handleUpdateUserSuccess(dispatch))
-    .catch(handleUpdateUserFailure(dispatch));
+    .then(handleUpdateUserSuccess(dispatch, state))
+    .catch(handleUpdateUserFailure(dispatch, state));
 };

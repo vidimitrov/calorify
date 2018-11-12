@@ -47,8 +47,8 @@ export class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    const { user, initialDate } = props;
-    const { createdAt } = user || {};
+    const { account, initialDate } = props;
+    const { createdAt } = account || {};
 
     this.state = {
       anchorEl: null,
@@ -95,10 +95,10 @@ export class Main extends React.Component {
   }
 
   isInRange(date) {
-    const { user } = this.props;
+    const { account } = this.props;
     const totalCalories = this.getTotalCaloriesForDate(date);
 
-    return totalCalories < user.dailyCaloriesLimit;
+    return totalCalories < account.dailyCaloriesLimit;
   }
 
   handleMenu(event) {
@@ -136,14 +136,14 @@ export class Main extends React.Component {
   }
 
   toggleFiltersVisibility() {
-    const { user, resetMealsFilters, initialDate } = this.props;
+    const { account, resetMealsFilters, initialDate } = this.props;
     const { showFilters } = this.state;
     let updates = {};
 
     if (showFilters) {
       resetMealsFilters();
       updates = {
-        dateFrom: moment(user.createdAt).toISOString().split('T')[0],
+        dateFrom: moment(account.createdAt).toISOString().split('T')[0],
         dateTo: initialDate || moment().toISOString().split('T')[0],
         timeFrom: '00:00',
         timeTo: '23:59',
@@ -183,7 +183,7 @@ export class Main extends React.Component {
   render() {
     const {
       navigate,
-      user,
+      account,
       filteredMeals,
       logout,
       removeMeal,
@@ -210,7 +210,7 @@ export class Main extends React.Component {
     const mealsGroupedByDate = _.groupBy(meals, 'date');
     const groupDates = Object.keys(mealsGroupedByDate).sort((a, b) => moment(b).diff(moment(a)));
 
-    if (!user) {
+    if (!account) {
       return (
         <Redirect to="/auth/login" />
       );
@@ -225,7 +225,7 @@ export class Main extends React.Component {
               Calorify
             </CustomTypography>
             <div>
-              {user.role === 'admin' && (
+              {account.role === 'admin' && (
                 <IconButton
                   name="meals"
                   title="All meals"
@@ -235,7 +235,7 @@ export class Main extends React.Component {
                   <Fastfood />
                 </IconButton>
               )}
-              {(user.role === 'manager' || user.role === 'admin') && (
+              {(account.role === 'manager' || account.role === 'admin') && (
                 <IconButton
                   name="users"
                   title="All users"
@@ -328,7 +328,7 @@ export class Main extends React.Component {
                   {' '}
                   /
                   {' '}
-                  {user.dailyCaloriesLimit}
+                  {account.dailyCaloriesLimit}
                   {' kCal'}
                   )
                 </GroupHeading>
@@ -414,7 +414,7 @@ export class Main extends React.Component {
 }
 
 Main.propTypes = {
-  user: PropTypes.shape({
+  account: PropTypes.shape({
     id: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -445,14 +445,14 @@ Main.propTypes = {
 };
 
 Main.defaultProps = {
-  user: null,
+  account: null,
   meals: [],
   filteredMeals: [],
   initialDate: null,
 };
 
 const mapStateToProps = state => ({
-  user: _.isEmpty(state.user.data) ? null : state.user.data,
+  account: _.isEmpty(state.account.data) ? null : state.account.data,
   meals: state.meals.data,
   filteredMeals: state.meals.filteredData,
 });

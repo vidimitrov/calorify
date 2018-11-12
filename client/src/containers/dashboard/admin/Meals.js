@@ -72,7 +72,7 @@ export class Meals extends React.Component {
 
   render() {
     const {
-      user,
+      account,
       navigate,
     } = this.props;
     const {
@@ -82,11 +82,11 @@ export class Meals extends React.Component {
       negativeMessage,
     } = this.state;
 
-    if (!user) {
+    if (!account) {
       return (
         <Redirect to="/auth/login" />
       );
-    } if (user.role !== 'admin') {
+    } if (account.role !== 'admin') {
       return (
         <Redirect to="/" />
       );
@@ -155,7 +155,7 @@ export class Meals extends React.Component {
 }
 
 Meals.propTypes = {
-  user: PropTypes.shape({
+  account: PropTypes.shape({
     id: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -175,12 +175,12 @@ Meals.propTypes = {
 };
 
 Meals.defaultProps = {
-  user: null,
+  account: null,
   // meals: [],
 };
 
 const mapStateToProps = state => ({
-  user: _.isEmpty(state.user.data) ? null : state.user.data,
+  account: _.isEmpty(state.account.data) ? null : state.account.data,
   meals: state.meals.data,
 });
 

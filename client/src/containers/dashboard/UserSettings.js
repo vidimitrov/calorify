@@ -24,8 +24,8 @@ export class UserSettings extends React.Component {
   constructor(props) {
     super(props);
 
-    const { user } = props;
-    const { name, dailyCaloriesLimit } = user || {};
+    const { account } = props;
+    const { name, dailyCaloriesLimit } = account || {};
 
     this.state = {
       name,
@@ -69,7 +69,7 @@ export class UserSettings extends React.Component {
 
   render() {
     const {
-      user,
+      account,
       updateUser,
     } = this.props;
     const {
@@ -81,7 +81,7 @@ export class UserSettings extends React.Component {
     } = this.state;
     const { navigate } = this.props;
 
-    if (!user) {
+    if (!account) {
       return (
         <Redirect to="/auth/login" />
       );
@@ -128,7 +128,7 @@ export class UserSettings extends React.Component {
             name="submit-account-update"
             disabled={!change}
             onClick={() => {
-              updateUser(user.id, {
+              updateUser(account.id, {
                 name,
                 dailyCalories,
               }).then(() => {
@@ -181,7 +181,7 @@ export class UserSettings extends React.Component {
 }
 
 UserSettings.propTypes = {
-  user: PropTypes.shape({
+  account: PropTypes.shape({
     id: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -193,11 +193,11 @@ UserSettings.propTypes = {
 };
 
 UserSettings.defaultProps = {
-  user: null,
+  account: null,
 };
 
 const mapStateToProps = state => ({
-  user: isEmpty(state.user.data) ? null : state.user.data,
+  account: isEmpty(state.account.data) ? null : state.account.data,
 });
 
 const mapDispatchToProps = dispatch => ({
