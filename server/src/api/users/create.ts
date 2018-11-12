@@ -35,7 +35,7 @@ const create = async (ctx: Koa.Context) => {
     return respondWith.error(ctx, err);
   }
 
-  return respondWith.success(ctx, { user });
+  return respondWith.success(ctx, { user }, 201);
 };
 
 export default create;
