@@ -22,7 +22,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
   RESET_AUTH_ERRORS,
-  STORE_USER_DATA,
+  STORE_ACCOUNT_DATA,
 } from '../constants/actionTypes';
 import cfg from '../../config';
 
@@ -99,7 +99,7 @@ describe('Authentication actions', () => {
       fetchMock.restore();
     });
 
-    it('login action creator should create LOGIN_SUCCESS and STORE_USER_DATA actions on successful API request', () => {
+    it('login action creator should create LOGIN_SUCCESS and STORE_ACCOUNT_DATA actions on successful API request', () => {
       const user = {
         id: 1,
         name: 'John Doe',
@@ -119,7 +119,7 @@ describe('Authentication actions', () => {
       const expectedActions = [
         { type: LOGIN_SUCCESS, payload: { token } },
         {
-          type: STORE_USER_DATA,
+          type: STORE_ACCOUNT_DATA,
           payload: {
             id: user.id,
             dailyCaloriesLimit: user.daily_calories_limit,
@@ -171,7 +171,7 @@ describe('Authentication actions', () => {
         });
     });
 
-    it('signup action creator should create SIGNUP_SUCCESS, LOGIN_SUCCESS and STORE_USER_DATA actions on successful API request', () => {
+    it('signup action creator should create SIGNUP_SUCCESS, LOGIN_SUCCESS and STORE_ACCOUNT_DATA actions on successful API request', () => {
       const user = {
         id: '8e99bfec-8131-44ab-b7e1-2b2c87206e8d',
         name: 'John Doe',
@@ -204,7 +204,7 @@ describe('Authentication actions', () => {
         { type: SIGNUP_SUCCESS },
         { type: LOGIN_SUCCESS, payload: { token } },
         {
-          type: STORE_USER_DATA,
+          type: STORE_ACCOUNT_DATA,
           payload: {
             id: user.id,
             dailyCaloriesLimit: user.daily_calories_limit,

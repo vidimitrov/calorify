@@ -441,7 +441,7 @@ Main.propTypes = {
   removeMeal: PropTypes.func.isRequired,
   filterMeals: PropTypes.func.isRequired,
   resetMealsFilters: PropTypes.func.isRequired,
-  initialDate: PropTypes.instanceOf(Date),
+  initialDate: PropTypes.string,
 };
 
 Main.defaultProps = {

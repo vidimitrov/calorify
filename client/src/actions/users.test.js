@@ -2,17 +2,20 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import configureMockStore from 'redux-mock-store';
 import {
-  storeUserData,
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
   updateUser,
 } from './users';
+import { storeAccountData } from './account';
 import {
-  STORE_USER_DATA,
+  STORE_ACCOUNT_DATA,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  UPDATE_ACCOUNT_START,
+  UPDATE_ACCOUNT_SUCCESS,
+  UPDATE_ACCOUNT_FAILURE,
 } from '../constants/actionTypes';
 import cfg from '../../config';
 
@@ -22,13 +25,13 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Users actions', () => {
   describe('actions creators', () => {
-    it('storeUserData action should return the right payload', () => {
+    it('storeAccountData action should return the right payload', () => {
       const data = {
         name: 'John Doe',
         email: 'john@email.com',
       };
-      expect(storeUserData(data)).toEqual({
-        type: STORE_USER_DATA,
+      expect(storeAccountData(data)).toEqual({
+        type: STORE_ACCOUNT_DATA,
         payload: data,
       });
     });
@@ -116,7 +119,9 @@ describe('Users actions', () => {
         },
       ];
       const store = mockStore({
-        user: {},
+        account: {
+          data: {},
+        },
         auth: {
           token: 'some-fake-token',
         },
@@ -150,7 +155,9 @@ describe('Users actions', () => {
         { type: UPDATE_USER_FAILURE, payload: { error } },
       ];
       const store = mockStore({
-        user: {},
+        account: {
+          data: {},
+        },
         auth: {
           token: 'some-fake-token',
         },

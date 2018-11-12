@@ -57,7 +57,7 @@ const handleUpdateUserFailure = (dispatch, state) => (error, userId) => {
 
   dispatch(updateUserFailure(error));
 
-  if (account.data.id === userId) {
+  if (account.data && userId && account.data.id === userId) {
     dispatch(updateAccountFailure(error));
   }
 

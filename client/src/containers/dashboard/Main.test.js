@@ -8,6 +8,7 @@ it('Main container renders correctly', () => {
     getAllMeals: () => { },
     removeMeal: () => { },
     filterMeals: () => { },
+    resetMealsFilters: () => { },
     navigate: () => { },
     account: {
       id: 'some-fake-id',
