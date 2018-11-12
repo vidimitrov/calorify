@@ -59,7 +59,6 @@ const handleLoginSuccess = dispatch => (response) => {
   const { token, user } = response;
 
   window.localStorage.setItem('token', token);
-  window.localStorage.setItem('user', JSON.stringify(user));
   dispatch(loginSuccess(token));
   dispatch(storeUserData(user));
   return Promise.resolve();

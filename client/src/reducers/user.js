@@ -1,13 +1,15 @@
+import jwt from 'jsonwebtoken';
 import {
   STORE_USER_DATA,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
 } from '../constants/actionTypes';
+import { parseUser } from '../api/users';
 
 function getInitialState() {
-  const stringifiedData = localStorage.getItem('user') || null;
-  const data = stringifiedData ? JSON.parse(stringifiedData) : null;
+  const token = localStorage.getItem('token') || null;
+  const data = token ? parseUser(jwt.decode(token)) : null;
 
   return {
     data: data || {},
