@@ -21,7 +21,7 @@ const findById = async (ctx: Koa.Context) => {
   try {
     meal = await Meal.findById(mealId);
 
-    if (meal.user_id !== ctx.state.user.id && ROLE !== 'admin') {
+    if (meal && (meal.user_id !== ctx.state.user.id) && ROLE !== 'admin') {
       return respondWith.forbidden(ctx);
     }
   } catch (err) {
