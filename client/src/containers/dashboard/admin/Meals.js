@@ -107,6 +107,10 @@ export class Meals extends React.Component {
     const { user } = this.state;
     const totalCalories = this.getTotalCaloriesForDate(date);
 
+    if (!user) {
+      return true;
+    }
+
     return totalCalories < user.dailyCaloriesLimit;
   }
 

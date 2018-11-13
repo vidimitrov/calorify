@@ -86,6 +86,7 @@ export class Login extends React.Component {
               name="email"
               placeholder="Email"
               invalid={!validEmail || requiredEmail}
+              value={email}
               onChange={e => this.onChangeHandler('email', e.target.value)}
             />
             <ValidationLabel invalid={!validEmail}>Email is incorrect</ValidationLabel>
@@ -100,6 +101,7 @@ export class Login extends React.Component {
               name="password"
               placeholder="Password"
               invalid={requiredPassword}
+              value={password}
               onChange={e => this.onChangeHandler('password', e.target.value)}
             />
             <ValidationLabel
