@@ -36,6 +36,9 @@ import {
   filterMeals as filterMealsAction,
   resetMealsFilters as resetMealsFiltersAction,
 } from '../../../actions/meals';
+import {
+  fetchUsers as fetchUsersActionCreator,
+} from '../../../actions/users';
 
 export class Meals extends React.Component {
   constructor(props) {
@@ -55,6 +58,7 @@ export class Meals extends React.Component {
       negativeSnackbarOpen: false,
       positiveMessage: null,
       negativeMessage: null,
+      user: null,
     };
 
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -66,15 +70,28 @@ export class Meals extends React.Component {
   }
 
   async componentDidMount() {
-    const { getAllMealsForUser, userId } = this.props;
+    const {
+      getAllMealsForUser,
+      getAllUsers,
+      userId,
+    } = this.props;
     try {
       await getAllMealsForUser(userId);
+      await getAllUsers();
     } catch (error) {
       this.setState({
         negativeSnackbarOpen: true,
         negativeMessage: 'Something went wrong!',
       });
     }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (!state.user && props.userId) {
+      const user = props.users.find(u => u.id === props.userId);
+      return { user };
+    }
+    return null;
   }
 
   getTotalCaloriesForDate(date) {
@@ -87,10 +104,10 @@ export class Meals extends React.Component {
   }
 
   isInRange(date) {
-    const { account } = this.props;
+    const { user } = this.state;
     const totalCalories = this.getTotalCaloriesForDate(date);
 
-    return totalCalories < account.dailyCaloriesLimit;
+    return totalCalories < user.dailyCaloriesLimit;
   }
 
   handlePositiveSnackbarClose(event, reason) {
@@ -179,6 +196,7 @@ export class Meals extends React.Component {
       dateTo,
       timeFrom,
       timeTo,
+      user,
     } = this.state;
     let { meals } = this.props;
 
@@ -278,7 +296,7 @@ export class Meals extends React.Component {
                   {' '}
                   /
                   {' '}
-                  {account.dailyCaloriesLimit}
+                  {user && user.dailyCaloriesLimit}
                   {' kCal'}
                   )
                 </GroupHeading>
@@ -290,7 +308,7 @@ export class Meals extends React.Component {
                   })
                   .map(meal => (
                     <Card key={meal.id} name="meal-card">
-                      <CardStatus inRange={this.isInRange(meal.date)} />
+                      <CardStatus user={user} inRange={this.isInRange(meal.date)} />
                       <CardInfo title={`${meal.calories} kCal`} subtitle={meal.name} />
                       <CardDate date={`${meal.date}T${meal.time}`} />
                       <CardActions
@@ -402,11 +420,13 @@ Meals.defaultProps = {
 const mapStateToProps = state => ({
   account: _.isEmpty(state.account.data) ? null : state.account.data,
   meals: state.meals.data,
+  users: state.users.data,
   filteredMeals: state.meals.filteredData,
 });
 
 const mapDispatchToProps = dispatch => ({
   getAllMealsForUser: userId => dispatch(fetchMealsActionCreator(userId)),
+  getAllUsers: () => dispatch(fetchUsersActionCreator()),
   removeMeal: mealId => dispatch(removeMealActionCreator(mealId)),
   filterMeals: filters => dispatch(filterMealsAction(filters)),
   resetMealsFilters: () => dispatch(resetMealsFiltersAction()),
