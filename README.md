@@ -10,6 +10,18 @@ If you are interested in the **REST API** only, you can check it here: [http://a
 
 To help you out in testing the API only you can use the following [Postman](https://www.getpostman.com/) collection: [LINK](https://www.getpostman.com/collections/e62ee7edf56dc366277f)
 
+To test the admin / manager flow you can use the following accounts:
+
+**Manager**:
+- email: manager@calorify.com
+- password: 123123
+
+**Admin**:
+- email: admin@calorify.com
+- password: 123123
+
+You can always escalate permissions for any account you previously created with any of the admin/manager accounts above.
+
 # Documentation
 You can find all the project related information (both for the client and the API) on the following link: [https://vidimi7rov.gitbook.io/calorify](https://vidimi7rov.gitbook.io/calorify)
 
