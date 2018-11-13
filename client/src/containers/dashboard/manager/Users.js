@@ -78,7 +78,6 @@ export class Users extends React.Component {
   render() {
     const {
       account,
-      users,
       navigate,
       removeUser,
     } = this.props;
@@ -88,6 +87,7 @@ export class Users extends React.Component {
       positiveMessage,
       negativeMessage,
     } = this.state;
+    let { users } = this.props;
 
     if (!account) {
       return (
@@ -98,6 +98,8 @@ export class Users extends React.Component {
         <Redirect to="/" />
       );
     }
+
+    users = users.filter(u => u.id !== account.id);
 
     return (
       <Wrapper data-testid="users">
