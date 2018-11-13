@@ -27,6 +27,7 @@ export const create = async (token, mealData) => {
         number_of_calories: mealData.calories,
         date: mealData.date,
         time: mealData.time,
+        user_id: mealData.userId,
       },
     }),
   });

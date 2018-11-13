@@ -212,7 +212,7 @@ export class CreateMeal extends React.Component {
                 const formattedDate = isoDate.split('T')[0];
                 const formattedTime = isoDate.split('T')[1].split('Z')[0];
 
-                createMeal(name, calories, formattedDate, formattedTime)
+                createMeal(name, calories, formattedDate, formattedTime, userId)
                   .then(() => {
                     this.setState({
                       positiveSnackbarOpen: true,
@@ -295,12 +295,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createMeal: (name, calories, date, time) => dispatch(
+  createMeal: (name, calories, date, time, userId) => dispatch(
     createMealActionCreator({
       name,
       calories,
       date,
       time,
+      userId,
     }),
   ),
 });
